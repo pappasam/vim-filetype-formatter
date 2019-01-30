@@ -1,0 +1,75 @@
+*vim_filetype_format.txt* A simple, functional Vim code formatter plugin
+
+Author: Samuel Roeca
+
+Table of Contents                                         *vim-filetype-format*
+
+1. Introduction .......................... |vim-filetype-format-intro|
+2. Configuration ......................... |vim-filetype-format-configuration|
+3. Commands .............................. |vim-filetype-format-commands|
+4. Credits ............................... |vim-filetype-format-credits|
+
+==============================================================================
+1. INTRODUCTION                                     *vim-filetype-format-intro*
+
+The |vim-filetype-format| plugin simply aplies most command line code
+formatters to your Vim buffer. It assumes two things:
+
+1. Your Vim buffer has a filetype
+2. You have associated a qualifying system command with your filetype
+
+A system command is "qualifying" if it takes its formatter input from standard
+input and writes its formatted output to standard output.
+
+==============================================================================
+2. CONFIGURATION                            *vim-filetype-format-configuration*
+
+                                                *g:vim_filetype_format_command*
+g:vim_filetype_format_command~
+
+Type: Dictionary
+Default: {}
+
+By default, this plugin does nothing. You must manually register a formatter
+to a filetype with this option before anything will happen.
+
+Assume you have two theoretical filetypes: 'dog' and 'cat'. With these two
+theoretical filetypes, you have two command line code formatting programs:
+'dog-fmt' and 'cat-fmt'. To enable the relevant code formatters to run on both
+the 'dog' and the 'cat' filetypes, depending on the command line interface
+provided by 'dog-fmt' and 'cat-fmt', you might configure this option as
+follows:
+>
+  let g:vim_filetype_format_command = {} let
+  g:vim_filetype_format_command['dog'] = 'dog-fmt --stdout -' let
+  g:vim_filetype_format_command['cat'] = 'cat-fmt --standard-out --std-in'
+<
+                                                *g:vim_filetype_format_verbose*
+g:vim_filetype_format_verbose~
+
+Type: Boolean (or Integer, Vim doesn't care)
+Default: 0 (for False)
+
+This plugin follows the "Rule of Silence" from "The Art of Unix Programming".
+This means that unsurprising messages are not given to the user. This mode
+echos a confirmation the user that a command ran successfully. To enable it,
+set this option to anything other than Zero.
+
+==============================================================================
+3. COMMANDS                                      *vim-filetype-format-commands*
+
+:FiletypeFormat                                               *:FiletypeFormat*
+  Format the entire current buffer using a configured formatter. If the
+  buffer's filetype has not been associated with this plugin, it will echo an
+  error message to the user.
+
+==============================================================================
+4. CREDITS                                        *vim-filetype-format-credits*
+
+Special thanks to Chiel ten Brinke and the entire vim-autoformat team for
+their inspiring plugin. This plugin was inspired by their interface and
+simplifies / cleans up a lot of aspects of that plugin I found annoying.
+Hopefully this plugin helps more Vim users get the most out of their command
+line formatters.
+
+vim:tw=78:ts=8:ft=help:norl:
