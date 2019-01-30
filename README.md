@@ -16,7 +16,7 @@ I recommend using [Vim-Plug](https://github.com/junegunn/vim-plug). Once you've 
 
 ```vim
 " ~/.vimrc or ~/.config/nvim/init.vim
-Plug 'pappasam/vim-black'
+Plug 'pappasam/vim-filetype-formatter'
 ```
 
 Now, execute the following Ex command:
