@@ -1,20 +1,20 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OriginalAuthor: Samuel Roeca
 " Maintainer:     Samuel Roeca samuel.roeca@gmail.com
-" Description:    vim-filetype-format: your favorite code formatters in Vim
+" Description:    vim-filetype-formatter: your favorite code formatters in Vim
 " License:        MIT License
-" Website:        https://github.com/pappasam/vim-filetype-format
+" Website:        https://github.com/pappasam/vim-filetype-formatter
 " License:        MIT
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Global lookup table of Vim filetypes to system commands
-if !exists('g:vim_filetype_format_commands')
-  let g:vim_filetype_format_commands = {}
+if !exists('g:vim_filetype_formatter_commands')
+  let g:vim_filetype_formatter_commands = {}
 endif
 
 " Only set this if you want confirmation on success
-if !exists('g:vim_filetype_format_verbose')
-  let g:vim_filetype_format_verbose = 0
+if !exists('g:vim_filetype_formatter_verbose')
+  let g:vim_filetype_formatter_verbose = 0
 endif
 
 function! s:strip_newlines(instring)
@@ -28,7 +28,7 @@ endfunction
 "   system_call: str :
 "     the string value of the system call to be performed.
 "     Must take input from stdin and read input to stdout.
-function! filetype_format#format_code(system_call)
+function! filetype_formatter#format_code(system_call)
   let results_raw = execute('write !' . a:system_call)
   let results = s:strip_newlines(results_raw)
   let current_row = line('.')
@@ -51,7 +51,7 @@ function! filetype_format#format_code(system_call)
           \ | let new_row = current_row + total_rows_new - total_rows_original
           \ | execute min([ total_rows_new, max( [0, new_row] ) ])
           \ | silent execute 'normal!z.'
-    if g:vim_filetype_format_verbose
+    if g:vim_filetype_formatter_verbose
       echo 'vim-filetype-format Success:'
       echo 'Modified buffer with system call: ' . a:system_call
     endif
@@ -64,18 +64,19 @@ endfunction
 
 " format_filetype: format a particular filetype with the configured command
 " WrittenBy: Samuel Roeca
-function! filetype_format#format_filetype()
-  let global_lookup = g:vim_filetype_format_commands
+function! filetype_formatter#format_filetype()
+  let global_lookup = g:vim_filetype_formatter_commands
   let current_filetype = &filetype
   if type(global_lookup) != v:t_dict
     echo 'vim-filetype-format Error:'
-    echo 'g:vim_filetype_format_commands must be a Dictionary'
+    echo 'g:vim_filetype_formatter_commands must be a Dictionary'
     return
   elseif !has_key(global_lookup, current_filetype)
     echo 'vim-filetype-format Error:'
-    echo current_filetype . ' not configured in g:vim_filetype_format_commands'
+    echo current_filetype .
+          \ ' not configured in g:vim_filetype_formatter_commands'
     return
   endif
   let system_call = get(global_lookup, current_filetype, '')
-  call filetype_format#format_code(system_call)
+  call filetype_formatter#format_code(system_call)
 endfunction

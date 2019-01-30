@@ -1,9 +1,10 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OriginalAuthor: Samuel Roeca
 " Maintainer:     Samuel Roeca samuel.roeca@gmail.com
-" Description:    vim-filetype-format: your favorite code formatters in Vim
+" Description:    vim-filetype-formatter: your favorite code formatters in Vim
 " License:        MIT License
-" Website:        https://github.com/pappasam/vim-filetype-format
+" Website:        https://github.com/pappasam/vim-filetype-formatter
 " License:        MIT
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-command! -buffer FiletypeFormat call filetype_format#format_filetype()
+
+command! -buffer FiletypeFormat call filetype_formatter#format_filetype()
