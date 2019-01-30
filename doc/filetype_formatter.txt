@@ -1,18 +1,18 @@
-*vim_filetype_format.txt* A simple, functional Vim code formatter plugin
+*vim_filetype_formatter.txt* A simple, functional Vim code formatter plugin
 
 Author: Samuel Roeca
 
-Table of Contents                                         *vim-filetype-format*
+Table of Contents                                      *vim-filetype-formatter*
 
-1. Introduction .......................... |vim-filetype-format-intro|
-2. Configuration ......................... |vim-filetype-format-configuration|
-3. Commands .............................. |vim-filetype-format-commands|
-4. Credits ............................... |vim-filetype-format-credits|
+1. Introduction .......................... |vim-filetype-formatter-intro|
+2. Configuration ......................... |vim-filetype-formatter-configuration|
+3. Commands .............................. |vim-filetype-formatter-commands|
+4. Credits ............................... |vim-filetype-formatter-credits|
 
 ==============================================================================
-1. INTRODUCTION                                     *vim-filetype-format-intro*
+1. INTRODUCTION                                  *vim-filetype-formatter-intro*
 
-The |vim-filetype-format| plugin simply aplies most command line code
+The |vim-filetype-formatter| plugin simply aplies most command line code
 formatters to your Vim buffer. It assumes two things:
 
 1. Your Vim buffer has a filetype
@@ -22,10 +22,10 @@ A system command is "qualifying" if it takes its formatter input from standard
 input and writes its formatted output to standard output.
 
 ==============================================================================
-2. CONFIGURATION                            *vim-filetype-format-configuration*
+2. CONFIGURATION                         *vim-filetype-formatter-configuration*
 
-                                                *g:vim_filetype_format_command*
-g:vim_filetype_format_command~
+                                             *g:vim_filetype_formatter_command*
+g:vim_filetype_formatter_command~
 
 Type: Dictionary[String, String]
 Default: {}
@@ -40,13 +40,13 @@ the 'dog' and the 'cat' filetypes, depending on the command line interface
 provided by 'dog-fmt' and 'cat-fmt', you might configure this option as
 follows: >
 
-  let g:vim_filetype_format_commands = {
+  let g:vim_filetype_formatter_commands = {
       \ 'dog': 'dog-fmt --stdout -',
       \ 'cat': 'cat-fmt --standard-out --std-in'
       \}
 <
-                                                *g:vim_filetype_format_verbose*
-g:vim_filetype_format_verbose~
+                                             *g:vim_filetype_formatter_verbose*
+g:vim_filetype_formatter_verbose~
 
 Type: Boolean (or Integer, Vim doesn't care)
 Default: 0 (for False)
@@ -56,11 +56,11 @@ This means that unsurprising messages are not given to the user. This mode
 echos a confirmation the user that a command ran successfully. To enable it,
 set this option to anything other than Zero: >
 
-  let g:vim_filetype_format_verbose = 1
+  let g:vim_filetype_formatter_verbose = 1
 >
 
 ==============================================================================
-3. COMMANDS                                      *vim-filetype-format-commands*
+3. COMMANDS                                   *vim-filetype-formatter-commands*
 
 :FiletypeFormat                                               *:FiletypeFormat*
   Format the entire current buffer using a configured formatter. If the
@@ -68,7 +68,7 @@ set this option to anything other than Zero: >
   error message to the user.
 
 ==============================================================================
-4. CREDITS                                        *vim-filetype-format-credits*
+4. CREDITS                                     *vim-filetype-formatter-credits*
 
 Special thanks to Chiel ten Brinke and the entire vim-autoformat team for
 their inspiring plugin. This plugin was inspired by their interface and
