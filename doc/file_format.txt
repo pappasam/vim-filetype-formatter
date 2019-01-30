@@ -27,7 +27,7 @@ input and writes its formatted output to standard output.
                                                 *g:vim_filetype_format_command*
 g:vim_filetype_format_command~
 
-Type: Dictionary
+Type: Dictionary[String, String]
 Default: {}
 
 By default, this plugin does nothing. You must manually register a formatter
@@ -38,11 +38,12 @@ theoretical filetypes, you have two command line code formatting programs:
 'dog-fmt' and 'cat-fmt'. To enable the relevant code formatters to run on both
 the 'dog' and the 'cat' filetypes, depending on the command line interface
 provided by 'dog-fmt' and 'cat-fmt', you might configure this option as
-follows:
->
-  let g:vim_filetype_format_command = {} let
-  g:vim_filetype_format_command['dog'] = 'dog-fmt --stdout -' let
-  g:vim_filetype_format_command['cat'] = 'cat-fmt --standard-out --std-in'
+follows: >
+
+  let g:vim_filetype_format_commands = {
+      \ 'dog': 'dog-fmt --stdout -',
+      \ 'cat': 'cat-fmt --standard-out --std-in'
+      \}
 <
                                                 *g:vim_filetype_format_verbose*
 g:vim_filetype_format_verbose~
@@ -53,7 +54,10 @@ Default: 0 (for False)
 This plugin follows the "Rule of Silence" from "The Art of Unix Programming".
 This means that unsurprising messages are not given to the user. This mode
 echos a confirmation the user that a command ran successfully. To enable it,
-set this option to anything other than Zero.
+set this option to anything other than Zero: >
+
+  let g:vim_filetype_format_verbose = 1
+>
 
 ==============================================================================
 3. COMMANDS                                      *vim-filetype-format-commands*
