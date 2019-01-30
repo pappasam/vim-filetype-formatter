@@ -1,4 +1,4 @@
-# Vim-Filetype-Format
+# Vim-Filetype-Formatter
 
 Tl;dr A simple, cross language Vim code formatter plugin.
 
@@ -27,7 +27,7 @@ Now, execute the following Ex command:
 
 ## Configuration Basics
 
-### g:vim_filetype_format_commands
+### g:vim_filetype_formatter_commands
 
 * Type: Dictionary[String, String]
 * Default: {}
@@ -41,7 +41,7 @@ We use a Vim Dictionary to map one filetype to one system command. See below for
 
 ```vim
 " ~/.vimrc or ~/.config/nvim/init.vim
-let g:vim_filetype_format_commands = {
+let g:vim_filetype_formatter_commands = {
       \ 'python': 'black -q -',
       \ 'rust': 'rustfmt',
       \ 'terraform': 'terraform fmt -'
@@ -54,7 +54,7 @@ This plugin provides no default key mappings. I recommend setting a key mapping 
 
 ```vim
 " ~/.vimrc or ~/.config/nvim/init.vim
-augroup mapping_vim_filetype_format
+augroup mapping_vim_filetype_formatter
   autocmd FileType python,rust,terraform
         \ nnoremap <silent> <buffer> <leader>f :FiletypeFormat<cr>
 augroup END
@@ -62,12 +62,12 @@ augroup END
 
 ## Full Documentation
 
-See [here](./doc/filetype_format.txt)
+See [here](./doc/filetype_formatter.txt)
 
 Or, from within Vim, type:
 
 ```vim
-:help filetype_format
+:help filetype_formatter
 ```
 
 ## Notes
