@@ -7,4 +7,4 @@
 " License:        MIT
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-command! -buffer FiletypeFormat call filetype_formatter#format_filetype()
+command! FiletypeFormat call filetype_formatter#format_filetype()
