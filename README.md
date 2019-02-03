@@ -1,10 +1,10 @@
 # Vim-Filetype-Formatter
 
-Tl;dr A simple, cross language Vim code formatter plugin.
+tl;dr: A simple, cross language Vim code formatter plugin.
 
 Each Vim filetype may be associated with one command line code formatting program. Examples of qualifying code formatting programs include:
 
-* Python: [black](https://github.com/ambv/black)
+* Python: [yapf](https://github.com/google/yapf)
 * Rust: [rustfmt](https://github.com/rust-lang/rustfmt)
 * Terraform: [terraform fmt](https://www.terraform.io/docs/commands/fmt.html)
 
