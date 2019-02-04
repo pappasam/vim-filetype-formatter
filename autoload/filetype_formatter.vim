@@ -32,31 +32,26 @@ function! filetype_formatter#format_code(system_call)
   let results_raw = execute('write !' . a:system_call)
   let results = s:strip_newlines(results_raw)
   let current_row = line('.')
-  let total_rows_original = line('$')
+  let winview = winsaveview()
   if !v:shell_error
     " 1. Delete last lines in buffer
     " 2. Place the script contents at the bottom of the buffer
     " 3. Go to the line above the original row
     " 4. Delete it, and everything above it
-    " 5. Figure out how many rows there are in the file
-    " 6. Compute the ideal new row
-    " 7. Set that row, accounting for min of 0 and max of number lines
-    " 8. Make the view centered to simplify viewing
+    " 5. Restore the old window position
     silent! undojoin
           \ | silent execute 'normal!dG'
           \ | silent put =results
           \ | silent execute current_row - 1
           \ | silent execute 'normal!dgg'
-          \ | let total_rows_new = line('$')
-          \ | let new_row = current_row + total_rows_new - total_rows_original
-          \ | execute min([ total_rows_new, max( [0, new_row] ) ])
-          \ | silent execute 'normal!z.'
+          \ | silent call winrestview(winview)
+
     if g:vim_filetype_formatter_verbose
-      echo 'vim-filetype-format Success:'
+      echo 'vim-filetype-format: Success!'
       echo 'Modified buffer with system call: ' . a:system_call
     endif
   else
-    echo 'vim-filetype-format Error:'
+    echo 'vim-filetype-format: Error :('
     echo 'stderror message when running ' . a:system_call . ':'
     echo results
   endif
@@ -68,11 +63,11 @@ function! filetype_formatter#format_filetype()
   let global_lookup = g:vim_filetype_formatter_commands
   let current_filetype = &filetype
   if type(global_lookup) != v:t_dict
-    echo 'vim-filetype-format Error:'
+    echo 'vim-filetype-format: Error :('
     echo 'g:vim_filetype_formatter_commands must be a Dictionary'
     return
   elseif !has_key(global_lookup, current_filetype)
-    echo 'vim-filetype-format Error:'
+    echo 'vim-filetype-format: Error:('
     echo current_filetype .
           \ ' not configured in g:vim_filetype_formatter_commands'
     return
