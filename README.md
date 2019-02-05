@@ -44,7 +44,8 @@ We use a Vim Dictionary to map one filetype to one system command. See below for
 let g:vim_filetype_formatter_commands = {
       \ 'python': 'black -q -',
       \ 'rust': 'rustfmt',
-      \ 'terraform': 'terraform fmt -'
+      \ 'terraform': 'terraform fmt -',
+      \ 'json': 'python3 -c "import json, sys; print(json.dumps(json.load(sys.stdin), indent=2))"',
       \}
 ```
 
