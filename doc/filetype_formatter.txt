@@ -70,10 +70,9 @@ set this option to anything other than Zero: >
 ==============================================================================
 4. CREDITS                                     *vim-filetype-formatter-credits*
 
-Special thanks to Chiel ten Brinke and the entire vim-autoformat team for
-their inspiring plugin. This plugin was inspired by their interface and
-simplifies / cleans up a lot of aspects of that plugin I found annoying.
-Hopefully this plugin helps more Vim users get the most out of their command
-line formatters.
+Special thanks to Chiel ten Brinke for designing vim-autoformat. This plugin
+was initially inspired by that interface and simplifies / cleans up a lot of
+aspects of that plugin I found annoying. Hopefully this plugin helps more Vim
+users get the most out of their command line formatters.
 
 vim:tw=78:ts=8:ft=help:norl:
