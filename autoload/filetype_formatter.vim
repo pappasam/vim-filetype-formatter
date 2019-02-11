@@ -31,19 +31,16 @@ endfunction
 function! filetype_formatter#format_code(system_call)
   let results_raw = execute('write !' . a:system_call)
   let results = s:strip_newlines(results_raw)
-  let current_row = line('.')
   let winview = winsaveview()
   if !v:shell_error
-    " 1. Delete last lines in buffer
-    " 2. Place the script contents at the bottom of the buffer
-    " 3. Go to the line above the original row
-    " 4. Delete it, and everything above it
-    " 5. Restore the old window position
+    " 1. Delete the entire buffer
+    " 2. Place the script contents in the buffer
+    " 3. Delete the first line; it's unnecessary
+    " 4. Restore the old window position
     silent! undojoin
-          \ | silent execute 'normal!dG'
+          \ | silent %delete
           \ | silent put =results
-          \ | silent execute current_row - 1
-          \ | silent execute 'normal!dgg'
+          \ | silent 1delete
           \ | silent call winrestview(winview)
 
     if g:vim_filetype_formatter_verbose
