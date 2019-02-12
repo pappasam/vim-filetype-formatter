@@ -44,12 +44,12 @@ We use a Vim Dictionary to map one filetype to one system command. See below for
 ```vim
 " ~/.vimrc
 let g:vim_filetype_formatter_commands = {
-      \ 'go': 'gofmt',
-      \ 'json': 'python3 -c "import json, sys; print(json.dumps(json.load(sys.stdin), indent=2))"',
-      \ 'python': 'yapf',
-      \ 'rust': 'rustfmt',
-      \ 'terraform': 'terraform fmt -',
-      \}
+    \ 'go': 'gofmt',
+    \ 'json': 'python3 -c "import json, sys; print(json.dumps(json.load(sys.stdin), indent=2), end=\"\")"',
+    \ 'python': 'yapf',
+    \ 'rust': 'rustfmt',
+    \ 'terraform': 'terraform fmt -',
+    \}
 ```
 
 ### Key mappings
