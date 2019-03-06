@@ -1,6 +1,6 @@
 # Vim-Filetype-Formatter
 
-tl;dr: A simple, cross language Vim code formatter plugin.
+tl;dr: A simple, cross language Vim code formatter plugin supporting full file formatting and range formatting.
 
 Each Vim filetype may be associated with one command-line code-formatting program. Examples of qualifying code-formatting programs include:
 
@@ -54,11 +54,12 @@ let g:vim_filetype_formatter_commands = {
 
 ### Key mappings
 
-This plugin provides no default key mappings. I recommend setting a key mapping like this:
+This plugin provides no default key mappings. I recommend setting a key mapping for normal mode and visual mode like this:
 
 ```vim
 " ~/.vimrc
 nnoremap <leader>f :FiletypeFormat<cr>
+vnoremap <leader>f :FiletypeFormat<cr>
 ```
 
 ## Full Documentation
@@ -73,7 +74,7 @@ From within Vim, type:
 
 ## Notes
 
-This plugin is focused on simplicity and ease of use on a POSIX-compliant system. Support for Windows and other non-Unix derivatives is not currently in scope. Additionally, I do not plan on supporting Vim ranges because of their required interface complexity.
+This plugin is focused on simplicity and ease of use on a POSIX-compliant system. Support for Windows and other non-Unix derivatives is not currently in scope.
 
 ## Written by
 
