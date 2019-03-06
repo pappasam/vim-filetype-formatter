@@ -67,6 +67,9 @@ set this option to anything other than Zero: >
   buffer's filetype has not been associated with this plugin, it will echo an
   error message to the user.
 
+  NOTE: this command works on both the entire file and visually selected
+  ranges.
+
 ==============================================================================
 4. CREDITS                                     *vim-filetype-formatter-credits*
 
