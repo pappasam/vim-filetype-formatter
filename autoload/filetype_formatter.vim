@@ -28,20 +28,18 @@ endfunction
 "   system_call: str :
 "     the string value of the system call to be performed.
 "     Must take input from stdin and read input to stdout.
-function! filetype_formatter#format_code(system_call)
-  let results_raw = execute('write !' . a:system_call)
+function! filetype_formatter#format_code(system_call, first_line, last_line)
+  let results_raw = execute(
+        \ a:first_line . ',' . a:last_line . 'write !' . a:system_call)
   let results = s:strip_newlines(results_raw)
-  let winview = winsaveview()
   if !v:shell_error
-    " 1. Delete the entire buffer
-    " 2. Place the script contents in the buffer
-    " 3. Delete the first line; it's unnecessary
-    " 4. Restore the old window position
+    " 1. Delete the relevant part of buffer
+    " 2. Place the script contents in that buffer
+    " 3. Delete the first line from range; it's unnecessary
     silent! undojoin
-          \ | silent %delete
+          \ | silent execute a:first_line . ',' a:last_line - 1 . 'delete'
           \ | silent put =results
-          \ | silent 1delete
-          \ | silent call winrestview(winview)
+          \ | silent execute a:first_line . 'delete'
 
     if g:vim_filetype_formatter_verbose
       echo 'vim-filetype-format: Success!'
@@ -56,7 +54,7 @@ endfunction
 
 " format_filetype: format a particular filetype with the configured command
 " WrittenBy: Samuel Roeca
-function! filetype_formatter#format_filetype()
+function! filetype_formatter#format_filetype() range
   let global_lookup = g:vim_filetype_formatter_commands
   let current_filetype = &filetype
   if type(global_lookup) != v:t_dict
@@ -70,5 +68,7 @@ function! filetype_formatter#format_filetype()
     return
   endif
   let system_call = get(global_lookup, current_filetype, '')
-  call filetype_formatter#format_code(system_call)
+  let winview = winsaveview()
+  call filetype_formatter#format_code(system_call, a:firstline, a:lastline)
+  silent call winrestview(winview)
 endfunction

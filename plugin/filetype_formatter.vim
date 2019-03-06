@@ -7,4 +7,4 @@
 " License:        MIT
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-command! FiletypeFormat call filetype_formatter#format_filetype()
+command! -range=% FiletypeFormat <line1>,<line2> call filetype_formatter#format_filetype()
