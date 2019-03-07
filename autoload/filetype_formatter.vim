@@ -35,7 +35,7 @@ function! filetype_formatter#format_code(system_call, first_line, last_line)
   let results = s:strip_newlines(results_raw)
   if !v:shell_error
     " Delete the relevant part of buffer
-    silent execute a:first_line . ',' a:last_line - 1 . 'delete'
+    silent execute a:first_line . ',' . (a:last_line - 1) . 'delete'
 
     " Place the script contents in that buffer
     silent put =results
@@ -56,20 +56,18 @@ endfunction
 
 " format_filetype: format a particular filetype with the configured command
 " WrittenBy: Samuel Roeca
-" Parameters: 'firstline' and 'lastline' (integers) from range command
+" Parameters: firstline AND lastline: int : from range command
 function! filetype_formatter#format_filetype() range
   let global_lookup = g:vim_filetype_formatter_commands
-  let current_filetype = &filetype
   if type(global_lookup) != v:t_dict
     echo 'vim-filetype-format: Error :('
     echo 'g:vim_filetype_formatter_commands must be a Dictionary'
     return
-  elseif !has_key(global_lookup, current_filetype)
+  elseif !has_key(global_lookup, &filetype)
     echo 'vim-filetype-format: Error:('
-    echo current_filetype .
-          \ ' not configured in g:vim_filetype_formatter_commands'
+    echo &filetype . ' not configured in g:vim_filetype_formatter_commands'
     return
   endif
-  let system_call = get(global_lookup, current_filetype, '')
+  let system_call = get(global_lookup, &filetype, '')
   call filetype_formatter#format_code(system_call, a:firstline, a:lastline)
 endfunction

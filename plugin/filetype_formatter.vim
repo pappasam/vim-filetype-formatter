@@ -7,7 +7,7 @@
 " License:        MIT
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-command! -range=% FiletypeFormat silent! undojoin
-      \ | let b:winview = winsaveview()
-      \ | execute <line1> . ',' . <line2> . 'call filetype_formatter#format_filetype()'
-      \ | silent call winrestview(b:winview)
+command! -range=% FiletypeFormat silent!
+      \ let b:filetype_formatter_winview = winsaveview()
+      \ | <line1>,<line2>call filetype_formatter#format_filetype()
+      \ | silent call winrestview(b:filetype_formatter_winview)

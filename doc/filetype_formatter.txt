@@ -68,7 +68,9 @@ set this option to anything other than Zero: >
   error message to the user.
 
   NOTE: this command works on both the entire file and visually selected
-  ranges.
+  ranges. For visually selected ranges, the code must be "valid" as determined
+  by your language's configured formatter. If you visually select code that is
+  not considered valid, your formatter will likely raise an exception.
 
 ==============================================================================
 4. CREDITS                                     *vim-filetype-formatter-credits*
