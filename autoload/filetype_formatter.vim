@@ -34,8 +34,10 @@ function! filetype_formatter#format_code(system_call, first_line, last_line)
         \ a:first_line . ',' . a:last_line . 'write !' . a:system_call)
   let results = s:strip_newlines(results_raw)
   if !v:shell_error
-    " Delete the relevant part of buffer
-    silent execute a:first_line . ',' . (a:last_line - 1) . 'delete'
+    if a:first_line != a:last_line
+      " Delete the relevant part of buffer if more than 1 line as input
+      silent execute a:first_line . ',' . (a:last_line - 1) . 'delete'
+    endif
 
     " Place the script contents in that buffer
     silent put =results
