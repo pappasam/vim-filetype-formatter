@@ -106,6 +106,6 @@ function! filetype_formatter#format_filetype() range
   endtry
   if g:vim_filetype_formatter_verbose
     echo 'Success! vim-filetype-format'
-    echo 'Modified buffer with system call: ' . a:system_call
+    echo 'Modified buffer with system call: ' . system_call
   endif
 endfunction
