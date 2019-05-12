@@ -79,7 +79,11 @@ function! s:format_code_file(system_call)
     call system('chmod --reference=' . expand('%') . ' ' . tempfile)
     call rename(tempfile, expand('%'))
     silent edit!
+
+    " Custom filetype overrides will be ignored in new file. This sets the
+    " filetype and syntax again explicitly to preserve user's custom overrides
     let &syntax = &syntax
+    let &filetype = &filetype
   else
     throw 'System call:' . a:system_call . "\n" . results
   endif
