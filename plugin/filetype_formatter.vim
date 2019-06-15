@@ -11,3 +11,5 @@ command! -range=% FiletypeFormat silent!
       \ let b:filetype_formatter_winview = winsaveview()
       \ | <line1>,<line2>call filetype_formatter#format_filetype()
       \ | silent call winrestview(b:filetype_formatter_winview)
+
+command! ErrorFiletypeFormat call filetype_formatter#echo_error()

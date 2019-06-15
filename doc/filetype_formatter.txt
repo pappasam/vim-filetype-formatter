@@ -64,13 +64,17 @@ set this option to anything other than Zero: >
 
 :FiletypeFormat                                               *:FiletypeFormat*
   Format the entire current buffer using a configured formatter. If the
-  buffer's filetype has not been associated with this plugin, it will echo an
-  error message to the user.
+  buffer's filetype has not been associated with this plugin, it will save an
+  error message accessible through :ErrorFiletypeFormat.
 
   NOTE: this command works on both the entire file and visually selected
   ranges. For visually selected ranges, the code must be "valid" as determined
   by your language's configured formatter. If you visually select code that is
   not considered valid, your formatter will likely raise an exception.
+
+:ErrorFiletypeFormat                                    *:ErrorFiletypeFormat*
+  Print any errors from a buffer's most recent formatter function attempt to
+  the console.
 
 ==============================================================================
 4. CREDITS                                     *vim-filetype-formatter-credits*

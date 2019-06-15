@@ -26,7 +26,8 @@ function! s:parse_config(global_lookup)
   if type(a:global_lookup) != v:t_dict
     throw 'g:vim_filetype_formatter_commands must be a Dictionary'
   elseif !has_key(a:global_lookup, &filetype)
-    throw &filetype . ' not configured in g:vim_filetype_formatter_commands'
+    throw '"' . &filetype .
+          \ '" not configured in g:vim_filetype_formatter_commands'
   endif
   return get(a:global_lookup, &filetype, '')
 endfunction
@@ -85,7 +86,7 @@ function! s:format_code_file(system_call)
     let &syntax = &syntax
     let &filetype = &filetype
   else
-    throw 'System call:' . a:system_call . "\n" . results
+    throw '"' . a:system_call . "\":\n" . results
   endif
 endfunction
 
@@ -103,13 +104,26 @@ function! filetype_formatter#format_filetype() range
       " If only range, then use the code_range function
       call s:format_code_range(system_call, a:firstline, a:lastline)
     endif
+    let b:vim_filetype_formatter_error =
+          \ 'No recent error! Previous command "'
+          \ . system_call . '" ran successfully'
   catch /.*/
-    echo 'Error! vim-filetype-format'
-    echo v:exception
+    echo 'Error! Run ":ErrorFiletypeFormat" for details'
+    let b:vim_filetype_formatter_error = v:exception
     return
   endtry
   if g:vim_filetype_formatter_verbose
-    echo 'Success! vim-filetype-format'
-    echo 'Modified buffer with system call: ' . system_call
+    echo 'vim-filetype-formatter: Success!'
+    echo 'Modified buffer with system call: "' . system_call . '"'
   endif
+endfunction
+
+" get_error: print the error message to the Vim console
+" WrittenBy: Samuel Roeca
+function! filetype_formatter#echo_error()
+  if !exists('b:vim_filetype_formatter_error')
+    echo 'No recent errors! FiletypeFormat has not been tried on this buffer'
+    return
+  endif
+  echo 'vim-filetype-formatter: ' . b:vim_filetype_formatter_error
 endfunction
