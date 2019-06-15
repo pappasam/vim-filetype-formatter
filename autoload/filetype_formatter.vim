@@ -95,13 +95,28 @@ endfunction
 " Parameters: firstline AND lastline: int : from range command
 function! filetype_formatter#format_filetype() range
   try
-    let system_call = s:parse_config(g:vim_filetype_formatter_commands)
+    " Note: below must begin with capital letter
+    let Config_system_call = s:parse_config(g:vim_filetype_formatter_commands)
+    let t_config_system_call = type(Config_system_call)
+    if t_config_system_call == v:t_func
+      let system_call = Config_system_call(a:firstline, a:lastline)
+    else
+      let system_call = Config_system_call
+    endif
+    if type(system_call) != v:t_string
+      throw '"' . &filetype .
+            \ '" is configured as neither a function nor a string'
+            \ ' in g:vim_filetype_formatter_commands'
+    endif
+
     if a:firstline == 1 && a:lastline == line('$')
-      " For the entire buffer, use a file to prevent weird 'goto top of file'
-      " bugs
+      " The entire buffer is selected, hence we use the entire file
+      call s:format_code_file(system_call)
+    elseif t_config_system_call == v:t_func
+      " When configuring with function, it takes range arguments
+      " The specific lines to be updated are handled by the formatter itself
       call s:format_code_file(system_call)
     else
-      " If only range, then use the code_range function
       call s:format_code_range(system_call, a:firstline, a:lastline)
     endif
     let b:vim_filetype_formatter_error =

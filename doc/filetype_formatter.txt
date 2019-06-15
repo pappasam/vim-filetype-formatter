@@ -27,7 +27,8 @@ input and writes its formatted output to standard output.
                                              *g:vim_filetype_formatter_command*
 g:vim_filetype_formatter_command~
 
-Type: Dictionary[String, String]
+Type: Dictionary[String, Union[String, F]]
+F: Function(Integer, Integer) -> String
 Default: {}
 
 By default, this plugin does nothing. You must manually register a formatter
@@ -43,8 +44,16 @@ follows: >
   let g:vim_filetype_formatter_commands = {
       \ 'dog': 'dog-fmt --stdout -',
       \ 'cat': 'cat-fmt --standard-out --std-in'
+      \ 'bat': {start, end -> printf('bat-fmt --lines=%d-%d', start, end)}
       \}
 <
+
+If your Dictionary value is a string, it is assumed to operate over an entire
+file. If your Dictionary value is a Function, it is assumed to take two
+arguments: the starting line and the ending line. In this case, the formatter
+itself will operate over the entire file but only format from "start line" to
+"end line".
+
                                              *g:vim_filetype_formatter_verbose*
 g:vim_filetype_formatter_verbose~
 
