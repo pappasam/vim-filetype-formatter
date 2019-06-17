@@ -44,7 +44,7 @@ follows: >
       \ 'dog': 'dog-fmt --stdout -',
       \ 'cat': 'cat-fmt --standard-out --std-in',
       \ 'bat': {start, end -> printf('bat-fmt --lines=%d-%d', start, end)},
-      \ 'rat': {-> printf('bat-fmt --stdin-file=%s', expand('%:p'))},
+      \ 'rat': {-> printf('rat-fmt --stdin-file=%s', expand('%:p'))},
       \}
 <
 
