@@ -22,7 +22,7 @@ Don't like the defaults? It's super easy to write your own! We provide many pre-
 - Respects your formatter's configuration files (pyproject.toml, .rustfmt.toml, .prettierrc.toml, etc)
 - Modular: does not pollute your Vim environment with remappings / poor Vim plugin practices
 - Keeps your Vim cursor in a sane location after the formatter has run
-- Gives you configurable access to clear logging so you can see how and why any formatter is/isn't working
+- Clear logging so you can see how and why any formatter is/isn't working
 - Ability to chain formatters together with Unix pipes
 - Works on visually-selected ranges for formatters that accept ranges, and even for code formatters **without** explicit range support!
 - Sane, yet override-able, defaults
@@ -42,6 +42,18 @@ Then run the Ex command:
 ```vim
 :PlugInstall
 ```
+
+## Full Documentation
+
+There are many configuration options. See [here](./doc/filetype_formatter.txt) for a complete list.
+
+From within Vim, type:
+
+```vim
+:help filetype_formatter
+```
+
+The following sections give some basic configuration examples.
 
 ## Configuration Basics
 
@@ -79,16 +91,6 @@ vnoremap <leader>f :FiletypeFormat<cr>
 ### Default configurations
 
 Many default configurations are provided out of the box and may be overridden by creating our own `g:vim_filetype_formatter_commands` dictionary. To see the latest provided options, please see [here](./autoload/filetype_formatter/ft.vim).
-
-## Full Documentation
-
-See [here](./doc/filetype_formatter.txt)
-
-From within Vim, type:
-
-```vim
-:help filetype_formatter
-```
 
 ## Notes
 

@@ -149,25 +149,25 @@ function! filetype_formatter#format_filetype() range
     else
       call s:format_code_range(parser.system_call, a:firstline, a:lastline)
     endif
-    let b:vim_filetype_formatter_error =
-          \ 'No recent error! Previous command "'
-          \ . parser.system_call . '" ran successfully'
+    if g:vim_filetype_formatter_verbose
+      echo 'Success! ' . '"' . parser.system_call . '"'
+    endif
+    let b:vim_filetype_formatter_log =
+          \ 'Success! "' . parser.system_call . '" ran successfully'
   catch /.*/
-    echo 'Error! Run ":ErrorFiletypeFormat" for details'
-    let b:vim_filetype_formatter_error = v:exception
+    echo 'Error! Run ":LogFiletypeFormat" for details'
+    let b:vim_filetype_formatter_log = "Error! " . v:exception
     return
   endtry
-  if g:vim_filetype_formatter_verbose
-    echo 'Successfully ran ' . '"' . parser.system_call . '"'
-  endif
 endfunction
 
-" get_error: print the error message to the Vim console
+" echo_log: print the full console output from the most-recent formatter run
+" in this buffer
 " WrittenBy: Samuel Roeca
-function! filetype_formatter#echo_error()
-  if !exists('b:vim_filetype_formatter_error')
-    echo 'No recent errors! FiletypeFormat has not been tried on this buffer'
+function! filetype_formatter#echo_log()
+  if !exists('b:vim_filetype_formatter_log')
+    echo 'FiletypeFormat has not been tried on this buffer'
     return
   endif
-  echo 'vim-filetype-formatter: ' . b:vim_filetype_formatter_error
+  echo 'vim-filetype-formatter: ' . b:vim_filetype_formatter_log
 endfunction

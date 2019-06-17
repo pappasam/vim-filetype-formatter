@@ -24,8 +24,8 @@ input and writes its formatted output to standard output.
 ==============================================================================
 2. CONFIGURATION                         *vim-filetype-formatter-configuration*
 
-                                             *g:vim_filetype_formatter_command*
-g:vim_filetype_formatter_command~
+                                             *g:vim_filetype_formatter_commands*
+g:vim_filetype_formatter_commands~
 
 Type: Dictionary[String, Union[String, F]]
       F:
@@ -44,7 +44,7 @@ option as follows: >
       \ 'cat': 'cat-fmt --standard-out --std-in',
       \ 'bat': {start, end -> printf('bat-fmt --lines=%d-%d', start, end)},
       \ 'rat': {-> printf('rat-fmt --stdin-file=%s', expand('%:p'))},
-      \}
+      \ }
 <
 
 If your Dictionary value is a String, it is assumed to operate over an entire
@@ -75,6 +75,24 @@ set this option to anything other than Zero: >
 
   let g:vim_filetype_formatter_verbose = 1
 <
+
+                                     *g:vim_filetype_formatter_ft_no_defaults*
+g:vim_filetype_formatter_ft_no_defaults~
+
+Type: List[String]
+Default: []
+
+Contains a list of filetype strings for which the user wants no default values
+configured. This is useful if you don't like the default formatter but don't
+have an alternative formatter in mind.
+
+If you specify values in this list, they are only removed from the defaults.
+Any filetypes configured in g:vim_filetype_formatter_commands will NOT be
+overridden by this configuration. >
+
+  let g:vim_filetype_formatter_ft_no_defaults = ['markdown', 'javascript']
+<
+
                                          *g:filetype_formatter#ft#formatters*
 g:filetype_formatter#ft#formatters~
 
@@ -87,7 +105,7 @@ Python, place the following in your vimrc: >
 
   let g:vim_filetype_formatter_commands = {
       \ 'python': g:filetype_formatter#ft#formatters['python']['yapf'],
-      \}
+      \ }
 <
                                          *g:filetype_formatter#ft#defaults*
 g:filetype_formatter#ft#defaults~
@@ -111,9 +129,9 @@ Filetype. Don't edit.
   ranges, behavior depends on whether a filetype's formatter is a "String", a
   "Function[] -> String", or a "Function[Integer, Integer] -> String".
 
-:ErrorFiletypeFormat                                    *:ErrorFiletypeFormat*
-  Print any errors from a buffer's most recent formatter function attempt to
-  the console.
+:LogFiletypeFormat                                         *:LogFiletypeFormat*
+  Print output from a buffer's most recent formatter function attempt to the
+  console.
 
 ==============================================================================
 4. CREDITS                                     *vim-filetype-formatter-credits*
