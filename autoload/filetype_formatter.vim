@@ -7,16 +7,6 @@
 " License:        MIT
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Global lookup table of Vim filetypes to system commands
-if !exists('g:vim_filetype_formatter_commands')
-  let g:vim_filetype_formatter_commands = {}
-endif
-
-" Only set this if you want confirmation on success
-if !exists('g:vim_filetype_formatter_verbose')
-  let g:vim_filetype_formatter_verbose = 0
-endif
-
 function! s:strip_newlines(instring)
   " Strip newlines from a string
   return substitute(a:instring, '\v^\n*(.{-})\n*$', '\1', '')
@@ -30,6 +20,59 @@ function! s:parse_config(global_lookup)
           \ '" not configured in g:vim_filetype_formatter_commands'
   endif
   return get(a:global_lookup, &filetype, '')
+endfunction
+
+" parse_call: parse the system call, determining specifics of configuration
+" WrittenBy: Samuel Roeca
+" Parameters:
+"   syscall_config: String | Function[Integer, Integer] | Function[]
+"   first_line: int : the first line for formatting
+"   last_line: int : the last line for formatting
+" Returns: Dict[system_call: String, lines_specified: Integer]
+"
+" Note: this function is a little ugly. It's really hard to test Vimscript
+" functions for number of accepted parameters. Functions accept more arguments
+" than configured, but fail if you don't pass them at least the number of
+" required arguments.
+function! s:parse_call(Syscall_config, first_line, last_line)
+  let t_config_system_call = type(a:Syscall_config)
+  if t_config_system_call == v:t_string
+    let result = {
+          \ 'system_call': a:Syscall_config,
+          \ 'lines_specified': 0,
+          \ }
+  elseif t_config_system_call == v:t_func
+    try
+      let result = {
+            \ 'system_call': a:Syscall_config(),
+            \ 'lines_specified': 0,
+            \ }
+    catch /.*/
+      try
+        " test if function accepts 1 argument
+        let _whatever = a:Syscall_config(1)
+        throw 'Formatter function only has 1 argument. Must have 0 or 2 args'
+      catch /.*/
+        " pass, this is what we hope for
+      endtry
+      try
+        let result = {
+              \ 'system_call': a:Syscall_config(a:first_line, a:last_line),
+              \ 'lines_specified': 1,
+              \ }
+      catch /.*/
+        throw 'Formatter function must take exactly 0, or 2, arguments'
+      endtry
+    endtry
+  else
+    throw 'Formatter value is neither a String nor a function'
+  endif
+  if type(result['system_call']) != v:t_string
+    throw '"' . &filetype .
+          \ '" is configured as neither a function nor a string'
+          \ ' in g:vim_filetype_formatter_commands'
+  endif
+  return result
 endfunction
 
 " format_code_range: format buffer range with system call
@@ -97,38 +140,27 @@ function! filetype_formatter#format_filetype() range
   try
     " Note: below must begin with capital letter
     let Config_system_call = s:parse_config(g:vim_filetype_formatter_commands)
-    let t_config_system_call = type(Config_system_call)
-    if t_config_system_call == v:t_func
-      let system_call = Config_system_call(a:firstline, a:lastline)
-    else
-      let system_call = Config_system_call
-    endif
-    if type(system_call) != v:t_string
-      throw '"' . &filetype .
-            \ '" is configured as neither a function nor a string'
-            \ ' in g:vim_filetype_formatter_commands'
-    endif
-
+    let parser = s:parse_call(Config_system_call, a:firstline, a:lastline)
     if a:firstline == 1 && a:lastline == line('$')
       " The entire buffer is selected, hence we use the entire file
-      call s:format_code_file(system_call)
-    elseif t_config_system_call == v:t_func
-      " When configuring with function, it takes range arguments
+      call s:format_code_file(parser.system_call)
+    elseif parser.lines_specified == 1
+      " Lines were specifically specified through function arguments.
       " The specific lines to be updated are handled by the formatter itself
-      call s:format_code_file(system_call)
+      call s:format_code_file(parser.system_call)
     else
-      call s:format_code_range(system_call, a:firstline, a:lastline)
+      call s:format_code_range(parser.system_call, a:firstline, a:lastline)
     endif
     let b:vim_filetype_formatter_error =
           \ 'No recent error! Previous command "'
-          \ . system_call . '" ran successfully'
+          \ . parser.system_call . '" ran successfully'
   catch /.*/
     echo 'Error! Run ":ErrorFiletypeFormat" for details'
     let b:vim_filetype_formatter_error = v:exception
     return
   endtry
   if g:vim_filetype_formatter_verbose
-    echo 'Successfully ran ' . '"' . system_call . '"'
+    echo 'Successfully ran ' . '"' . parser.system_call . '"'
   endif
 endfunction
 

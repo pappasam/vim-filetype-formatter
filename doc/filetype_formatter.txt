@@ -28,11 +28,10 @@ input and writes its formatted output to standard output.
 g:vim_filetype_formatter_command~
 
 Type: Dictionary[String, Union[String, F]]
-F: Function(Integer, Integer) -> String
-Default: {}
-
-By default, this plugin does nothing. You must manually register a formatter
-to a filetype with this option before anything will happen.
+      F:
+        Function(Integer, Integer) -> String |
+        Function() -> String
+Default: g:filetype_formatter#ft#defaults
 
 Assume you have two theoretical filetypes: 'dog' and 'cat'. With these two
 theoretical filetypes, you have two command line code formatting programs:
@@ -43,16 +42,24 @@ follows: >
 
   let g:vim_filetype_formatter_commands = {
       \ 'dog': 'dog-fmt --stdout -',
-      \ 'cat': 'cat-fmt --standard-out --std-in'
-      \ 'bat': {start, end -> printf('bat-fmt --lines=%d-%d', start, end)}
+      \ 'cat': 'cat-fmt --standard-out --std-in',
+      \ 'bat': {start, end -> printf('bat-fmt --lines=%d-%d', start, end)},
+      \ 'rat': {-> printf('bat-fmt --stdin-file=%s', expand('%:p'))},
       \}
 <
 
 If your Dictionary value is a string, it is assumed to operate over an entire
-file. If your Dictionary value is a Function, it is assumed to take two
-arguments: the starting line and the ending line. In this case, the formatter
+file.
+
+If your Dictionary value is a Function that takes 0 arguments, it may require
+some runtime functionality to format your string command, but it's assumed
+that the formatter is not aware of visually-selected ranges.
+
+If your Dictionary value takes is a Function that takes two arguments, these
+should be the starting line and the ending line. In this case, the formatter
 itself will operate over the entire file but only format from "start line" to
-"end line".
+"end line". This is good because only running the formatter on selected text
+can be breakable without the text's broader context.
 
                                              *g:vim_filetype_formatter_verbose*
 g:vim_filetype_formatter_verbose~
@@ -66,7 +73,29 @@ echos a confirmation the user that a command ran successfully. To enable it,
 set this option to anything other than Zero: >
 
   let g:vim_filetype_formatter_verbose = 1
->
+<
+                                         *g:filetype_formatter#ft#formatters*
+g:filetype_formatter#ft#formatters~
+
+Type: Dict[String, Dict[String, F]]
+Default: Created by this plugin. DON'T EDIT
+
+Variable containing pre-written commands for different code formatters that
+we're aware of. For example, if you want to use "yapf" instead of "black" for
+Python, place the following in your vimrc: >
+
+  let g:vim_filetype_formatter_commands = {
+      \ 'python': g:filetype_formatter#ft#formatters['python']['yapf'],
+      \}
+<
+                                         *g:filetype_formatter#ft#defaults*
+g:filetype_formatter#ft#defaults~
+
+Type: Dict[String, F]
+Default: Created by this plugin. DON'T EDIT
+
+A variable containing the default, pre-written commands assigned to each
+Filetype. Don't edit.
 
 ==============================================================================
 3. COMMANDS                                   *vim-filetype-formatter-commands*
