@@ -60,7 +60,7 @@ The following sections give some basic configuration examples.
 ### g:vim_filetype_formatter_commands
 
 - Type: `Dictionary[String, Union[String, F]]`
-- F: `Function[int, int] -> String`
+- F: `Union[Function[] -> String, Function[int, int] -> String]`
 - Default: `g:filetype_formatter#ft#defaults`
 
 Configuration consists of two components:
