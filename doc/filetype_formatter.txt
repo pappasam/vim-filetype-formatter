@@ -33,12 +33,11 @@ Type: Dictionary[String, Union[String, F]]
         Function() -> String
 Default: g:filetype_formatter#ft#defaults
 
-Assume you have two theoretical filetypes: 'dog' and 'cat'. With these two
-theoretical filetypes, you have two command line code formatting programs:
-'dog-fmt' and 'cat-fmt'. To enable the relevant code formatters to run on both
-the 'dog' and the 'cat' filetypes, depending on the command line interface
-provided by 'dog-fmt' and 'cat-fmt', you might configure this option as
-follows: >
+Assume you have several theoretical filetypes: 'dog', 'cat', 'bat', and 'rat'.
+With these theoretical filetypes, you have some command line code formatting
+programs: 'dog-fmt', 'cat-fmt', 'bat-fmt', and 'rat-fmt'. To enable the
+relevant code formatters to run on each filetype, you might configure this
+option as follows: >
 
   let g:vim_filetype_formatter_commands = {
       \ 'dog': 'dog-fmt --stdout -',
@@ -48,18 +47,20 @@ follows: >
       \}
 <
 
-If your Dictionary value is a string, it is assumed to operate over an entire
-file.
+If your Dictionary value is a String, it is assumed to operate over an entire
+file / buffer.
 
 If your Dictionary value is a Function that takes 0 arguments, it may require
 some runtime functionality to format your string command, but it's assumed
 that the formatter is not aware of visually-selected ranges.
 
-If your Dictionary value takes is a Function that takes two arguments, these
-should be the starting line and the ending line. In this case, the formatter
-itself will operate over the entire file but only format from "start line" to
-"end line". This is good because only running the formatter on selected text
-can be breakable without the text's broader context.
+If your Dictionary value is a Function that takes two arguments, these should
+be the starting line and the ending line from your range selection. In this
+case, the formatter itself will operate over the entire file but only format
+from "start line" to "end line". This is good because only running the
+formatter on selected text can be breakable without the text's broader
+context. If a formatter provides a range interface, it's a good idea to use
+it!
 
                                              *g:vim_filetype_formatter_verbose*
 g:vim_filetype_formatter_verbose~
@@ -106,9 +107,9 @@ Filetype. Don't edit.
   error message accessible through :ErrorFiletypeFormat.
 
   NOTE: this command works on both the entire file and visually selected
-  ranges. For visually selected ranges, the code must be "valid" as determined
-  by your language's configured formatter. If you visually select code that is
-  not considered valid, your formatter will likely raise an exception.
+  ranges. As described elsewhere in this document, for visually selected
+  ranges, behavior depends on whether a filetype's formatter is a "String", a
+  "Function[] -> String", or a "Function[Integer, Integer] -> String".
 
 :ErrorFiletypeFormat                                    *:ErrorFiletypeFormat*
   Print any errors from a buffer's most recent formatter function attempt to
