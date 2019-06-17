@@ -7,14 +7,16 @@
 " License:        MIT
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Global lookup table of Vim filetypes to system commands
-if !exists('g:vim_filetype_formatter_commands')
-  let g:vim_filetype_formatter_commands = {}
-endif
-
 " Only set this if you want confirmation on success
 if !exists('g:vim_filetype_formatter_verbose')
   let g:vim_filetype_formatter_verbose = 0
+endif
+
+" Global lookup table of Vim filetypes to system commands
+if !exists('g:vim_filetype_formatter_commands')
+  let g:vim_filetype_formatter_commands = {}
+elseif type(g:vim_filetype_formatter_commands) != v:t_dict
+  throw 'User-configured g:vim_filetype_formatter_commands must be a Dict'
 endif
 
 " Override defaults with user preferences

@@ -1,22 +1,21 @@
 # Vim-Filetype-Formatter
 
-tl;dr: A simple, cross language Vim code formatter plugin supporting full file formatting, range formatting, and sane behavior.
+tl;dr: A simple, cross language Vim code formatter plugin supporting full file formatting, range formatting, and sane behavior. Requires Vim 8 or a recent version of Neovim.
 
-Each Vim filetype may be associated with one command-line code-formatting command. This plugin supports any language, as long as it has a compliant code formatter program. See the end of this document for supported formatters / filetypes (there's a lot!). Virtually any code-formatting program qualifies as long as it reads from standard input and writes to standard output. Default configurations are provided for:
+Each Vim filetype may be associated with one command-line code-formatting command. This plugin supports any language, as long as it has a compliant code formatter program(s). See the end of this document for supported formatters / filetypes (there's a lot!). Virtually any code-formatting program qualifies as long as it reads from standard input and writes to standard output. Default configurations are provided for:
 
-- Css: prettier
-- Go: gofmt
-- Html: prettier
-- Javascript: prettier
-- Json: python.json
-- Markdown: prettier
-- Python: black
-- Rust: rustfmt
-- Terraform: terraform fmt
-- Yaml: prettier
-- Yaml.docker-compose: prettier
+- css: [prettier](https://prettier.io/docs/en/index.html)
+- go: [gofmt](https://golang.org/cmd/gofmt/)
+- html: [prettier](https://prettier.io/docs/en/index.html)
+- javascript: [prettier](https://prettier.io/docs/en/index.html)
+- json: [python.json](https://docs.python.org/3/library/json.html)
+- markdown: [prettier](https://prettier.io/docs/en/index.html)
+- python: [black](https://github.com/python/black)
+- rust: [rustfmt](https://github.com/rust-lang/rustfmt)
+- terraform: [terraform fmt](https://www.terraform.io/docs/commands/fmt.html)
+- yaml: [prettier](https://prettier.io/docs/en/index.html)
 
-That said, it's super easy to write your own! We also provide many simple variables in `g:filetype_formatter#ft#formatters`.
+Don't like the defaults? It's super easy to write your own! We provide many pre-defined formatter variables in `g:filetype_formatter#ft#formatters` to make your life as easy as possible! And writing your own command is trivial; read on to discover the simplest code-formatting experience in Vim!
 
 ## Differentiating Features
 
@@ -25,7 +24,8 @@ That said, it's super easy to write your own! We also provide many simple variab
 - Keeps your Vim cursor in a sane location after the formatter has run
 - Gives you configurable access to clear logging so you can see how and why any formatter is/isn't working
 - Ability to chain formatters together with Unix pipes
-- Works on visually-selected ranges, perfectly for formatters that accept ranges, and imperfectly even for code formatters **without** range support!
+- Works on visually-selected ranges for formatters that accept ranges, and even for code formatters **without** explicit range support!
+- Sane, yet override-able, defaults
 - Simple, extendable codebase
 
 ## Installation
@@ -47,8 +47,9 @@ Then run the Ex command:
 
 ### g:vim_filetype_formatter_commands
 
-- Type: Dictionary[String, Union[String, F]]
-- F: Function[int, int] -> String
+- Type: `Dictionary[String, Union[String, F]]`
+- F: `Function[int, int] -> String`
+- Default: `g:filetype_formatter#ft#defaults`
 
 Configuration consists of two components:
 

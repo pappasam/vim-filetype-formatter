@@ -13,9 +13,7 @@ function! s:strip_newlines(instring)
 endfunction
 
 function! s:parse_config(global_lookup)
-  if type(a:global_lookup) != v:t_dict
-    throw 'g:vim_filetype_formatter_commands must be a Dictionary'
-  elseif !has_key(a:global_lookup, &filetype)
+  if !has_key(a:global_lookup, &filetype)
     throw '"' . &filetype .
           \ '" not configured in g:vim_filetype_formatter_commands'
   endif
