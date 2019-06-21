@@ -11,8 +11,10 @@
 
 " Dry Helpers: helper functions to reduce repetition
 function! s:get_prettier()
-  return {->
-        \ printf('npx -q prettier --stdin --stdin-filepath="%s"', expand('%:p'))}
+  return {-> printf(
+        \ 'npx --no-install prettier --stdin --stdin-filepath="%s"',
+        \ expand('%:p')
+        \ )}
 endfunction
 
 " Default Formatters: all pre-configured formatters live in the
