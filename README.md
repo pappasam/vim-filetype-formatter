@@ -1,29 +1,30 @@
 # Vim-Filetype-Formatter
 
-tl;dr: A simple, cross language Vim code formatter plugin supporting full file formatting, range formatting, and sane behavior. Requires Vim 8 or a recent version of Neovim.
+A simple, cross language Vim code formatter plugin supporting both range and full-file formatting. By default, it provides the following filetype / formatter pairings:
 
-Each Vim filetype maps to one command-line code-formatting command. This plugin supports any language as long as it has a compliant code formatter program(s). Code-formatting programs qualify if they:
+- [**css**](https://developer.mozilla.org/en-US/docs/Web/CSS): [prettier](https://prettier.io/docs/en/index.html)
+- [**go**](https://golang.org/): [gofmt](https://golang.org/cmd/gofmt/)
+- [**html**](https://developer.mozilla.org/en-US/docs/Web/HTML): [prettier](https://prettier.io/docs/en/index.html)
+- [**javascript**](https://developer.mozilla.org/en-US/docs/Web/JavaScript): [prettier](https://prettier.io/docs/en/index.html)
+- [**json**](https://json.org/): [python.json](https://docs.python.org/3/library/json.html)
+- [**markdown**](https://en.wikipedia.org/wiki/Markdown): [prettier](https://prettier.io/docs/en/index.html)
+- [**python**](https://www.python.org/): [black](https://github.com/python/black)
+- [**rust**](https://www.rust-lang.org/): [rustfmt](https://github.com/rust-lang/rustfmt)
+- [**svelte**](https://svelte.dev/): [prettier](https://prettier.io/docs/en/index.html) + [prettier-plugin-svelte](https://github.com/UnwrittenFun/prettier-plugin-svelte)
+- [**terraform**](https://www.terraform.io/): [terraform fmt](https://www.terraform.io/docs/commands/fmt.html)
+- [**toml**](https://github.com/toml-lang/toml): [toml-sort](https://github.com/pappasam/toml-sort)
+- [**typescript**](https://www.typescriptlang.org/): [prettier](https://prettier.io/docs/en/index.html)
+- [**yaml**](https://yaml.org/): [prettier](https://prettier.io/docs/en/index.html)
 
-1. Read from standard input.
-2. Write to standard output.
-3. Are in your PATH.
+Don't like the defaults? Writing custom commands is easy!
 
-Default formatters:
+Each Vim filetype maps to one command-line code-formatting command. This plugin supports any language code formatter as long as it:
 
-- css: [prettier](https://prettier.io/docs/en/index.html)
-- go: [gofmt](https://golang.org/cmd/gofmt/)
-- html: [prettier](https://prettier.io/docs/en/index.html)
-- javascript: [prettier](https://prettier.io/docs/en/index.html)
-- json: [python.json](https://docs.python.org/3/library/json.html)
-- markdown: [prettier](https://prettier.io/docs/en/index.html)
-- python: [black](https://github.com/python/black)
-- rust: [rustfmt](https://github.com/rust-lang/rustfmt)
-- terraform: [terraform fmt](https://www.terraform.io/docs/commands/fmt.html)
-- toml: [toml-sort](https://github.com/pappasam/toml-sort)
-- typescript: [prettier](https://prettier.io/docs/en/index.html)
-- yaml: [prettier](https://prettier.io/docs/en/index.html)
+1. Reads from standard input.
+2. Writes to standard output.
+3. Is in your PATH.
 
-Don't like the defaults? Write custom commands is both possible and easy!
+Requires a recent version of Neovim or Vim 8.
 
 ## Differentiating Features
 
