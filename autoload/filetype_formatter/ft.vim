@@ -51,6 +51,9 @@ let g:filetype_formatter#ft#formatters['rust'] = {
 let g:filetype_formatter#ft#formatters['terraform'] = {
       \ 'terraform fmt': 'terraform fmt -',
       \ }
+let g:filetype_formatter#ft#formatters['toml'] = {
+      \ 'toml-sort': 'toml-sort',
+      \ }
 let g:filetype_formatter#ft#formatters['typescript'] = {
       \ 'prettier': s:get_prettier(),
       \ }
@@ -69,6 +72,7 @@ let g:filetype_formatter#ft#defaults = {
       \ 'python': g:filetype_formatter#ft#formatters['python']['black'],
       \ 'rust': g:filetype_formatter#ft#formatters['rust']['rustfmt'],
       \ 'terraform': g:filetype_formatter#ft#formatters['terraform']['terraform fmt'],
+      \ 'toml': g:filetype_formatter#ft#formatters['toml']['toml-sort'],
       \ 'typescript': g:filetype_formatter#ft#formatters['typescript']['prettier'],
       \ 'yaml': g:filetype_formatter#ft#formatters['yaml']['prettier'],
       \ 'yaml.docker-compose': g:filetype_formatter#ft#formatters['yaml']['prettier'],

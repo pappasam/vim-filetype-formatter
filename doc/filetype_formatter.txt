@@ -7,19 +7,28 @@ Table of Contents                                      *vim-filetype-formatter*
 1. Introduction .......................... |vim-filetype-formatter-intro|
 2. Configuration ......................... |vim-filetype-formatter-configuration|
 3. Commands .............................. |vim-filetype-formatter-commands|
-4. Credits ............................... |vim-filetype-formatter-credits|
+4. Mappings .............................. |vim-filetype-formatter-mappings|
+5. Credits ............................... |vim-filetype-formatter-credits|
 
 ==============================================================================
 1. INTRODUCTION                                  *vim-filetype-formatter-intro*
 
-The |vim-filetype-formatter| plugin simply aplies most command line code
-formatters to your Vim buffer. It assumes two things:
+The |vim-filetype-formatter| plugin simply applies command line code
+formatters to your Vim buffer. It assumes:
 
 1. Your Vim buffer has a filetype
 2. You have associated a qualifying system command with your filetype
 
-A system command is "qualifying" if it takes its formatter input from standard
-input and writes its formatted output to standard output.
+Code formatters are provided as system commands. A system command is
+compatible with this plugin if it:
+
+1. Takes its formatter input from standard input
+2. Writes its formatted output to standard output
+3. Is in your PATH
+
+Most code formatters will be compatible with this plugin. If they are not, you
+should submit a PR to the formatter's project; any well-designed code
+formatter should be able to meet these minimal requirements.
 
 ==============================================================================
 2. CONFIGURATION                         *vim-filetype-formatter-configuration*
@@ -134,7 +143,17 @@ Filetype. Don't edit.
   console.
 
 ==============================================================================
-4. CREDITS                                     *vim-filetype-formatter-credits*
+4. MAPPINGS                                   *vim-filetype-formatter-mappings*
+
+This plugin does not provide key mappings; please add your own! My recommended
+mappings: >
+
+  nnoremap <leader>f :FiletypeFormat<cr>
+  vnoremap <leader>f :FiletypeFormat<cr>
+<
+
+==============================================================================
+5. CREDITS                                     *vim-filetype-formatter-credits*
 
 Special thanks to Chiel ten Brinke for designing vim-autoformat. This plugin
 was initially inspired by that interface and simplifies / cleans up a lot of

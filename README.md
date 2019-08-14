@@ -2,7 +2,13 @@
 
 tl;dr: A simple, cross language Vim code formatter plugin supporting full file formatting, range formatting, and sane behavior. Requires Vim 8 or a recent version of Neovim.
 
-Each Vim filetype may be associated with one command-line code-formatting command. This plugin supports any language, as long as it has a compliant code formatter program(s). See the end of this document for supported formatters / filetypes (there's a lot!). Virtually any code-formatting program qualifies as long as it reads from standard input and writes to standard output. Default configurations are provided for:
+Each Vim filetype maps to one command-line code-formatting command. This plugin supports any language as long as it has a compliant code formatter program(s). Code-formatting programs qualify if they:
+
+1. Read from standard input.
+2. Write to standard output.
+3. Are in your PATH.
+
+Default formatters:
 
 - css: [prettier](https://prettier.io/docs/en/index.html)
 - go: [gofmt](https://golang.org/cmd/gofmt/)
@@ -13,20 +19,22 @@ Each Vim filetype may be associated with one command-line code-formatting comman
 - python: [black](https://github.com/python/black)
 - rust: [rustfmt](https://github.com/rust-lang/rustfmt)
 - terraform: [terraform fmt](https://www.terraform.io/docs/commands/fmt.html)
+- toml: [toml-sort](https://github.com/pappasam/toml-sort)
+- typescript: [prettier](https://prettier.io/docs/en/index.html)
 - yaml: [prettier](https://prettier.io/docs/en/index.html)
 
-Don't like the defaults? It's super easy to write your own! We provide many pre-defined formatter variables in `g:filetype_formatter#ft#formatters` to make your life as easy as possible! And writing your own command is trivial; read on to discover the simplest code-formatting experience in Vim!
+Don't like the defaults? Write custom commands is both possible and easy!
 
 ## Differentiating Features
 
-- Respects your formatter's configuration files (pyproject.toml, .rustfmt.toml, .prettierrc.toml, etc)
-- Modular: does not pollute your Vim environment with remappings / poor Vim plugin practices
-- Keeps your Vim cursor in a sane location after the formatter has run
-- Clear logging so you can see how and why any formatter is/isn't working
-- Ability to chain formatters together with Unix pipes
-- Works on visually-selected ranges for formatters that accept ranges, and even for code formatters **without** explicit range support!
-- Sane, yet override-able, defaults
+- Respects configuration files (pyproject.toml, .rustfmt.toml, .prettierrc.toml, etc)
+- Accepts visually-selected ranges for any formatter
+- Preserves Vim cursor location after the formatter has run
+- Clear logging so you can see why a formatter is or isn't working (:LogFiletypeFormat)
+- Chain formatters together with Unix pipes
+- Configurable, with sane defaults
 - Simple, extendable codebase
+- Modular: does not pollute your Vim environment with remappings / poor Vim plugin practices
 
 ## Installation
 
@@ -44,8 +52,6 @@ Then run the Ex command:
 ```
 
 ## Full Documentation
-
-There are many configuration options. See [here](./doc/filetype_formatter.txt) for a complete list.
 
 From within Vim, type:
 
@@ -90,11 +96,11 @@ vnoremap <leader>f :FiletypeFormat<cr>
 
 ### Default configurations
 
-Many default configurations are provided out of the box and may be overridden by creating our own `g:vim_filetype_formatter_commands` dictionary. To see the latest provided options, please see [here](./autoload/filetype_formatter/ft.vim).
+Default configurations may be overridden by creating our own `g:vim_filetype_formatter_commands` dictionary. To see the latest provided options, please see [here](./autoload/filetype_formatter/ft.vim).
 
 ## Notes
 
-This plugin is focused on simplicity and ease of use on a POSIX-compliant system. Support for Windows and other non-Unix derivatives is not currently in scope.
+This plugin prioritizes simplicity and ease of use on a POSIX-compliant system. Support for Windows and other non-Unix derivatives is out of scope.
 
 ## Written by
 
