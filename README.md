@@ -1,6 +1,6 @@
 # Vim-Filetype-Formatter
 
-A simple, cross language Vim code formatter plugin supporting both range and full-file formatting. By default, it provides the following filetype / formatter pairings:
+A simple, cross language Vim code formatter plugin supporting both range and full-file formatting. By default, it provides the following filetype formatters:
 
 - [**css**](https://developer.mozilla.org/en-US/docs/Web/CSS): [prettier](https://prettier.io/docs/en/index.html)
 - [**go**](https://golang.org/): [gofmt](https://golang.org/cmd/gofmt/)
@@ -22,7 +22,7 @@ Each Vim filetype maps to one command-line code-formatting command. This plugin 
 
 1. Reads from standard input.
 2. Writes to standard output.
-3. Is in your PATH.
+3. Is in your PATH. Vim-filetype-formatter uses code formatters; it does not install them.
 
 Requires a recent version of Neovim or Vim 8.
 
@@ -60,32 +60,7 @@ From within Vim, type:
 :help filetype_formatter
 ```
 
-The following sections give some basic configuration examples.
-
-## Configuration Basics
-
-### g:vim_filetype_formatter_commands
-
-- Type: `Dictionary[String, Union[String, F]]`
-- F: `Union[Function[] -> String, Function[int, int] -> String]`
-- Default: `g:filetype_formatter#ft#defaults`
-
-Configuration consists of two components:
-
-1. A Vim filetype
-2. A system command that accepts the following [standard stream](https://en.wikipedia.org/wiki/Standard_streams): reads from standard input, writes to standard output. The command is either a **string** or a Vim **function**. A function either accepts 0 arguments or 2 arguments (the start and the end line)
-
-```vim
-" ~/.vimrc
-let g:vim_filetype_formatter_commands = {
-      \ 'javascript': {-> printf('npx prettier --stdin --stdin-filepath="%s"', expand('%:p'))},
-      \ 'json': 'python3 -c "import json, sys; print(json.dumps(json.load(sys.stdin), indent=2), end=\"\")"',
-      \ 'python': {start, end -> printf('yapf --lines=%d-%d', start, end)},
-      \ 'terraform': 'terraform fmt -',
-      \ }
-```
-
-### Key mappings
+## Key mappings
 
 This plugin provides no default key mappings. I recommend setting a key mapping for normal mode and visual mode like this:
 
@@ -95,9 +70,11 @@ nnoremap <leader>f :FiletypeFormat<cr>
 vnoremap <leader>f :FiletypeFormat<cr>
 ```
 
-### Default configurations
+## Default configurations
 
-Default configurations may be overridden by creating our own `g:vim_filetype_formatter_commands` dictionary. To see the latest provided options, please see [here](./autoload/filetype_formatter/ft.vim).
+Default configurations may be overridden by creating our own `g:vim_filetype_formatter_commands` dictionary. See [here](./doc/filetype_formatter.txt) for specifics on how to do this.
+
+To see the latest provided defaults / options, please see [here](./autoload/filetype_formatter/ft.vim).
 
 ## Notes
 
