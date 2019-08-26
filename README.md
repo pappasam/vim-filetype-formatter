@@ -2,20 +2,20 @@
 
 A simple, cross language Vim code formatter plugin supporting both range and full-file formatting. By default, it provides the following filetype formatters:
 
-- [**biblatex**](http://www.bibtex.org/): [bibclean](https://ctan.org/pkg/bibclean?lang=en)
-- [**css**](https://developer.mozilla.org/en-US/docs/Web/CSS): [prettier](https://prettier.io/docs/en/index.html)
+- [**biblatex**](http://www.bibtex.org/): [bibtool](https://ctan.org/pkg/bibtool)
+- [**css**](https://developer.mozilla.org/en-US/docs/Web/CSS): [prettier](https://prettier.io/)
 - [**go**](https://golang.org/): [gofmt](https://golang.org/cmd/gofmt/)
-- [**html**](https://developer.mozilla.org/en-US/docs/Web/HTML): [prettier](https://prettier.io/docs/en/index.html)
-- [**javascript**](https://developer.mozilla.org/en-US/docs/Web/JavaScript): [prettier](https://prettier.io/docs/en/index.html)
+- [**html**](https://developer.mozilla.org/en-US/docs/Web/HTML): [prettier](https://prettier.io/)
+- [**javascript**](https://developer.mozilla.org/en-US/docs/Web/JavaScript): [prettier](https://prettier.io/)
 - [**json**](https://json.org/): [python.json](https://docs.python.org/3/library/json.html)
-- [**markdown**](https://en.wikipedia.org/wiki/Markdown): [prettier](https://prettier.io/docs/en/index.html)
+- [**markdown**](https://en.wikipedia.org/wiki/Markdown): [prettier](https://prettier.io/)
 - [**python**](https://www.python.org/): [black](https://github.com/python/black)
 - [**rust**](https://www.rust-lang.org/): [rustfmt](https://github.com/rust-lang/rustfmt)
-- [**svelte**](https://svelte.dev/): [prettier](https://prettier.io/docs/en/index.html) + [prettier-plugin-svelte](https://github.com/UnwrittenFun/prettier-plugin-svelte)
+- [**svelte**](https://svelte.dev/): [prettier](https://prettier.io/) + [prettier-plugin-svelte](https://github.com/UnwrittenFun/prettier-plugin-svelte)
 - [**terraform**](https://www.terraform.io/): [terraform fmt](https://www.terraform.io/docs/commands/fmt.html)
 - [**toml**](https://github.com/toml-lang/toml): [toml-sort](https://github.com/pappasam/toml-sort)
-- [**typescript**](https://www.typescriptlang.org/): [prettier](https://prettier.io/docs/en/index.html)
-- [**yaml**](https://yaml.org/): [prettier](https://prettier.io/docs/en/index.html)
+- [**typescript**](https://www.typescriptlang.org/): [prettier](https://prettier.io/)
+- [**yaml**](https://yaml.org/): [prettier](https://prettier.io/)
 
 Don't like the defaults? Writing custom commands is easy!
 
