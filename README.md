@@ -2,7 +2,7 @@
 
 A simple, cross language Vim code formatter plugin supporting both range and full-file formatting. By default, it provides the following filetype formatters:
 
-- [**bibtex**](http://www.bibtex.org/): [bibclean](https://ctan.org/pkg/bibclean?lang=en)
+- [**biblatex**](http://www.bibtex.org/): [bibclean](https://ctan.org/pkg/bibclean?lang=en)
 - [**css**](https://developer.mozilla.org/en-US/docs/Web/CSS): [prettier](https://prettier.io/docs/en/index.html)
 - [**go**](https://golang.org/): [gofmt](https://golang.org/cmd/gofmt/)
 - [**html**](https://developer.mozilla.org/en-US/docs/Web/HTML): [prettier](https://prettier.io/docs/en/index.html)
