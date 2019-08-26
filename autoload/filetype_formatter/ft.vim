@@ -23,6 +23,9 @@ endfunction
 "   2) A function(start: Integer, end: Integer) -> String
 "   3) A function() -> String
 let g:filetype_formatter#ft#formatters = {}
+let g:filetype_formatter#ft#formatters['bib']= {
+      \ 'bibclean': 'bibclean --no-warnings',
+      \ }
 let g:filetype_formatter#ft#formatters['css']= {
       \ 'prettier': s:get_prettier(),
       \ }
@@ -66,6 +69,7 @@ let g:filetype_formatter#ft#formatters['yaml'] = {
 
 " Defaults: language defaults live in the below dictionary
 let g:filetype_formatter#ft#defaults = {
+      \ 'bib': g:filetype_formatter#ft#formatters['bib']['bibclean'],
       \ 'css': g:filetype_formatter#ft#formatters['css']['prettier'],
       \ 'go': g:filetype_formatter#ft#formatters['go']['gofmt'],
       \ 'html': g:filetype_formatter#ft#formatters['html']['prettier'],
