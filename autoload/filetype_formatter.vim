@@ -82,8 +82,8 @@ endfunction
 "   last_line: int : the last line for formatting
 function! s:format_code_range(
       \ system_call, first_line, last_line)
-  let results_raw = execute(
-        \ a:first_line . ',' . a:last_line . 'write !' . a:system_call)
+  let stdin = join(getline(a:first_line, a:last_line), "\n")
+  let results_raw = system(a:system_call, stdin)
   let results = s:strip_newlines(results_raw)
   if !v:shell_error
     if a:first_line != a:last_line
@@ -108,7 +108,8 @@ endfunction
 "   system_call: str : the string value of the system call to be performed.
 "     Must take input from stdin and read input to stdout.
 function! s:format_code_file(system_call)
-  let results_raw = execute('write !' . a:system_call)
+  let stdin = join(getline(1, '$'), "\n")
+  let results_raw = system(a:system_call, stdin)
   let results = s:strip_newlines(results_raw)
   if !v:shell_error
     " remove undo point caused via BufWritePre
