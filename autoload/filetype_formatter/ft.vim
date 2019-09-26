@@ -50,7 +50,7 @@ let g:filetype_formatter#ft#formatters['python'] = {
       \ 'yapf': {start, end -> printf('yapf --lines=%d-%d', start, end)},
       \ }
 let g:filetype_formatter#ft#formatters['rust'] = {
-      \ 'rustfmt': 'rustfmt',
+      \ 'rustfmt': 'rustfmt --quiet',
       \ }
 let g:filetype_formatter#ft#formatters['svelte']= {
       \ 'prettier': s:get_prettier(),
