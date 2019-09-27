@@ -40,10 +40,16 @@ let g:filetype_formatter#ft#formatters['javascript']= {
       \ 'prettier': s:get_prettier(),
       \ }
 let g:filetype_formatter#ft#formatters['json'] = {
-      \ 'python.json': 'python3 -c "import json, sys; print(json.dumps(json.load(sys.stdin), indent=2), end=\"\")"',
+      \ 'python.json': 'python3 -c "import json, sys;'
+      \                . 'print(json.dumps(json.load(sys.stdin),'
+      \                . 'indent=2), end=\"\")"',
       \ }
 let g:filetype_formatter#ft#formatters['markdown'] = {
       \ 'prettier': s:get_prettier(),
+      \ }
+let g:filetype_formatter#ft#formatters['ocaml'] = {
+      \ 'ocamlformat': {-> 'ocamlformat --enable-outside-detected-project '
+      \                 . '--name ' . expand('%') . ' -'},
       \ }
 let g:filetype_formatter#ft#formatters['python'] = {
       \ 'black': 'black -q -',
@@ -77,6 +83,7 @@ let g:filetype_formatter#ft#defaults = {
       \ 'javascript': g:filetype_formatter#ft#formatters['javascript']['prettier'],
       \ 'json': g:filetype_formatter#ft#formatters['json']['python.json'],
       \ 'markdown': g:filetype_formatter#ft#formatters['markdown']['prettier'],
+      \ 'ocaml': g:filetype_formatter#ft#formatters['ocaml']['ocamlformat'],
       \ 'python': g:filetype_formatter#ft#formatters['python']['black'],
       \ 'rust': g:filetype_formatter#ft#formatters['rust']['rustfmt'],
       \ 'terraform': g:filetype_formatter#ft#formatters['terraform']['terraform fmt'],

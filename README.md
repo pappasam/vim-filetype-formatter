@@ -9,6 +9,7 @@ A simple, cross language Vim code formatter plugin supporting both range and ful
 - [**javascript**](https://developer.mozilla.org/en-US/docs/Web/JavaScript): [prettier](https://prettier.io/)
 - [**json**](https://json.org/): [python.json](https://docs.python.org/3/library/json.html)
 - [**markdown**](https://en.wikipedia.org/wiki/Markdown): [prettier](https://prettier.io/)
+- [**ocaml**](https://ocaml.org/): [ocamlformat](https://github.com/ocaml-ppx/ocamlformat)
 - [**python**](https://www.python.org/): [black](https://github.com/python/black)
 - [**rust**](https://www.rust-lang.org/): [rustfmt](https://github.com/rust-lang/rustfmt)
 - [**svelte**](https://svelte.dev/): [prettier](https://prettier.io/) + [prettier-plugin-svelte](https://github.com/UnwrittenFun/prettier-plugin-svelte)
