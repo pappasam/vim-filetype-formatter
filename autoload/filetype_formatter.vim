@@ -70,6 +70,8 @@ function! s:parse_call(Syscall_config, first_line, last_line)
           \ '" is configured as neither a function nor a string'
           \ ' in g:vim_filetype_formatter_commands'
   endif
+  " Make sure pipelines (eg, 'x - | y - | z -') fail immediately
+  let result.system_call = 'set -Eeuo pipefail; ' . result.system_call
   return result
 endfunction
 
