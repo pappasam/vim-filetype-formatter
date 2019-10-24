@@ -49,10 +49,14 @@ function! s:parse_call(Syscall_config, first_line, last_line)
       try
         " test if function accepts 1 argument
         let _whatever = a:Syscall_config(1)
-        throw 'Formatter function only has 1 argument. Must have 0 or 2 args'
+        let bad_function_one_argument = v:true
       catch /.*/
-        " pass, this is what we hope for
+        let bad_function_one_argument = v:false
       endtry
+      if bad_function_one_argument == v:true
+        throw 'Formatter function only has 1 argument. Must have 0 or 2 args'
+      endif
+
       try
         let result = {
               \ 'system_call': a:Syscall_config(a:first_line, a:last_line),
