@@ -31,6 +31,8 @@ Most code formatters will be compatible with this plugin. If they are not, you
 should submit a PR to the formatter's project; any well-designed code
 formatter should be able to meet these minimal requirements.
 
+This plugin assumes you have Bash installed and available at /bin/bash.
+
 ==============================================================================
 2. CONFIGURATION                            *filetype-formatter-configuration*
 

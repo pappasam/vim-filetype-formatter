@@ -26,7 +26,10 @@ Each Vim filetype maps to one command-line code-formatting command. This plugin 
 2. Writes to standard output.
 3. Is in your PATH. Vim-filetype-formatter uses code formatters; it does not install them.
 
-Requires a recent version of Neovim or Vim 8.
+Requires:
+
+* A recent version of Neovim or Vim 8.
+* Bash (/bin/bash)
 
 ## Differentiating Features
 
