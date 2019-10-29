@@ -138,6 +138,10 @@ endfunction
 " Parameters: firstline AND lastline: int : from range command
 function! filetype_formatter#format_filetype() range
   try
+    " Temporarily change shell. This will be reverted in the finally block
+    let user_shell = &shell
+    set shell=/bin/bash
+
     " Note: below must begin with capital letter
     let Config_system_call = s:parse_config(g:vim_filetype_formatter_commands)
     let parser = s:parse_call(Config_system_call, a:firstline, a:lastline)
@@ -160,6 +164,9 @@ function! filetype_formatter#format_filetype() range
     echo 'Error! Run ":LogFiletypeFormat" for details'
     let b:vim_filetype_formatter_log = "Error! " . v:exception
     return
+  finally
+    " Revert shell to what it was before.
+    execute 'set shell=' . user_shell
   endtry
 endfunction
 
