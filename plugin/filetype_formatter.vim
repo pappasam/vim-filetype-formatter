@@ -49,7 +49,7 @@ let s:default_formatters = {
 
 " Only set this if you want confirmation on success
 if !exists('g:vim_filetype_formatter_verbose')
-  let g:vim_filetype_formatter_verbose = 0
+  let g:vim_filetype_formatter_verbose = v:false
 endif
 
 " Map weird filetypes to standard filetypes
