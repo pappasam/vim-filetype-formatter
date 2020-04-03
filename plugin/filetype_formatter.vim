@@ -7,9 +7,40 @@
 " License:        MIT
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Set plugin defaults
+let s:prettier = {-> printf('npx --no-install prettier --stdin-filepath="%s"', expand('%:p'))}
+let s:default_formatters = {
+      \ 'bib': 'bibtool -q -s',
+      \ 'css': s:prettier,
+      \ 'go': 'gofmt',
+      \ 'html': s:prettier,
+      \ 'javascript': s:prettier,
+      \ 'json': s:prettier,
+      \ 'markdown': s:prettier,
+      \ 'ocaml': {-> 'ocamlformat --enable-outside-detected-project ' . '--name ' . expand('%') . ' -'},
+      \ 'python': 'black -q -',
+      \ 'rust': 'rustfmt --quiet',
+      \ 'terraform': 'terraform fmt -',
+      \ 'toml': 'toml-sort',
+      \ 'typescript': s:prettier,
+      \ 'svelte': s:prettier,
+      \ 'yaml': s:prettier,
+      \ }
+
 " Only set this if you want confirmation on success
 if !exists('g:vim_filetype_formatter_verbose')
   let g:vim_filetype_formatter_verbose = 0
+endif
+
+" Map weird filetypes to standard filetypes
+if !exists('g:vim_filetype_formatter_ft_maps')
+  let g:vim_filetype_formatter_ft_maps = {
+    \ 'javascript.jsx': 'javascript',
+    \ 'typescript.tsx': 'typescript',
+    \ 'yaml.docker-compose': 'yaml',
+    \ }
+elseif type(g:vim_filetype_formatter_ft_maps) != v:t_dict
+  throw 'User-configured g:vim_filetype_formatter_ft_no_defaults must be List'
 endif
 
 " Set filetypes for which there is no default
@@ -21,8 +52,8 @@ endif
 
 " Remove filetypes in config specified for removal specified in config
 for ft_string in g:vim_filetype_formatter_ft_no_defaults
-  if has_key(g:filetype_formatter#ft#defaults, ft_string)
-    unlet g:filetype_formatter#ft#defaults[ft_string]
+  if has_key(s:default_formatters, ft_string)
+    unlet s:default_formatters[ft_string]
   endif
 endfor
 
@@ -35,7 +66,7 @@ endif
 
 " Override defaults with user preferences
 let g:vim_filetype_formatter_commands = extend(
-      \ g:filetype_formatter#ft#defaults,
+      \ s:default_formatters,
       \ g:vim_filetype_formatter_commands)
 
 " Commands

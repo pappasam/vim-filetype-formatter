@@ -12,12 +12,14 @@ function! s:strip_newlines(instring)
   return substitute(a:instring, '\v^\n*(.{-})\n*$', '\1', '')
 endfunction
 
-function! s:parse_config(global_lookup)
-  if !has_key(a:global_lookup, &filetype)
-    throw '"' . &filetype .
-          \ '" not configured in g:vim_filetype_formatter_commands'
+function! s:parse_config(global_lookup, filetype_map)
+  let ft = has_key(a:filetype_map, &filetype)
+        \ ? a:filetype_map[&filetype]
+        \ : &filetype
+  if !has_key(a:global_lookup, ft)
+    throw '"' . ft . '" not configured in g:vim_filetype_formatter_commands'
   endif
-  return get(a:global_lookup, &filetype, '')
+  return get(a:global_lookup, ft, '')
 endfunction
 
 " parse_call: parse the system call, determining specifics of configuration
@@ -143,7 +145,10 @@ function! filetype_formatter#format_filetype() range
     set shell=/bin/bash
 
     " Note: below must begin with capital letter
-    let Config_system_call = s:parse_config(g:vim_filetype_formatter_commands)
+    let Config_system_call = s:parse_config(
+          \ g:vim_filetype_formatter_commands,
+          \ g:vim_filetype_formatter_ft_maps,
+          \ )
     let parser = s:parse_call(Config_system_call, a:firstline, a:lastline)
     if a:firstline == 1 && a:lastline == line('$')
       " The entire buffer is selected, hence we use the entire file

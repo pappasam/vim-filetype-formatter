@@ -43,7 +43,7 @@ Type: Dictionary[String, Union[String, F]]
       F:
         Function(Integer, Integer) -> String |
         Function() -> String
-Default: g:filetype_formatter#ft#defaults
+Default: defined in plugin/filetype_formatter.vim
 
 Assume you have several theoretical filetypes: 'dog', 'cat', 'bat', and 'rat'.
 With these theoretical filetypes, you have some command line code formatting
@@ -58,7 +58,6 @@ option as follows: >
       \ 'rat': {-> printf('rat-fmt --stdin-file=%s', expand('%:p'))},
       \ }
 <
-
 If your Dictionary value is a String, it is assumed to operate over an entire
 file / buffer.
 
@@ -87,7 +86,21 @@ set this option to anything other than Zero: >
 
   let g:vim_filetype_formatter_verbose = 1
 <
+                                     *g:vim_filetype_formatter_ft_maps*
+g:vim_filetype_formatter_ft_maps~
 
+Type: Dictionary[String, String]
+Default: defined in plugin/filetype_formatter.vim
+
+Maps a filetype to a top-level filetype. Values on the left should be
+available as keys in vim_filetype_formatter_commands.
+
+This default is provided purely as a courtesy. If you choose to override, you
+will need to provide the above mappings again in your own vimrc if you would
+like to retain them. >
+
+  let g:vim_filetype_formatter_ft_maps = {'sql.postgres', 'sql'}
+<
                                      *g:vim_filetype_formatter_ft_no_defaults*
 g:vim_filetype_formatter_ft_no_defaults~
 
@@ -104,30 +117,6 @@ overridden by this configuration. >
 
   let g:vim_filetype_formatter_ft_no_defaults = ['markdown', 'javascript']
 <
-
-                                         *g:filetype_formatter#ft#formatters*
-g:filetype_formatter#ft#formatters~
-
-Type: Dict[String, Dict[String, F]]
-Default: Created by this plugin. DON'T EDIT
-
-Variable containing pre-written commands for different code formatters that
-we're aware of. For example, if you want to use "yapf" instead of "black" for
-Python, place the following in your vimrc: >
-
-  let g:vim_filetype_formatter_commands = {
-      \ 'python': g:filetype_formatter#ft#formatters['python']['yapf'],
-      \ }
-<
-                                         *g:filetype_formatter#ft#defaults*
-g:filetype_formatter#ft#defaults~
-
-Type: Dict[String, F]
-Default: Created by this plugin. DON'T EDIT
-
-A variable containing the default, pre-written commands assigned to each
-Filetype. Don't edit.
-
 ==============================================================================
 3. COMMANDS                                      *filetype-formatter-commands*
 
@@ -154,7 +143,6 @@ mappings: >
   nnoremap <leader>f :FiletypeFormat<cr>
   vnoremap <leader>f :FiletypeFormat<cr>
 <
-
 ==============================================================================
 5. CREDITS                                       *filetype-formatter-credits*
 

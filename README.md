@@ -28,8 +28,8 @@ Each Vim filetype maps to one command-line code-formatting command. This plugin 
 
 Requires:
 
-* A recent version of Neovim or Vim 8.
-* Bash (/bin/bash)
+- A recent version of Neovim or Vim 8.
+- Bash (/bin/bash)
 
 ## Differentiating Features
 
@@ -77,7 +77,7 @@ vnoremap <leader>f :FiletypeFormat<cr>
 
 ## Default configurations
 
-Default configurations may be overridden by creating our own `g:vim_filetype_formatter_commands` dictionary. See [here](./doc/filetype_formatter.txt) for specifics on how to do this.
+Default configurations may be overridden by creating our own `g:vim_filetype_formatter_commands` dictionary. If you would like to map one filetype to another, see `g:vim_filetype_formatter_ft_maps`. See [here](./doc/filetype_formatter.txt) for specifics on how to do this, along with provided defaults.
 
 To see the latest provided defaults / options, please see [here](./autoload/filetype_formatter/ft.vim).
 
