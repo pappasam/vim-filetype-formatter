@@ -90,7 +90,7 @@ set this option to anything other than Zero: >
 g:vim_filetype_formatter_ft_maps~
 
 Type: Dictionary[String, String]
-Default: defined in plugin/filetype_formatter.vim
+Default: {}
 
 Maps a filetype to a top-level filetype. Values on the left should be
 available as keys in vim_filetype_formatter_commands.

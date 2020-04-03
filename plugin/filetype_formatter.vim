@@ -9,22 +9,27 @@
 
 " Set plugin defaults
 let s:prettier = {-> printf('npx --no-install prettier --stdin-filepath="%s"', expand('%:p'))}
+let s:ocaml = {-> printf('ocamlformat --enable-outside-detected-project --name "%s" -',  expand('%'))}
 let s:default_formatters = {
       \ 'bib': 'bibtool -q -s',
       \ 'css': s:prettier,
       \ 'go': 'gofmt',
       \ 'html': s:prettier,
       \ 'javascript': s:prettier,
+      \ 'javascript.jsx': s:prettier,
       \ 'json': s:prettier,
+      \ 'jsonc': s:prettier,
       \ 'markdown': s:prettier,
-      \ 'ocaml': {-> 'ocamlformat --enable-outside-detected-project ' . '--name ' . expand('%') . ' -'},
+      \ 'ocaml': s:ocaml,
       \ 'python': 'black -q -',
       \ 'rust': 'rustfmt --quiet',
+      \ 'svelte': s:prettier,
       \ 'terraform': 'terraform fmt -',
       \ 'toml': 'toml-sort',
       \ 'typescript': s:prettier,
-      \ 'svelte': s:prettier,
+      \ 'typescript.tsx': s:prettier,
       \ 'yaml': s:prettier,
+      \ 'yaml.docker-compose': s:prettier,
       \ }
 
 " Only set this if you want confirmation on success
@@ -34,11 +39,7 @@ endif
 
 " Map weird filetypes to standard filetypes
 if !exists('g:vim_filetype_formatter_ft_maps')
-  let g:vim_filetype_formatter_ft_maps = {
-    \ 'javascript.jsx': 'javascript',
-    \ 'typescript.tsx': 'typescript',
-    \ 'yaml.docker-compose': 'yaml',
-    \ }
+  let g:vim_filetype_formatter_ft_maps = {}
 elseif type(g:vim_filetype_formatter_ft_maps) != v:t_dict
   throw 'User-configured g:vim_filetype_formatter_ft_no_defaults must be List'
 endif
