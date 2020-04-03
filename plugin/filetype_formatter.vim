@@ -8,8 +8,23 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Set plugin defaults
-let s:prettier = {-> printf('npx --no-install prettier --stdin-filepath="%s"', expand('%:p'))}
-let s:ocaml = {-> printf('ocamlformat --enable-outside-detected-project --name "%s" -',  expand('%'))}
+
+function! s:_prettier()
+  return printf(
+        \ 'npx --no-install prettier --stdin-filepath="%s"',
+        \ expand('%:p')
+        \ )
+endfunction
+let s:prettier = funcref('s:_prettier')
+
+function! s:_ocamlformat()
+  return printf(
+        \ 'ocamlformat --enable-outside-detected-project --name "%s" -',
+        \ expand('%')
+        \ )
+endfunction
+let s:ocamlformat = funcref('s:_ocamlformat')
+
 let s:default_formatters = {
       \ 'bib': 'bibtool -q -s',
       \ 'css': s:prettier,
@@ -20,7 +35,7 @@ let s:default_formatters = {
       \ 'json': s:prettier,
       \ 'jsonc': s:prettier,
       \ 'markdown': s:prettier,
-      \ 'ocaml': s:ocaml,
+      \ 'ocaml': s:ocamlformat,
       \ 'python': 'black -q -',
       \ 'rust': 'rustfmt --quiet',
       \ 'svelte': s:prettier,
