@@ -38,6 +38,7 @@ Requires:
 - Accepts visually-selected ranges for any formatter
 - Preserves Vim cursor location after the formatter has run
 - Clear logging so you can see why a formatter is or isn't working (:LogFiletypeFormat)
+- Easy debugging of user configuration (:DebugFiletypeFormat)
 - Chain formatters together with Unix pipes
 - Configurable, with sane defaults
 - Simple, extendable codebase

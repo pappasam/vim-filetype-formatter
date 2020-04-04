@@ -92,3 +92,5 @@ command! -range=% FiletypeFormat silent!
       \ | silent call winrestview(b:filetype_formatter_winview)
 
 command! LogFiletypeFormat call filetype_formatter#echo_log()
+
+command! DebugFiletypeFormat call filetype_formatter#debug()

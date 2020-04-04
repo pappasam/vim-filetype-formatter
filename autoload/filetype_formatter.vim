@@ -185,3 +185,27 @@ function! filetype_formatter#echo_log()
   endif
   echo 'vim-filetype-formatter: ' . b:vim_filetype_formatter_log
 endfunction
+
+" debug: print configuration variables and settings to console
+" WrittenBy: Samuel Roeca
+function! filetype_formatter#debug()
+  echo 'g:vim_filetype_formatter_ft_maps = {'
+  for [ft, ft_map] in sort(items(g:vim_filetype_formatter_ft_maps))
+    echo printf('  "%s": "%s",', ft, ft_map)
+  endfor
+  echo '}'
+  echo 'g:vim_filetype_formatter_commands = {'
+  for [ft, Ft_formatter] in sort(items(g:vim_filetype_formatter_commands))
+    echo printf('  "%s": "%s",', ft, Ft_formatter)
+  endfor
+  echo '}'
+  try
+    let Current_formatter = s:parse_config(
+          \ g:vim_filetype_formatter_commands,
+          \ g:vim_filetype_formatter_ft_maps,
+          \ )
+  catch /.*/
+    let Current_formatter = 'No formatter configured'
+  endtry
+  echo printf('Current [%s] formatter: "%s"', &filetype, Current_formatter)
+endfunction

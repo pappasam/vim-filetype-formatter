@@ -1,17 +1,19 @@
-*filetype_formatter.txt* A simple, functional Vim code formatter plugin
+*vim_filetype_formatter.txt*  *filetype_formatter*  *formatter*
+
+A simple, functional Neovim/Vim "code formatter" utility
 
 Author: Samuel Roeca
 
-Table of Contents                                         *filetype-formatter*
+Table of Contents                                          *filetype-formatter*
 
-1. Introduction .......................... |vim-filetype-formatter-intro|
-2. Configuration ......................... |vim-filetype-formatter-configuration|
-3. Commands .............................. |vim-filetype-formatter-commands|
-4. Mappings .............................. |vim-filetype-formatter-mappings|
-5. Credits ............................... |vim-filetype-formatter-credits|
+1. Introduction ........................ |vim-filetype-formatter-intro|
+2. Configuration ....................... |vim-filetype-formatter-configuration|
+3. Commands ............................ |vim-filetype-formatter-commands|
+4. Mappings ............................ |vim-filetype-formatter-mappings|
+5. Credits ............................. |vim-filetype-formatter-credits|
 
 ==============================================================================
-1. INTRODUCTION                                     *filetype-formatter-intro*
+1. INTRODUCTION                                      *filetype-formatter-intro*
 
 The |vim-filetype-formatter| plugin simply applies command line code
 formatters to your Vim buffer. It assumes:
@@ -34,9 +36,9 @@ formatter should be able to meet these minimal requirements.
 This plugin assumes you have Bash installed and available at /bin/bash.
 
 ==============================================================================
-2. CONFIGURATION                            *filetype-formatter-configuration*
+2. CONFIGURATION                             *filetype-formatter-configuration*
 
-                                             *g:vim_filetype_formatter_commands*
+                                            *g:vim_filetype_formatter_commands*
 g:vim_filetype_formatter_commands~
 
 Type: Dictionary[String, Union[String, F]]
@@ -86,7 +88,7 @@ set this option to anything other than Zero: >
 
   let g:vim_filetype_formatter_verbose = 1
 <
-                                     *g:vim_filetype_formatter_ft_maps*
+                                             *g:vim_filetype_formatter_ft_maps*
 g:vim_filetype_formatter_ft_maps~
 
 Type: Dictionary[String, String]
@@ -101,7 +103,7 @@ like to retain them. >
 
   let g:vim_filetype_formatter_ft_maps = {'sql.postgres', 'sql'}
 <
-                                     *g:vim_filetype_formatter_ft_no_defaults*
+                                      *g:vim_filetype_formatter_ft_no_defaults*
 g:vim_filetype_formatter_ft_no_defaults~
 
 Type: List[String]
@@ -118,7 +120,7 @@ overridden by this configuration. >
   let g:vim_filetype_formatter_ft_no_defaults = ['markdown', 'javascript']
 <
 ==============================================================================
-3. COMMANDS                                      *filetype-formatter-commands*
+3. COMMANDS                                       *filetype-formatter-commands*
 
 :FiletypeFormat                                               *:FiletypeFormat*
   Format the entire current buffer using a configured formatter. If the
@@ -134,21 +136,22 @@ overridden by this configuration. >
   Print output from a buffer's most recent formatter function attempt to the
   console.
 
-==============================================================================
-4. MAPPINGS                                      *filetype-formatter-mappings*
+:DebugFiletypeFormat                                     *:DebugFiletypeFormat*
+  Print configuration variables and settings to the console.
 
-This plugin does not provide key mappings; please add your own! My recommended
+==============================================================================
+4. MAPPINGS                                       *filetype-formatter-mappings*
+
+This plugin does not provide key mappings; please add your own! Recommended
 mappings: >
 
   nnoremap <leader>f :FiletypeFormat<cr>
   vnoremap <leader>f :FiletypeFormat<cr>
 <
 ==============================================================================
-5. CREDITS                                       *filetype-formatter-credits*
+5. CREDITS                                         *filetype-formatter-credits*
 
-Special thanks to Chiel ten Brinke for designing vim-autoformat. This plugin
-was initially inspired by that interface and simplifies / cleans up a lot of
-aspects of that plugin I thought should be changed. Hopefully this plugin
-helps more Vim users get the most out of their command line formatters.
+Special thanks to Chiel ten Brinke for designing vim-autoformat; you inspired
+vim-filetype-formatter.
 
 vim:tw=78:ts=8:ft=help:norl:
