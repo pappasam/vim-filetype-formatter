@@ -46,7 +46,7 @@ Requires:
 
 ## Installation
 
-Use [Vim-Plug](https://github.com/junegunn/vim-plug). Once you've installed Vim-Plug, place the following line in the Plugin section of your vimrc:
+If using [vim-plug](https://github.com/junegunn/vim-plug), place the following line in the Plugin section of your inti.vim / vimrc:
 
 ```vim
 " ~/.vimrc
@@ -58,6 +58,8 @@ Then run the Ex command:
 ```vim
 :PlugInstall
 ```
+
+I personally use [vim-packager](https://github.com/kristijanhusak/vim-packager), so if you'd like to go down the "package" rabbit hole, I suggest giving that a try.
 
 ## Full Documentation
 
