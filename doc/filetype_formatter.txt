@@ -1,22 +1,21 @@
-*vim_filetype_formatter.txt*  *filetype_formatter*  *formatter*
-
-A simple, functional Neovim/Vim "code formatter" utility
+*filetype_formatter.txt* A general Neovim/Vim "code formatter" utility
 
 Author: Samuel Roeca
 
-Table of Contents                                          *filetype-formatter*
+Table of Contents
 
-1. Introduction ........................ |vim-filetype-formatter-intro|
-2. Configuration ....................... |vim-filetype-formatter-configuration|
-3. Commands ............................ |vim-filetype-formatter-commands|
-4. Mappings ............................ |vim-filetype-formatter-mappings|
-5. Credits ............................. |vim-filetype-formatter-credits|
+1. Introduction ... |filetype_formatter_intro|
+2. Configuration .. |filetype_formatter_configuration|
+3. Commands ....... |filetype_formatter_commands|
+4. Mappings ....... |filetype_formatter_mappings|
+5. Credits ........ |filetype_formatter_credits|
 
 ==============================================================================
-1. INTRODUCTION                                      *filetype-formatter-intro*
+                                                     *filetype_formatter_intro*
+1. INTRODUCTION~
 
-The |vim-filetype-formatter| plugin simply applies command line code
-formatters to your Vim buffer. It assumes:
+This plugin plugin simply applies command line code formatters to your Vim
+buffer. It assumes:
 
 1. Your Vim buffer has a filetype
 2. You have associated a qualifying system command with your filetype
@@ -36,11 +35,10 @@ formatter should be able to meet these minimal requirements.
 This plugin assumes you have Bash installed and available at /bin/bash.
 
 ==============================================================================
-2. CONFIGURATION                             *filetype-formatter-configuration*
+                                             *filetype_formatter_configuration*
+2. CONFIGURATION~
 
-                                            *g:vim_filetype_formatter_commands*
-g:vim_filetype_formatter_commands~
-
+*g:vim_filetype_formatter_commands*
 Type: Dictionary[String, Union[String, F]]
       F:
         Function(Integer, Integer) -> String |
@@ -75,9 +73,7 @@ formatter on selected text can be breakable without the text's broader
 context. If a formatter provides a range interface, it's a good idea to use
 it!
 
-                                             *g:vim_filetype_formatter_verbose*
-g:vim_filetype_formatter_verbose~
-
+*g:vim_filetype_formatter_verbose*
 Type: Boolean (or Integer, Vim doesn't care)
 Default: 0 (for False)
 
@@ -88,9 +84,7 @@ set this option to anything other than Zero: >
 
   let g:vim_filetype_formatter_verbose = 1
 <
-                                             *g:vim_filetype_formatter_ft_maps*
-g:vim_filetype_formatter_ft_maps~
-
+*g:vim_filetype_formatter_ft_maps*
 Type: Dictionary[String, String]
 Default: {}
 
@@ -103,9 +97,7 @@ like to retain them. >
 
   let g:vim_filetype_formatter_ft_maps = {'sql.postgres', 'sql'}
 <
-                                      *g:vim_filetype_formatter_ft_no_defaults*
-g:vim_filetype_formatter_ft_no_defaults~
-
+*g:vim_filetype_formatter_ft_no_defaults*
 Type: List[String]
 Default: []
 
@@ -120,9 +112,10 @@ overridden by this configuration. >
   let g:vim_filetype_formatter_ft_no_defaults = ['markdown', 'javascript']
 <
 ==============================================================================
-3. COMMANDS                                       *filetype-formatter-commands*
+                                                  *filetype_formatter_commands*
+3. COMMANDS~
 
-:FiletypeFormat                                               *:FiletypeFormat*
+*:FiletypeFormat*
   Format the entire current buffer using a configured formatter. If the
   buffer's filetype has not been associated with this plugin, it will save an
   error message accessible through :ErrorFiletypeFormat.
@@ -132,15 +125,16 @@ overridden by this configuration. >
   ranges, behavior depends on whether a filetype's formatter is a "String", a
   "Function[] -> String", or a "Function[Integer, Integer] -> String".
 
-:LogFiletypeFormat                                         *:LogFiletypeFormat*
+*:LogFiletypeFormat*
   Print output from a buffer's most recent formatter function attempt to the
   console.
 
-:DebugFiletypeFormat                                     *:DebugFiletypeFormat*
+*:DebugFiletypeFormat*
   Print configuration variables and settings to the console.
 
 ==============================================================================
-4. MAPPINGS                                       *filetype-formatter-mappings*
+                                                  *filetype_formatter_mappings*
+4. MAPPINGS~
 
 This plugin does not provide key mappings; please add your own! Recommended
 mappings: >
@@ -149,9 +143,9 @@ mappings: >
   vnoremap <leader>f :FiletypeFormat<cr>
 <
 ==============================================================================
-5. CREDITS                                         *filetype-formatter-credits*
+                                                   *filetype_formatter_credits*
+5. CREDITS~
 
-Special thanks to Chiel ten Brinke for designing vim-autoformat; you inspired
-vim-filetype-formatter.
+filetype_formatter was originally inspired by the design of vim-autoformat.
 
 vim:tw=78:ts=8:ft=help:norl:
