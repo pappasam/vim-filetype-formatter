@@ -7,7 +7,7 @@
 " License:        MIT
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Setup:
+" Setup
 
 if exists("g:loaded_filetype_formatter")
   finish
@@ -16,7 +16,7 @@ let g:loaded_filetype_formatter = v:true
 let s:save_cpo = &cpo
 set cpo&vim
 
-" Set plugin defaults
+" Configuration
 
 function! s:_prettier()
   return printf(
@@ -96,25 +96,42 @@ function! s:configure_constants()
         \ g:vim_filetype_formatter_commands)
 endfunction
 
-" Commands:
+function! s:exists(name)
+  let _exists = exists(a:name)
+  if _exists
+    echom printf(
+          \ 'filetype_formatter: unable to define "%s"; already defined',
+          \ a:name,
+          \ )
+  endif
+  return _exists
+endfunction
 
-command! -range=% FiletypeFormat silent!
-      \ let b:filetype_formatter_winview = winsaveview()
-      \ | <line1>,<line2>call filetype_formatter#format_filetype()
-      \ | silent call winrestview(b:filetype_formatter_winview)
+" Commands
 
-command! LogFiletypeFormat call filetype_formatter#echo_log()
+if !s:exists(':FiletypeFormat')
+  command -range=% FiletypeFormat silent!
+        \ let b:filetype_formatter_winview = winsaveview()
+        \ | <line1>,<line2>call filetype_formatter#format_filetype()
+        \ | silent call winrestview(b:filetype_formatter_winview)
+endif
 
-command! DebugFiletypeFormat call filetype_formatter#debug()
+if !s:exists(':LogFiletypeFormat')
+  command LogFiletypeFormat call filetype_formatter#echo_log()
+endif
 
-" Finish:
+if !s:exists(':DebugFiletypeFormat')
+  command DebugFiletypeFormat call filetype_formatter#debug()
+endif
+
+" Finish
 
 try
   call s:configure_constants()
 catch /.*/
-  throw printf('vim-filetype_formatter: %s', v:exception)
+  throw printf('filetype_formatter: %s', v:exception)
 finally
-  " Teardown:
+  " Teardown
   let &cpo = s:save_cpo
   unlet s:save_cpo
 endtry
