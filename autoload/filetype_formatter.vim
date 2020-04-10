@@ -22,6 +22,12 @@ function! s:parse_config(global_lookup, filetype_map)
   return get(a:global_lookup, ft, '')
 endfunction
 
+function! s:warning(msg)
+  echohl WarningMsg
+  echom 'filetype_formatter: ' . a:msg
+  echohl None
+endfunction
+
 " parse_call: parse the system call, determining specifics of configuration
 " WrittenBy: Samuel Roeca
 " Parameters:
@@ -131,7 +137,7 @@ function! s:format_code_file(system_call)
     call rename(tempfile, expand('%'))
     silent edit!
   else
-    throw '"' . a:system_call . "\":\n" . results
+    throw printf("command: %s\nmessage: %s", a:system_call, results)
   endif
 endfunction
 
@@ -161,13 +167,15 @@ function! filetype_formatter#format_filetype() range
       call s:format_code_range(parser.system_call, a:firstline, a:lastline)
     endif
     if g:vim_filetype_formatter_verbose
-      echom 'filetype_format: Success! ' . '"' . parser.system_call . '"'
+      echom 'filetype_formatter: Success! ' . '"' . parser.system_call . '"'
     endif
     let b:vim_filetype_formatter_log =
           \ 'Success! "' . parser.system_call . '" ran successfully'
   catch /.*/
-    echom 'filetype_format: Error! Run ":LogFiletypeFormat" for details'
-    let b:vim_filetype_formatter_log = "Error! " . v:exception
+    call s:warning(
+          \ 'error! debug with ":LogFiletypeFormat" and ":DebugFiletypeFormat"'
+          \ )
+    let b:vim_filetype_formatter_log = v:exception
     return
   finally
     " Revert shell to what it was before.
@@ -180,21 +188,23 @@ endfunction
 " WrittenBy: Samuel Roeca
 function! filetype_formatter#echo_log()
   if !exists('b:vim_filetype_formatter_log')
-    echom 'filetype_format: FiletypeFormat has not been tried on this buffer'
+    call s:warning('":FiletypeFormat" not yet used on this buffer')
     return
   endif
-  echom 'filetype_formatter: ' . b:vim_filetype_formatter_log
+  call s:warning('log of most-recently executed command')
+  echo b:vim_filetype_formatter_log
 endfunction
 
 " debug: print configuration variables and settings to console
 " WrittenBy: Samuel Roeca
 function! filetype_formatter#debug()
-  echom 'filetype_formatter: g:vim_filetype_formatter_ft_maps = {'
+  call s:warning('user configuration details')
+  echom 'g:vim_filetype_formatter_ft_maps = {'
   for [ft, ft_map] in sort(items(g:vim_filetype_formatter_ft_maps))
     echom printf('  "%s": "%s",', ft, ft_map)
   endfor
   echom '}'
-  echom 'filetype_formatter: g:vim_filetype_formatter_commands = {'
+  echom 'g:vim_filetype_formatter_commands = {'
   for [ft, Ft_formatter] in sort(items(g:vim_filetype_formatter_commands))
     echom printf('  "%s": "%s",', ft, Ft_formatter)
   endfor
@@ -208,8 +218,9 @@ function! filetype_formatter#debug()
     let Current_formatter = 'No formatter configured'
   endtry
   echom printf(
-        \ 'filetype_formatter:Current [%s] formatter: "%s"',
+        \ '[%s] formatter: "%s"',
         \ &filetype,
         \ Current_formatter,
         \ )
+  echom 'shell: /bin/bash'
 endfunction
