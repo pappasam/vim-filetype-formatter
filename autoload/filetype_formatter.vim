@@ -161,12 +161,12 @@ function! filetype_formatter#format_filetype() range
       call s:format_code_range(parser.system_call, a:firstline, a:lastline)
     endif
     if g:vim_filetype_formatter_verbose
-      echo 'Success! ' . '"' . parser.system_call . '"'
+      echom 'filetype_format: Success! ' . '"' . parser.system_call . '"'
     endif
     let b:vim_filetype_formatter_log =
           \ 'Success! "' . parser.system_call . '" ran successfully'
   catch /.*/
-    echo 'Error! Run ":LogFiletypeFormat" for details'
+    echom 'filetype_format: Error! Run ":LogFiletypeFormat" for details'
     let b:vim_filetype_formatter_log = "Error! " . v:exception
     return
   finally
@@ -180,25 +180,25 @@ endfunction
 " WrittenBy: Samuel Roeca
 function! filetype_formatter#echo_log()
   if !exists('b:vim_filetype_formatter_log')
-    echo 'FiletypeFormat has not been tried on this buffer'
+    echom 'filetype_format: FiletypeFormat has not been tried on this buffer'
     return
   endif
-  echo 'vim-filetype-formatter: ' . b:vim_filetype_formatter_log
+  echom 'filetype_formatter: ' . b:vim_filetype_formatter_log
 endfunction
 
 " debug: print configuration variables and settings to console
 " WrittenBy: Samuel Roeca
 function! filetype_formatter#debug()
-  echo 'g:vim_filetype_formatter_ft_maps = {'
+  echom 'filetype_formatter: g:vim_filetype_formatter_ft_maps = {'
   for [ft, ft_map] in sort(items(g:vim_filetype_formatter_ft_maps))
-    echo printf('  "%s": "%s",', ft, ft_map)
+    echom printf('  "%s": "%s",', ft, ft_map)
   endfor
-  echo '}'
-  echo 'g:vim_filetype_formatter_commands = {'
+  echom '}'
+  echom 'filetype_formatter: g:vim_filetype_formatter_commands = {'
   for [ft, Ft_formatter] in sort(items(g:vim_filetype_formatter_commands))
-    echo printf('  "%s": "%s",', ft, Ft_formatter)
+    echom printf('  "%s": "%s",', ft, Ft_formatter)
   endfor
-  echo '}'
+  echom '}'
   try
     let Current_formatter = s:parse_config(
           \ g:vim_filetype_formatter_commands,
@@ -207,5 +207,9 @@ function! filetype_formatter#debug()
   catch /.*/
     let Current_formatter = 'No formatter configured'
   endtry
-  echo printf('Current [%s] formatter: "%s"', &filetype, Current_formatter)
+  echom printf(
+        \ 'filetype_formatter:Current [%s] formatter: "%s"',
+        \ &filetype,
+        \ Current_formatter,
+        \ )
 endfunction
