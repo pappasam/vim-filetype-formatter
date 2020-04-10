@@ -22,7 +22,7 @@ function! s:parse_config(global_lookup, filetype_map)
   return get(a:global_lookup, ft, '')
 endfunction
 
-function! s:warning(msg)
+function! filetype_formatter#warning(msg)
   echohl WarningMsg
   echom 'filetype_formatter: ' . a:msg
   echohl None
@@ -170,9 +170,9 @@ function! filetype_formatter#format_filetype() range
       echom 'filetype_formatter: Success! ' . '"' . parser.system_call . '"'
     endif
     let b:vim_filetype_formatter_log =
-          \ 'Success! "' . parser.system_call . '" ran successfully'
+          \ printf("command: %s\nmessage: %s", parser.system_call, 'success!')
   catch /.*/
-    call s:warning(
+    call filetype_formatter#warning(
           \ 'error! debug with ":LogFiletypeFormat" and ":DebugFiletypeFormat"'
           \ )
     let b:vim_filetype_formatter_log = v:exception
@@ -188,17 +188,19 @@ endfunction
 " WrittenBy: Samuel Roeca
 function! filetype_formatter#echo_log()
   if !exists('b:vim_filetype_formatter_log')
-    call s:warning('":FiletypeFormat" not yet used on this buffer')
+    call filetype_formatter#warning(
+          \ '":FiletypeFormat" not yet used on this buffer'
+          \ )
     return
   endif
-  call s:warning('log of most-recently executed command')
+  call filetype_formatter#warning('log of most-recently executed command')
   echo b:vim_filetype_formatter_log
 endfunction
 
 " debug: print configuration variables and settings to console
 " WrittenBy: Samuel Roeca
 function! filetype_formatter#debug()
-  call s:warning('user configuration details')
+  call filetype_formatter#warning('user configuration details')
   echom 'g:vim_filetype_formatter_ft_maps = {'
   for [ft, ft_map] in sort(items(g:vim_filetype_formatter_ft_maps))
     echom printf('  "%s": "%s",', ft, ft_map)

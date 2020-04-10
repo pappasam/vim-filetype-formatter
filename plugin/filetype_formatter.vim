@@ -99,10 +99,10 @@ endfunction
 function! s:exists(name)
   let _exists = exists(a:name)
   if _exists
-    echom printf(
-          \ 'filetype_formatter: unable to define "%s"; already defined',
+    call filetype_formatter#warning(printf(
+          \ 'unable to define "%s"; already defined',
           \ a:name,
-          \ )
+          \ ))
   endif
   return _exists
 endfunction
@@ -129,7 +129,10 @@ endif
 try
   call s:configure_constants()
 catch /.*/
-  throw printf('filetype_formatter: %s', v:exception)
+  call filetype_formatter#warning(printf(
+        \ 'filetype_formatter: %s',
+        \ v:exception,
+        \ ))
 finally
   " Teardown
   let &cpo = s:save_cpo
