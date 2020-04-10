@@ -100,7 +100,7 @@ function! s:exists(name)
   let _exists = exists(a:name)
   if _exists
     call filetype_formatter#warning(printf(
-          \ 'unable to define "%s"; already defined',
+          \ 'cannot define "%s"; already defined',
           \ a:name,
           \ ))
   endif
