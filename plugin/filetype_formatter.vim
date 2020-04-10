@@ -7,6 +7,15 @@
 " License:        MIT
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Setup:
+
+if exists("g:loaded_filetype_formatter")
+  finish
+endif
+let g:loaded_filetype_formatter = v:true
+let s:save_cpo = &cpo
+set cpo&vim
+
 " Set plugin defaults
 
 function! s:_prettier()
@@ -94,3 +103,8 @@ command! -range=% FiletypeFormat silent!
 command! LogFiletypeFormat call filetype_formatter#echo_log()
 
 command! DebugFiletypeFormat call filetype_formatter#debug()
+
+" Teardown:
+
+let &cpo = s:save_cpo
+unlet s:save_cpo
