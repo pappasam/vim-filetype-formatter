@@ -57,7 +57,7 @@ option as follows: >
       \ 'bat': {start, end -> printf('bat-fmt --lines=%d-%d', start, end)},
       \ 'rat': {-> printf('rat-fmt --stdin-file=%s', expand('%:p'))},
       \ }
-<
+
 If your Dictionary value is a String, it is assumed to operate over an entire
 file / buffer.
 
@@ -83,7 +83,7 @@ echos a confirmation the user that a command ran successfully. To enable it,
 set this option to anything other than Zero: >
 
   let g:vim_filetype_formatter_verbose = 1
-<
+
 *g:vim_filetype_formatter_ft_maps*
 Type: Dictionary[String, String]
 Default: {}
@@ -96,7 +96,7 @@ will need to provide the above mappings again in your own vimrc if you would
 like to retain them. >
 
   let g:vim_filetype_formatter_ft_maps = {'sql.postgres', 'sql'}
-<
+
 *g:vim_filetype_formatter_ft_no_defaults*
 Type: List[String]
 Default: []
@@ -110,7 +110,7 @@ Any filetypes configured in g:vim_filetype_formatter_commands will NOT be
 overridden by this configuration. >
 
   let g:vim_filetype_formatter_ft_no_defaults = ['markdown', 'javascript']
-<
+
 ==============================================================================
                                                   *filetype_formatter_commands*
 3. COMMANDS~
@@ -141,7 +141,7 @@ mappings: >
 
   nnoremap <leader>f :FiletypeFormat<cr>
   vnoremap <leader>f :FiletypeFormat<cr>
-<
+
 ==============================================================================
                                                    *filetype_formatter_credits*
 5. CREDITS~
