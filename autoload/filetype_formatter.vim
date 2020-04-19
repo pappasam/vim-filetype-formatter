@@ -145,12 +145,9 @@ endfunction
 " WrittenBy: Samuel Roeca
 " Parameters: firstline AND lastline: int : from range command
 function! filetype_formatter#format_filetype() range
-  " 'writedelay' suspends characters from being sent to screen.
-  let _writedelay_original = &writedelay
-  set writedelay=1000000
-  " 'shell' determines what shell is used to run the formatter program.
   let _shell_original = &shell
   set shell=/bin/bash
+  set lazyredraw
   try
     " Note: below must begin with capital letter
     let Config_system_call = s:parse_config(
@@ -178,11 +175,9 @@ function! filetype_formatter#format_filetype() range
           \ 'error! debug with ":LogFiletypeFormat" and ":DebugFiletypeFormat"'
           \ )
     let b:vim_filetype_formatter_log = v:exception
-    return
   finally
-    " reset global options to their original values
     let &shell = _shell_original
-    let &writedelay = _writedelay_original
+    set nolazyredraw
   endtry
 endfunction
 
