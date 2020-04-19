@@ -145,11 +145,13 @@ endfunction
 " WrittenBy: Samuel Roeca
 " Parameters: firstline AND lastline: int : from range command
 function! filetype_formatter#format_filetype() range
+  " 'writedelay' suspends characters from being sent to screen.
+  let _writedelay_original = &writedelay
+  set writedelay=1000000
+  " 'shell' determines what shell is used to run the formatter program.
+  let _shell_original = &shell
+  set shell=/bin/bash
   try
-    " Temporarily change shell. This will be reverted in the finally block
-    let user_shell = &shell
-    set shell=/bin/bash
-
     " Note: below must begin with capital letter
     let Config_system_call = s:parse_config(
           \ g:vim_filetype_formatter_commands,
@@ -178,8 +180,9 @@ function! filetype_formatter#format_filetype() range
     let b:vim_filetype_formatter_log = v:exception
     return
   finally
-    " Revert shell to what it was before.
-    execute 'set shell=' . user_shell
+    " reset global options to their original values
+    let &shell = _shell_original
+    let &writedelay = _writedelay_original
   endtry
 endfunction
 
