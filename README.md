@@ -75,8 +75,8 @@ This plugin provides no default key mappings. I recommend setting a key mapping 
 
 ```vim
 " ~/.vimrc
-nnoremap <leader>f :FiletypeFormat<cr>
-vnoremap <leader>f :FiletypeFormat<cr>
+nnoremap <silent> <leader>f :FiletypeFormat<cr>
+vnoremap <silent> <leader>f :FiletypeFormat<cr>
 ```
 
 ## Default configurations
