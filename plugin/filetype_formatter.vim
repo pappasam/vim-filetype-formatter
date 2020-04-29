@@ -96,8 +96,8 @@ function! s:configure_constants()
         \ g:vim_filetype_formatter_commands)
 endfunction
 
-function! s:exists(name)
-  let _exists = exists(a:name)
+function! s:cmd_exists(name)
+  let _exists = exists(a:name) == 2
   if _exists
     call filetype_formatter#warning(printf(
           \ 'cannot define "%s"; already defined',
@@ -109,18 +109,18 @@ endfunction
 
 " Commands
 
-if !s:exists(':FiletypeFormat')
+if !s:cmd_exists(':FiletypeFormat')
   command -range=% FiletypeFormat silent!
         \ let b:filetype_formatter_winview = winsaveview()
         \ | <line1>,<line2>call filetype_formatter#format_filetype()
         \ | silent call winrestview(b:filetype_formatter_winview)
 endif
 
-if !s:exists(':LogFiletypeFormat')
+if !s:cmd_exists(':LogFiletypeFormat')
   command LogFiletypeFormat call filetype_formatter#echo_log()
 endif
 
-if !s:exists(':DebugFiletypeFormat')
+if !s:cmd_exists(':DebugFiletypeFormat')
   command DebugFiletypeFormat call filetype_formatter#debug()
 endif
 
