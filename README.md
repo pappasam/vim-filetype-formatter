@@ -1,6 +1,6 @@
 # Vim-Filetype-Formatter
 
-A simple, cross language Vim code formatter plugin supporting both range and full-file formatting. By default, it provides the following filetype formatters:
+A simple, cross language Vim code formatter plugin supporting both range and full-file formatting. By default, it provides configurations for the following code formatters:
 
 - [**biblatex**](http://www.bibtex.org/): [bibtool](https://ctan.org/pkg/bibtool)
 - [**css**](https://developer.mozilla.org/en-US/docs/Web/CSS): [prettier](https://prettier.io/)
@@ -25,7 +25,7 @@ Each Vim filetype maps to one command-line code-formatting command. This plugin 
 
 1. Reads from standard input.
 2. Writes to standard output.
-3. Is in your PATH. Vim-filetype-formatter uses code formatters; it does not install them.
+3. Is in your PATH. `vim-filetype-formatter` uses code formatters; it does not install them.
 
 Requires:
 
