@@ -52,6 +52,7 @@ let s:default_formatters = {
       \ 'toml': 'toml-sort',
       \ 'typescript': s:prettier,
       \ 'typescript.tsx': s:prettier,
+      \ 'typescriptreact': s:prettier,
       \ 'yaml': s:prettier,
       \ 'yaml.docker-compose': s:prettier,
       \ }

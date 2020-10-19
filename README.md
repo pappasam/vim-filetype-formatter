@@ -6,7 +6,7 @@ A simple, cross language Vim code formatter plugin supporting both range and ful
 - [**css**](https://developer.mozilla.org/en-US/docs/Web/CSS): [prettier](https://prettier.io/)
 - [**go**](https://golang.org/): [gofmt](https://golang.org/cmd/gofmt/)
 - [**html**](https://developer.mozilla.org/en-US/docs/Web/HTML): [prettier](https://prettier.io/)
-- [**javascript**](https://developer.mozilla.org/en-US/docs/Web/JavaScript): [prettier](https://prettier.io/)
+- [**javascript/jsx**](https://developer.mozilla.org/en-US/docs/Web/JavaScript): [prettier](https://prettier.io/)
 - [**json**](https://json.org/): [prettier](https://prettier.io/)
 - [**jsonc**](https://komkom.github.io/): [prettier](https://prettier.io/)
 - [**markdown**](https://en.wikipedia.org/wiki/Markdown): [prettier](https://prettier.io/)
@@ -16,7 +16,7 @@ A simple, cross language Vim code formatter plugin supporting both range and ful
 - [**svelte**](https://svelte.dev/): [prettier](https://prettier.io/) + [prettier-plugin-svelte](https://github.com/UnwrittenFun/prettier-plugin-svelte)
 - [**terraform**](https://www.terraform.io/): [terraform fmt](https://www.terraform.io/docs/commands/fmt.html)
 - [**toml**](https://github.com/toml-lang/toml): [toml-sort](https://github.com/pappasam/toml-sort)
-- [**typescript**](https://www.typescriptlang.org/): [prettier](https://prettier.io/)
+- [**typescript/tsx**](https://www.typescriptlang.org/): [prettier](https://prettier.io/)
 - [**yaml**](https://yaml.org/): [prettier](https://prettier.io/)
 
 Don't like the defaults? Writing custom commands is easy!
