@@ -42,6 +42,7 @@ let s:default_formatters = {
       \ 'javascript': s:prettier,
       \ 'javascript.jsx': s:prettier,
       \ 'javascriptreact': s:prettier,
+      \ 'jinja.html': s:prettier,
       \ 'json': s:prettier,
       \ 'jsonc': s:prettier,
       \ 'markdown': s:prettier,
