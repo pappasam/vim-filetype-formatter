@@ -44,6 +44,10 @@ Requires:
 - Simple, extendable codebase
 - Modular: does not pollute your Vim environment with remappings / poor Vim plugin practices
 
+See gif for simple example using Python black, demonstrating `:FiletypeFormat`, `:LogFiletypeFormat`, and `:DebugFiletypeFormat`:
+
+![interactive-demo](./img/vim-filetype-formatter-example.gif)
+
 ## Installation
 
 If using [vim-plug](https://github.com/junegunn/vim-plug), place the following line in the Plugin section of your inti.vim / vimrc:
