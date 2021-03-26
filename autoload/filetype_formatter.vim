@@ -7,6 +7,8 @@
 " License:        MIT
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+let s:filename_log = 'log-vim-filetype-formatter'
+
 function! s:strip_newlines(instring)
   " Strip newlines from a string
   return substitute(a:instring, '\v^\n*(.{-})\n*$', '\1', '')
@@ -141,6 +143,24 @@ function! s:format_code_file(system_call)
   endif
 endfunction
 
+" Read lines into preview window
+" Note: taken from <https://vi.stackexchange.com/a/19059>
+function! s:show_in_preview(name, fileType, lines)
+  let l:command = "silent! pedit! +setlocal\\ " .
+        \ "buftype=nofile\\ nobuflisted\\ " .
+        \ "noswapfile\\ nonumber\\ hidden\\ " .
+        \ "filetype=" . a:fileType . " " . a:name
+
+  exe l:command
+
+  if has('nvim')
+    let l:bufNr = bufnr(a:name)
+    call nvim_buf_set_lines(l:bufNr, 0, -1, 0, a:lines)
+  else
+    call setbufline(a:name, 1, a:lines)
+  endif
+endfunction
+
 " format_filetype: format a particular filetype with the configured command
 " WrittenBy: Samuel Roeca
 " Parameters: firstline AND lastline: int : from range command
@@ -171,31 +191,23 @@ function! filetype_formatter#format_filetype() range
     let b:vim_filetype_formatter_log =
           \ printf("command: %s\nmessage: %s", parser.system_call, 'success!')
   catch /.*/
-    call filetype_formatter#warning(
-          \ 'error! debug with ":LogFiletypeFormat" and ":DebugFiletypeFormat"'
-          \ )
+    if bufwinnr(s:filename_log) >= 0
+      call filetype_formatter#warning(
+            \ 'error! debug command with ":DebugFiletypeFormat"'
+            \ )
+    else
+      call filetype_formatter#warning(
+            \ 'error! debug with ":LogFiletypeFormat" and '
+            \ . '":DebugFiletypeFormat"'
+            \ )
+    endif
     let b:vim_filetype_formatter_log = v:exception
   finally
     let &shell = _shell_original
     set nolazyredraw
   endtry
-endfunction
-
-" Read lines into preview window
-" Note: taken from <https://vi.stackexchange.com/a/19059>
-function! s:show_in_preview(name, fileType, lines)
-  let l:command = "silent! pedit! +setlocal\\ " .
-        \ "buftype=nofile\\ nobuflisted\\ " .
-        \ "noswapfile\\ nonumber\\ " .
-        \ "filetype=" . a:fileType . " " . a:name
-
-  exe l:command
-
-  if has('nvim')
-    let l:bufNr = bufnr(a:name)
-    call nvim_buf_set_lines(l:bufNr, 0, -1, 0, a:lines)
-  else
-    call setbufline(a:name, 1, a:lines)
+  if bufwinnr(s:filename_log) >= 0
+    call filetype_formatter#log()
   endif
 endfunction
 
@@ -210,7 +222,7 @@ function! filetype_formatter#log()
     return
   endif
   let message = split(b:vim_filetype_formatter_log, '\n', v:true)
-  call s:show_in_preview('log-filetype-formatter', 'text', message)
+  call s:show_in_preview(s:filename_log, 'text', message)
 endfunction
 
 " debug: print configuration variables and settings to console
@@ -241,5 +253,5 @@ function! filetype_formatter#debug()
         \ Current_formatter,
         \))
   call add(message, 'shell: /bin/bash')
-  call s:show_in_preview('debug-filetype-formatter', 'text', message)
+  call s:show_in_preview('debug-vim=filetype-formatter', 'text', message)
 endfunction
