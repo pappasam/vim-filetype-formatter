@@ -44,9 +44,17 @@ Requires:
 - Simple, extendable codebase
 - Modular: does not pollute your Vim environment with remappings / poor Vim plugin practices
 
-See gif for simple example using Python black, demonstrating `:FiletypeFormat`, `:LogFiletypeFormat`, and `:DebugFiletypeFormat`:
+See gif for simple Python example, demonstrating `:FiletypeFormat`, `:LogFiletypeFormat`, and `:DebugFiletypeFormat`:
 
 ![interactive-demo](./img/vim-filetype-formatter-example.gif)
+
+Although [black](https://github.com/psf/black) works out of the box for Python, the above example overrides the default and combines black with [isort](https://github.com/PyCQA/isort) and [docformatter](https://github.com/myint/docformatter) using unix pipes. This specific example can be achieved with the following configuration in your vimrc / init.vim:
+
+```vim
+let g:vim_filetype_formatter_commands = {
+      \ 'python': 'black -q - | isort -q - | docformatter -',
+      \ }
+```
 
 ## Installation
 
