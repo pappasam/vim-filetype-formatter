@@ -253,5 +253,5 @@ function! filetype_formatter#debug()
         \ Current_formatter,
         \))
   call add(message, 'shell: /bin/bash')
-  call s:show_in_preview('debug-vim=filetype-formatter', 'text', message)
+  call s:show_in_preview('debug-vim-filetype-formatter', 'text', message)
 endfunction
