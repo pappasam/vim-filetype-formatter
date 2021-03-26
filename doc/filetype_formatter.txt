@@ -126,11 +126,11 @@ overridden by this configuration. >
   "Function[] -> String", or a "Function[Integer, Integer] -> String".
 
 *:LogFiletypeFormat*
-  Print output from a buffer's most recent formatter function attempt to the
-  console.
+  Show output from a buffer's most recent formatter function attempt in a Vim
+  preview window.
 
 *:DebugFiletypeFormat*
-  Print configuration variables and settings to the console.
+  Show configuration variables and settings in a Vim preview window.
 
 ==============================================================================
                                                   *filetype_formatter_mappings*

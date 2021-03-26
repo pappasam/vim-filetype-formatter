@@ -120,7 +120,7 @@ if !s:cmd_exists(':FiletypeFormat')
 endif
 
 if !s:cmd_exists(':LogFiletypeFormat')
-  command LogFiletypeFormat call filetype_formatter#echo_log()
+  command LogFiletypeFormat call filetype_formatter#log()
 endif
 
 if !s:cmd_exists(':DebugFiletypeFormat')

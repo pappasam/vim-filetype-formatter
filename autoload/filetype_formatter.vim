@@ -181,34 +181,52 @@ function! filetype_formatter#format_filetype() range
   endtry
 endfunction
 
+" Read lines into preview window
+" Note: taken from <https://vi.stackexchange.com/a/19059>
+function! s:show_in_preview(name, fileType, lines)
+  let l:command = "silent! pedit! +setlocal\\ " .
+        \ "buftype=nofile\\ nobuflisted\\ " .
+        \ "noswapfile\\ nonumber\\ " .
+        \ "filetype=" . a:fileType . " " . a:name
+
+  exe l:command
+
+  if has('nvim')
+    let l:bufNr = bufnr(a:name)
+    call nvim_buf_set_lines(l:bufNr, 0, -1, 0, a:lines)
+  else
+    call setbufline(a:name, 1, a:lines)
+  endif
+endfunction
+
 " echo_log: print the full console output from the most-recent formatter run
 " in this buffer
 " WrittenBy: Samuel Roeca
-function! filetype_formatter#echo_log()
+function! filetype_formatter#log()
   if !exists('b:vim_filetype_formatter_log')
     call filetype_formatter#warning(
           \ '":FiletypeFormat" not yet used on this buffer'
           \ )
     return
   endif
-  call filetype_formatter#warning('log of most-recently executed command')
-  echo b:vim_filetype_formatter_log
+  let message = split(b:vim_filetype_formatter_log, '\n', v:true)
+  call s:show_in_preview('log-filetype-formatter', 'text', message)
 endfunction
 
 " debug: print configuration variables and settings to console
 " WrittenBy: Samuel Roeca
 function! filetype_formatter#debug()
-  call filetype_formatter#warning('user configuration details')
-  echom 'g:vim_filetype_formatter_ft_maps = {'
+  let message = []
+  call add(message, 'g:vim_filetype_formatter_ft_maps = {')
   for [ft, ft_map] in sort(items(g:vim_filetype_formatter_ft_maps))
-    echom printf('  "%s": "%s",', ft, ft_map)
+    call add(message, printf('  "%s": "%s",', ft, ft_map))
   endfor
-  echom '}'
-  echom 'g:vim_filetype_formatter_commands = {'
+  call add(message, '}')
+  call add(message, 'g:vim_filetype_formatter_commands = {')
   for [ft, Ft_formatter] in sort(items(g:vim_filetype_formatter_commands))
-    echom printf('  "%s": "%s",', ft, Ft_formatter)
+    call add(message, printf('  "%s": "%s",', ft, Ft_formatter))
   endfor
-  echom '}'
+  call add(message, '}')
   try
     let Current_formatter = s:parse_config(
           \ g:vim_filetype_formatter_commands,
@@ -217,10 +235,11 @@ function! filetype_formatter#debug()
   catch /.*/
     let Current_formatter = 'No formatter configured'
   endtry
-  echom printf(
+  call add(message, printf(
         \ '[%s] formatter: "%s"',
         \ &filetype,
         \ Current_formatter,
-        \ )
-  echom 'shell: /bin/bash'
+        \))
+  call add(message, 'shell: /bin/bash')
+  call s:show_in_preview('debug-filetype-formatter', 'text', message)
 endfunction
