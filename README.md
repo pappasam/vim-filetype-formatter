@@ -10,6 +10,7 @@ A simple, cross language Vim code formatter plugin supporting both range and ful
 - [**json**](https://json.org/): [prettier](https://prettier.io/)
 - [**jsonc**](https://komkom.github.io/): [prettier](https://prettier.io/)
 - [**markdown**](https://en.wikipedia.org/wiki/Markdown): [prettier](https://prettier.io/)
+- [**nginx**](https://www.nginx.com/resources/wiki/start/topics/examples/full/): [nginxbeautifier](https://github.com/vasilevich/nginxbeautifier)
 - [**ocaml**](https://ocaml.org/): [ocamlformat](https://github.com/ocaml-ppx/ocamlformat)
 - [**python**](https://www.python.org/): [black](https://github.com/python/black)
 - [**rust**](https://www.rust-lang.org/): [rustfmt](https://github.com/rust-lang/rustfmt)
@@ -21,7 +22,7 @@ A simple, cross language Vim code formatter plugin supporting both range and ful
 
 Don't like the defaults? Writing custom commands is easy!
 
-Each Vim filetype maps to one command-line code-formatting command. This plugin supports any language code formatter as long as it:
+Each Vim filetype maps to one command-line command command. This plugin supports any code formatter command as long as it:
 
 1. Reads from standard input.
 2. Writes to standard output.
@@ -94,6 +95,28 @@ vnoremap <silent> <leader>f :FiletypeFormat<cr>
 ## Default configurations
 
 Default configurations may be overridden by creating our own `g:vim_filetype_formatter_commands` dictionary. If you would like to map one filetype to another, see `g:vim_filetype_formatter_ft_maps`. See [here](./doc/filetype_formatter.txt) for specifics on how to do this.
+
+## Non-standard code formatters
+
+In the rare case where a required code formatter does not read from standard input and/or write to standard output, don't panic. With some effort, you can probably still create a working command by chaining the code formatter with standard Unix programs. See the following example (which is included by default for `nginx`, so don't worry about writing this particular example yourself):
+
+```vim
+\ 'nginx':
+\   'dd status=none of=/tmp/nginx.conf >& /dev/null && '
+\   . 'nginxbeautifier --space 4 /tmp/nginx.conf >& /dev/null && '
+\   . 'cat /tmp/nginx.conf && '
+\   . 'rm /tmp/nginx.conf',
+```
+
+1. `dd`: read vim-filetype-formatter's standard output as standard input, writing to a temporary file named `/tmp/nginx.conf`
+2. `nginxbeautifier`: read from the temporary file and modify that file in-place
+3. `cat`: write the contents of the temporary file to stdout
+4. `rm`: remove the temporary file to keep things tidy
+
+It's not exactly pretty, but:
+
+1. Reality isn't always pretty
+2. We can use the command because it reads from standard input and writes to standard output
 
 ## Notes
 
