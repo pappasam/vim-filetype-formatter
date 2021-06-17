@@ -20,7 +20,7 @@ set cpo&vim
 
 function! s:_prettier()
   return printf(
-        \ 'npx --no-install prettier --stdin-filepath="%s"',
+        \ 'npx --silent --no-install prettier --stdin-filepath="%s"',
         \ expand('%:p')
         \ )
 endfunction
