@@ -46,11 +46,7 @@ let s:default_formatters = {
       \ 'json': s:prettier,
       \ 'jsonc': s:prettier,
       \ 'markdown': s:prettier,
-      \ 'nginx':
-      \   'dd status=none of=/tmp/nginx.conf >& /dev/null && '
-      \   . 'nginxbeautifier --space 4 /tmp/nginx.conf >& /dev/null && '
-      \   . 'cat /tmp/nginx.conf && '
-      \   . 'rm /tmp/nginx.conf',
+      \ 'nginx': 'nginxfmt -',
       \ 'ocaml': s:ocamlformat,
       \ 'python': 'black -q -',
       \ 'rust': 'rustfmt --quiet',

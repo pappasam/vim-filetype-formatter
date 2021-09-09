@@ -10,7 +10,7 @@ A simple, cross language Vim code formatter plugin supporting both range and ful
 - [**json**](https://json.org/): [prettier](https://prettier.io/)
 - [**jsonc**](https://komkom.github.io/): [prettier](https://prettier.io/)
 - [**markdown**](https://en.wikipedia.org/wiki/Markdown): [prettier](https://prettier.io/)
-- [**nginx**](https://www.nginx.com/resources/wiki/start/topics/examples/full/): [nginxbeautifier](https://github.com/vasilevich/nginxbeautifier)
+- [**nginx**](https://www.nginx.com/resources/wiki/start/topics/examples/full/): [nginxfmt](https://github.com/slomkowski/nginx-config-formatter)
 - [**ocaml**](https://ocaml.org/): [ocamlformat](https://github.com/ocaml-ppx/ocamlformat)
 - [**python**](https://www.python.org/): [black](https://github.com/python/black)
 - [**rust**](https://www.rust-lang.org/): [rustfmt](https://github.com/rust-lang/rustfmt)
@@ -98,7 +98,7 @@ Default configurations may be overridden by creating our own `g:vim_filetype_for
 
 ## Non-standard code formatters
 
-In the rare case where a required code formatter does not read from standard input and/or write to standard output, don't panic. With some effort, you can probably still create a working command by chaining the code formatter with standard Unix programs. See the following example (which is included by default for `nginx`, so don't worry about writing this particular example yourself):
+In the rare case where a required code formatter does not read from standard input and/or write to standard output, don't panic. With some effort, you can probably still create a working command by chaining the code formatter with standard Unix programs. See the following example, using [nginxbeautifier](https://github.com/vasilevich/nginxbeautifier):
 
 ```vim
 \ 'nginx':
