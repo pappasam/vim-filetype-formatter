@@ -5,6 +5,7 @@ A simple, cross language Vim code formatter plugin supporting both range and ful
 - [**biblatex**](http://www.bibtex.org/): [bibtool](https://ctan.org/pkg/bibtool)
 - [**css**](https://developer.mozilla.org/en-US/docs/Web/CSS): [prettier](https://prettier.io/)
 - [**go**](https://golang.org/): [gofmt](https://golang.org/cmd/gofmt/)
+- [**graphql**](https://developer.mozilla.org/en-US/docs/Web/HTML): [prettier](https://prettier.io/)
 - [**html**](https://developer.mozilla.org/en-US/docs/Web/HTML): [prettier](https://prettier.io/)
 - [**javascript/jsx**](https://developer.mozilla.org/en-US/docs/Web/JavaScript): [prettier](https://prettier.io/)
 - [**json**](https://json.org/): [prettier](https://prettier.io/)

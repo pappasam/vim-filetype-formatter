@@ -38,6 +38,7 @@ let s:default_formatters = {
       \ 'bib': 'bibtool -q -s',
       \ 'css': s:prettier,
       \ 'go': 'gofmt',
+      \ 'graphql': s:prettier,
       \ 'html': s:prettier,
       \ 'javascript': s:prettier,
       \ 'javascript.jsx': s:prettier,
