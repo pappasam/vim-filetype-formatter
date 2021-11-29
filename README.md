@@ -11,6 +11,7 @@ A simple, cross language Vim code formatter plugin supporting both range and ful
 - [**json**](https://json.org/): [prettier](https://prettier.io/)
 - [**jsonc**](https://komkom.github.io/): [prettier](https://prettier.io/)
 - [**markdown**](https://en.wikipedia.org/wiki/Markdown): [prettier](https://prettier.io/)
+- [**mdx**](https://mdxjs.com/): [prettier](https://prettier.io/)
 - [**nginx**](https://www.nginx.com/resources/wiki/start/topics/examples/full/): [nginxfmt](https://github.com/slomkowski/nginx-config-formatter)
 - [**ocaml**](https://ocaml.org/): [ocamlformat](https://github.com/ocaml-ppx/ocamlformat)
 - [**python**](https://www.python.org/): [black](https://github.com/python/black)

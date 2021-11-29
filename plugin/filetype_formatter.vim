@@ -47,6 +47,8 @@ let s:default_formatters = {
       \ 'json': s:prettier,
       \ 'jsonc': s:prettier,
       \ 'markdown': s:prettier,
+      \ 'markdown.mdx': s:prettier,
+      \ 'mdx': s:prettier,
       \ 'nginx': 'nginxfmt -',
       \ 'ocaml': s:ocamlformat,
       \ 'python': 'black -q -',
