@@ -34,6 +34,14 @@ function! s:_ocamlformat()
 endfunction
 let s:ocamlformat = funcref('s:_ocamlformat')
 
+function! s:_stylua()
+  return printf(
+        \ 'stylua --search-parent-directories --stdin-filepath "%s" -',
+        \ expand('%')
+        \ )
+endfunction
+let s:stylua = funcref('s:_stylua')
+
 let s:default_formatters = {
       \ 'bib': 'bibtool -q -s',
       \ 'css': s:prettier,
@@ -46,6 +54,7 @@ let s:default_formatters = {
       \ 'jinja.html': s:prettier,
       \ 'json': s:prettier,
       \ 'jsonc': s:prettier,
+      \ 'lua': s:stylua,
       \ 'markdown': s:prettier,
       \ 'markdown.mdx': s:prettier,
       \ 'mdx': s:prettier,

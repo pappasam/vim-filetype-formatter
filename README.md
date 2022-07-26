@@ -10,6 +10,7 @@ A simple, cross language Vim code formatter plugin supporting both range and ful
 - [**javascript/jsx**](https://developer.mozilla.org/en-US/docs/Web/JavaScript): [prettier](https://prettier.io/)
 - [**json**](https://json.org/): [prettier](https://prettier.io/)
 - [**jsonc**](https://komkom.github.io/): [prettier](https://prettier.io/)
+- [**lua**](https://www.lua.org/): [stylua](https://github.com/JohnnyMorganz/StyLua)
 - [**markdown**](https://en.wikipedia.org/wiki/Markdown): [prettier](https://prettier.io/)
 - [**mdx**](https://mdxjs.com/): [prettier](https://prettier.io/)
 - [**nginx**](https://www.nginx.com/resources/wiki/start/topics/examples/full/): [nginxfmt](https://github.com/slomkowski/nginx-config-formatter)
