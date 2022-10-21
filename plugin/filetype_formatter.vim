@@ -64,6 +64,7 @@ let s:default_formatters = {
       \ 'rust': 'rustfmt --quiet',
       \ 'svelte': s:prettier,
       \ 'terraform': 'terraform fmt -',
+      \ 'r': 'Rscript --default-packages=formatR -e "tidy_source(file(\"stdin\"))"',
       \ 'toml': 'toml-sort',
       \ 'typescript': s:prettier,
       \ 'typescript.tsx': s:prettier,
@@ -130,7 +131,7 @@ if !s:cmd_exists(':FiletypeFormat')
         \ let b:filetype_formatter_winview = winsaveview()
         \ | <line1>,<line2>call filetype_formatter#format_filetype()
         \ | silent call winrestview(b:filetype_formatter_winview)
-        \ | silent normal! zO
+        \ | silent! normal! zO
 endif
 
 if !s:cmd_exists(':LogFiletypeFormat')
