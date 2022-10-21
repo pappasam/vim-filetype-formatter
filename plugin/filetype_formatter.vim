@@ -130,6 +130,7 @@ if !s:cmd_exists(':FiletypeFormat')
         \ let b:filetype_formatter_winview = winsaveview()
         \ | <line1>,<line2>call filetype_formatter#format_filetype()
         \ | silent call winrestview(b:filetype_formatter_winview)
+        \ | silent normal! zO
 endif
 
 if !s:cmd_exists(':LogFiletypeFormat')
