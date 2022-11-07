@@ -60,6 +60,7 @@ let s:default_formatters = {
       \ 'mdx': s:prettier,
       \ 'nginx': 'nginxfmt -',
       \ 'ocaml': s:ocamlformat,
+      \ 'prisma': s:prettier,
       \ 'python': 'black -q -',
       \ 'rust': 'rustfmt --quiet',
       \ 'svelte': s:prettier,
