@@ -17,7 +17,7 @@ A simple, cross language Vim code formatter plugin supporting both range and ful
 - [**ocaml**](https://ocaml.org/): [ocamlformat](https://github.com/ocaml-ppx/ocamlformat)
 - [**prisma**](https://www.prisma.io/): [prettier](https://prettier.io/) + [prettier-plugin-prisma](https://github.com/umidbekk/prettier-plugin-prisma)
 - [**python**](https://www.python.org/): [black](https://github.com/python/black)
-- [**r**](https://www.r-project.org/): [formatR](https://yihui.org/formatr/)
+- [**r**](https://www.r-project.org/): [styler](https://github.com/r-lib/styler)
 - [**rust**](https://www.rust-lang.org/): [rustfmt](https://github.com/rust-lang/rustfmt)
 - [**svelte**](https://svelte.dev/): [prettier](https://prettier.io/) + [prettier-plugin-svelte](https://github.com/UnwrittenFun/prettier-plugin-svelte)
 - [**terraform**](https://www.terraform.io/): [terraform fmt](https://www.terraform.io/docs/commands/fmt.html)

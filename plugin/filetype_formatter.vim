@@ -42,6 +42,17 @@ function! s:_stylua()
 endfunction
 let s:stylua = funcref('s:_stylua')
 
+function! s:_styler()
+  return 'Rscript --default-packages=styler '.
+        \ '-e "options(styler.colored_print.vertical = FALSE)" ' .
+        \ '-e "options(styler.quiet = TRUE)" ' .
+        \ '-e "options(warn = -1)" ' .
+        \ '-e "style_text(' .
+        \ 'readLines(file(\"stdin\"), warn = FALSE, encoding=\"UTF-8\")' .
+        \ ')"'
+endfunction
+let s:styler = funcref('s:_styler')
+
 let s:default_formatters = {
       \ 'bib': 'bibtool -q -s',
       \ 'css': s:prettier,
@@ -65,7 +76,7 @@ let s:default_formatters = {
       \ 'rust': 'rustfmt --quiet',
       \ 'svelte': s:prettier,
       \ 'terraform': 'terraform fmt -',
-      \ 'r': 'Rscript --default-packages=formatR -e "tidy_source(file(\"stdin\"))"',
+      \ 'r': s:styler,
       \ 'toml': 'toml-sort',
       \ 'typescript': s:prettier,
       \ 'typescript.tsx': s:prettier,
