@@ -81,7 +81,7 @@ function! s:parse_call(Syscall_config, first_line, last_line)
   endif
   if type(result['system_call']) != v:t_string
     throw '"' . &filetype .
-          \ '" is configured as neither a function nor a string'
+          \ '" is configured as neither a function nor a string' .
           \ ' in g:vim_filetype_formatter_commands'
   endif
   " Make sure pipelines (eg, 'x - | y - | z -') fail immediately
