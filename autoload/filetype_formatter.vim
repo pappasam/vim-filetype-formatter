@@ -135,7 +135,12 @@ function! s:format_code_file(system_call)
     " sure new file has same Unix permissions as old file
     let tempfile = tempname()
     call writefile(split(results, '\n'), tempfile)
-    call system('chmod --reference=' . expand('%') . ' ' . tempfile)
+    if has('mac')
+        silent let permission = trim(system('stat -f "%Mp%Lp"  ' . expand('%')))
+        call system('chmod "' . permission . '"  '. tempfile)
+    else
+        call system('chmod --reference=' . expand('%') . ' ' . tempfile)
+    endif
     call rename(tempfile, expand('%'))
     silent edit!
   else
