@@ -141,7 +141,7 @@ function! s:format_code_file(system_call)
     else
         call system('chmod --reference=' . expand('%') . ' ' . tempfile)
     endif
-    call rename(tempfile, expand('%'))
+    call rename(tempfile, resolve(expand('%')))
     silent edit!
   else
     throw printf("command: %s\nmessage: %s", a:system_call, results)
