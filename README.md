@@ -62,12 +62,29 @@ let g:vim_filetype_formatter_commands = {
       \ }
 ```
 
-## Installation
-
-If using [vim-plug](https://github.com/junegunn/vim-plug), place the following line in the Plugin section of your inti.vim / vimrc:
+For further customization (e.g., where you need anything dynamic), you can pass a [Funcref](https://neovim.io/doc/user/eval.html#Funcref) to a zero-argument function. For example, you might need to pass the current filename as an argument to your command line program. Here is an example for Python:
 
 ```vim
-" ~/.vimrc
+function! s:formatter_python()
+  let filename = expand('%:p')
+  return printf(
+        \ 'ruff check -q --fix-only --stdin-filename="%s" - ' .
+        \ '| black -q --stdin-filename="%s" - ' .
+        \ '| isort -q --filename="%s" - ' .
+        \ '| docformatter -',
+        \ filename, filename, filename
+        \ )
+endfunction
+let g:vim_filetype_formatter_commands = {
+      \ 'python': funcref('s:formatter_python')
+      \ }
+```
+
+## Installation
+
+If using [vim-plug](https://github.com/junegunn/vim-plug), place the following line in the Plugin section of your `init.vim` / `vimrc`:
+
+```vim
 Plug 'pappasam/vim-filetype-formatter'
 ```
 
@@ -92,12 +109,11 @@ From within Vim, type:
 This plugin provides no default key mappings. I recommend setting a key mapping for normal mode and visual mode like this:
 
 ```vim
-" ~/.vimrc
 nnoremap <silent> <leader>f :FiletypeFormat<cr>
 vnoremap <silent> <leader>f :FiletypeFormat<cr>
 ```
 
-If you're using [coc.nvim](https://github.com/neoclide/coc.nvim) and you want to prevent the language server from freaking out after running FiletypeFormat, you can use the following mappings instead. They're just like the above mappings, but they explicitly turn off, then turn on, coc, which seems to get around any "language server"-side hiccups.
+If you're using [coc.nvim](https://github.com/neoclide/coc.nvim), and you want to prevent the language server from freaking out after running FiletypeFormat, you can use the following mappings instead. They're just like the above mappings, but they explicitly turn off/on coc, which seems to get around any "language server"-side hiccups.
 
 ```vim
 nnoremap <silent> <leader>f <Cmd>silent! CocDisable<cr><Cmd>FiletypeFormat<cr><Cmd>silent! CocEnable<cr>
