@@ -234,6 +234,50 @@ endfunction
 " WrittenBy: Samuel Roeca
 function! filetype_formatter#debug()
   let message = []
+  try
+    let Current_formatter = s:parse_config(
+          \ g:vim_filetype_formatter_commands,
+          \ g:vim_filetype_formatter_ft_maps,
+          \ )
+  catch /.*/
+    let Current_formatter = 'No formatter configured'
+  endtry
+  let t_config_system_call = type(Current_formatter)
+  let current_formatter_result = 'Something went wrong'
+  if t_config_system_call == v:t_string
+    let current_formatter_result = Current_formatter
+  elseif t_config_system_call == v:t_func
+    try
+      let current_formatter_result = Current_formatter()
+    catch /.*/
+      try
+        " test if function accepts 1 argument
+        let _whatever = Current_formatter(1)
+        let bad_function_one_argument = v:true
+      catch /.*/
+        let bad_function_one_argument = v:false
+      endtry
+      if bad_function_one_argument == v:true
+        let current_formatter_result = 'Formatter function only has 1 argument. Must have 0 or 2 args'
+      endif
+      try
+        let result = {
+              \ 'system_call': Current_formatter(0, 1),
+              \ 'lines_specified': 1,
+              \ }
+      catch /.*/
+        let current_formatter_result = 'Formatter function must take exactly 0, or 2, arguments'
+      endtry
+    endtry
+  else
+    let current_formatter_result = 'Formatter value is neither a String nor a function'
+  endif
+  call add(message, printf(
+        \ '[%s] formatter: "%s"',
+        \ &filetype,
+        \ current_formatter_result,
+        \))
+  call add(message, 'shell: /bin/bash')
   call add(message, 'g:vim_filetype_formatter_ft_maps = {')
   for [ft, ft_map] in sort(items(g:vim_filetype_formatter_ft_maps))
     call add(message, printf('  "%s": "%s",', ft, ft_map))
@@ -244,19 +288,5 @@ function! filetype_formatter#debug()
     call add(message, printf('  "%s": "%s",', ft, Ft_formatter))
   endfor
   call add(message, '}')
-  try
-    let Current_formatter = s:parse_config(
-          \ g:vim_filetype_formatter_commands,
-          \ g:vim_filetype_formatter_ft_maps,
-          \ )
-  catch /.*/
-    let Current_formatter = 'No formatter configured'
-  endtry
-  call add(message, printf(
-        \ '[%s] formatter: "%s"',
-        \ &filetype,
-        \ Current_formatter,
-        \))
-  call add(message, 'shell: /bin/bash')
   call s:show_in_preview('debug-vim-filetype-formatter', 'text', message)
 endfunction
