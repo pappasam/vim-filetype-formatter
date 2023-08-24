@@ -273,16 +273,27 @@ function! filetype_formatter#debug()
     let current_formatter_result = 'Formatter value is neither a String nor a function'
   endif
   call add(message, printf(
-        \ '[%s] formatter: "%s"',
+        \ 'filetype: %s',
         \ &filetype,
+        \))
+  call add(message, "----------------------------------------------------------------")
+  call add(message, printf(
+        \ 'formatter: %s',
         \ current_formatter_result,
         \))
+  call add(message, "----------------------------------------------------------------")
   call add(message, 'shell: /bin/bash')
-  call add(message, 'g:vim_filetype_formatter_ft_maps = {')
-  for [ft, ft_map] in sort(items(g:vim_filetype_formatter_ft_maps))
-    call add(message, printf('  "%s": "%s",', ft, ft_map))
-  endfor
-  call add(message, '}')
+  call add(message, "----------------------------------------------------------------")
+  if g:vim_filetype_formatter_ft_maps == {}
+    call add(message, 'g:vim_filetype_formatter_ft_maps = {}')
+  else
+    call add(message, 'g:vim_filetype_formatter_ft_maps = {')
+    for [ft, ft_map] in sort(items(g:vim_filetype_formatter_ft_maps))
+      call add(message, printf('  "%s": "%s",', ft, ft_map))
+    endfor
+    call add(message, '}')
+  endif
+  call add(message, "----------------------------------------------------------------")
   call add(message, 'g:vim_filetype_formatter_commands = {')
   for [ft, Ft_formatter] in sort(items(g:vim_filetype_formatter_commands))
     call add(message, printf('  "%s": "%s",', ft, Ft_formatter))
