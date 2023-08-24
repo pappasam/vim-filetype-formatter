@@ -1,6 +1,6 @@
-# Vim-Filetype-Formatter
+# Vim Filetype Formatter
 
-A simple, cross language Vim code formatter plugin supporting both range and full-file formatting. By default, it provides configurations for the following code formatters:
+A simple, cross-language Vim code formatter plugin supporting both range and full-file formatting. By default, it provides configurations for the following code formatters:
 
 - [**biblatex**](http://www.bibtex.org/): [bibtool](https://ctan.org/pkg/bibtool)
 - [**css**](https://developer.mozilla.org/en-US/docs/Web/CSS): [prettier](https://prettier.io/)
@@ -27,34 +27,36 @@ A simple, cross language Vim code formatter plugin supporting both range and ful
 
 Don't like the defaults? Writing custom commands is easy!
 
-Each Vim filetype maps to one command-line command command. This plugin supports any code formatter command as long as it:
+Each Vim filetype maps to one command-line command. This plugin supports any code formatter command as long as it:
 
 1. Reads from standard input.
 2. Writes to standard output.
-3. Is in your PATH. `vim-filetype-formatter` uses code formatters; it does not install them.
+3. Is in your `$PATH`.
+
+**Vim Filetype Formatter uses code formatters; it does not install them.**
 
 Requires:
 
 - A recent version of Neovim or Vim 8.
-- Bash (/bin/bash)
+- Bash
 
 ## Differentiating Features
 
-- Respects configuration files (pyproject.toml, .rustfmt.toml, .prettierrc.toml, etc)
+- Respects configuration files (`pyproject.toml`, `.rustfmt.toml`, `.prettierrc.toml`, etc.)
 - Accepts visually-selected ranges for any formatter
 - Preserves Vim cursor location after the formatter has run
-- Clear logging so you can see why a formatter is or isn't working (:LogFiletypeFormat)
-- Easy debugging of user configuration (:DebugFiletypeFormat)
+- Clear logging, so you can see why a formatter is or isn't working (`:LogFiletypeFormat`)
+- Easy debugging of user configuration (`:DebugFiletypeFormat`)
 - Chain formatters together with Unix pipes
 - Configurable, with sane defaults
 - Simple, extendable codebase
-- Modular: does not pollute your Vim environment with remappings / poor Vim plugin practices
+- Modular: does not pollute your Vim environment with custom key mappings / poor Vim plugin practices
 
-See gif for simple Python example, demonstrating `:FiletypeFormat`, `:LogFiletypeFormat`, and `:DebugFiletypeFormat`:
+The following screencast demonstrates `:FiletypeFormat`, `:LogFiletypeFormat`, and `:DebugFiletypeFormat`.
 
-![interactive-demo](./img/vim-filetype-formatter-walkthrough.gif)
+![Screencast](./img/vim-filetype-formatter-walkthrough.gif)
 
-Although [black](https://github.com/psf/black) works out of the box for Python, the above example overrides the default and combines black with [isort](https://github.com/PyCQA/isort) and [docformatter](https://github.com/myint/docformatter) using unix pipes. This specific example can be achieved with the following configuration in your vimrc / init.vim:
+Although [black](https://github.com/psf/black) works out of the box for Python, the above example overrides the default and combines black with [isort](https://github.com/PyCQA/isort) and [docformatter](https://github.com/myint/docformatter) using Unix pipes. This specific example can be achieved with the following configuration in your `vimrc` or `init.vim`:
 
 ```vim
 let g:vim_filetype_formatter_commands = {
@@ -62,7 +64,7 @@ let g:vim_filetype_formatter_commands = {
       \ }
 ```
 
-For further customization (e.g., where you need anything dynamic), you can pass a [Funcref](https://neovim.io/doc/user/eval.html#Funcref) to a zero-argument function. For example, you might need to pass the current filename as an argument to your command line program. Here is an example for Python:
+For further customization (e.g., where you need anything dynamic), you can pass a [`Funcref`](https://neovim.io/doc/user/eval.html#Funcref) to a zero-argument function. For example, you might need to pass the current filename as an argument to your command line program. Here is an example for Python:
 
 ```vim
 function! s:formatter_python()
@@ -113,7 +115,7 @@ nnoremap <silent> <leader>f :FiletypeFormat<cr>
 vnoremap <silent> <leader>f :FiletypeFormat<cr>
 ```
 
-If you're using [coc.nvim](https://github.com/neoclide/coc.nvim), and you want to prevent the language server from freaking out after running FiletypeFormat, you can use the following mappings instead. They're just like the above mappings, but they explicitly turn off/on coc, which seems to get around any "language server"-side hiccups.
+If you're using [coc.nvim](https://github.com/neoclide/coc.nvim), and you want to prevent the language server from freaking out after running `:FiletypeFormat`, you can use the following mappings instead. They're just like the above mappings, but they explicitly turn off/on coc, which seems to get around any "language server"-side hiccups.
 
 ```vim
 nnoremap <silent> <leader>f <Cmd>silent! CocDisable<cr><Cmd>FiletypeFormat<cr><Cmd>silent! CocEnable<cr>
@@ -126,7 +128,7 @@ Default configurations may be overridden by creating our own `g:vim_filetype_for
 
 ## Non-standard code formatters
 
-In the rare case where a required code formatter does not read from standard input and/or write to standard output, don't panic. With some effort, you can probably still create a working command by chaining the code formatter with standard Unix programs. See the following example, using [nginxbeautifier](https://github.com/vasilevich/nginxbeautifier):
+In the rare case where a required code formatter does not read from standard input and/or write to standard output, don't panic. With some effort, you can probably still create a working command by chaining the code formatter with standard Unix programs. See the following example, using [`nginxbeautifier`](https://github.com/vasilevich/nginxbeautifier):
 
 ```vim
 \ 'nginx':
@@ -136,7 +138,7 @@ In the rare case where a required code formatter does not read from standard inp
 \   . 'rm /tmp/nginx.conf',
 ```
 
-1. `dd`: read vim-filetype-formatter's standard output as standard input, writing to a temporary file named `/tmp/nginx.conf`
+1. `dd`: read `vim-filetype-formatter`'s standard output as standard input, writing to a temporary file named `/tmp/nginx.conf`
 2. `nginxbeautifier`: read from the temporary file and modify that file in-place
 3. `cat`: write the contents of the temporary file to stdout
 4. `rm`: remove the temporary file to keep things tidy
