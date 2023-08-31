@@ -1,31 +1,33 @@
 # Vim Filetype Formatter
 
-A simple, cross-language Vim code formatter plugin supporting both range and full-file formatting. By default, it provides configurations for the following code formatters:
+A simple, cross-language Vim code formatter plugin supporting both range and full-file formatting. **It uses code formatters available in your $PATH; it does not install them.** The following languages are configured out of the box.
 
-- [**biblatex**](http://www.bibtex.org/): [bibtool](https://ctan.org/pkg/bibtool)
-- [**css**](https://developer.mozilla.org/en-US/docs/Web/CSS): [prettier](https://prettier.io/)
-- [**go**](https://golang.org/): [gofmt](https://golang.org/cmd/gofmt/)
-- [**graphql**](https://developer.mozilla.org/en-US/docs/Web/HTML): [prettier](https://prettier.io/)
-- [**html**](https://developer.mozilla.org/en-US/docs/Web/HTML): [prettier](https://prettier.io/)
-- [**javascript/jsx**](https://developer.mozilla.org/en-US/docs/Web/JavaScript): [prettier](https://prettier.io/)
-- [**json**](https://json.org/): [prettier](https://prettier.io/)
-- [**jsonc**](https://komkom.github.io/): [prettier](https://prettier.io/)
-- [**lua**](https://www.lua.org/): [stylua](https://github.com/JohnnyMorganz/StyLua)
-- [**markdown**](https://en.wikipedia.org/wiki/Markdown): [prettier](https://prettier.io/)
-- [**mdx**](https://mdxjs.com/): [prettier](https://prettier.io/)
-- [**nginx**](https://www.nginx.com/resources/wiki/start/topics/examples/full/): [nginxfmt](https://github.com/slomkowski/nginx-config-formatter)
-- [**ocaml**](https://ocaml.org/): [ocamlformat](https://github.com/ocaml-ppx/ocamlformat)
-- [**prisma**](https://www.prisma.io/): [prettier](https://prettier.io/) + [prettier-plugin-prisma](https://github.com/umidbekk/prettier-plugin-prisma)
-- [**python**](https://www.python.org/): [black](https://github.com/python/black)
-- [**r**](https://www.r-project.org/): [styler](https://github.com/r-lib/styler)
-- [**rust**](https://www.rust-lang.org/): [rustfmt](https://github.com/rust-lang/rustfmt)
-- [**svelte**](https://svelte.dev/): [prettier](https://prettier.io/) + [prettier-plugin-svelte](https://github.com/UnwrittenFun/prettier-plugin-svelte)
-- [**terraform**](https://www.terraform.io/): [terraform fmt](https://www.terraform.io/docs/commands/fmt.html)
-- [**toml**](https://github.com/toml-lang/toml): [toml-sort](https://github.com/pappasam/toml-sort)
-- [**typescript/tsx**](https://www.typescriptlang.org/): [prettier](https://prettier.io/)
-- [**yaml**](https://yaml.org/): [prettier](https://prettier.io/)
+| Language                                                                      | Formatter                                                                                                           |
+| ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| [**biblatex**](http://www.bibtex.org/)                                        | [bibtool](https://ctan.org/pkg/bibtool)                                                                             |
+| [**css**](https://developer.mozilla.org/en-US/docs/Web/CSS)                   | [prettier](https://prettier.io/)                                                                                    |
+| [**go**](https://golang.org/)                                                 | [gofmt](https://golang.org/cmd/gofmt/)                                                                              |
+| [**graphql**](https://developer.mozilla.org/en-US/docs/Web/HTML)              | [prettier](https://prettier.io/)                                                                                    |
+| [**html**](https://developer.mozilla.org/en-US/docs/Web/HTML)                 | [prettier](https://prettier.io/)                                                                                    |
+| [**javascript/jsx**](https://developer.mozilla.org/en-US/docs/Web/JavaScript) | [prettier](https://prettier.io/)                                                                                    |
+| [**json**](https://json.org/)                                                 | [prettier](https://prettier.io/)                                                                                    |
+| [**jsonc**](https://komkom.github.io/)                                        | [prettier](https://prettier.io/)                                                                                    |
+| [**lua**](https://www.lua.org/)                                               | [stylua](https://github.com/JohnnyMorganz/StyLua)                                                                   |
+| [**markdown**](https://en.wikipedia.org/wiki/Markdown)                        | [prettier](https://prettier.io/)                                                                                    |
+| [**mdx**](https://mdxjs.com/)                                                 | [prettier](https://prettier.io/)                                                                                    |
+| [**nginx**](https://www.nginx.com/resources/wiki/start/topics/examples/full/) | [nginxfmt](https://github.com/slomkowski/nginx-config-formatter)                                                    |
+| [**ocaml**](https://ocaml.org/)                                               | [ocamlformat](https://github.com/ocaml-ppx/ocamlformat)                                                             |
+| [**prisma**](https://www.prisma.io/)                                          | [prettier](https://prettier.io/) + [prettier-plugin-prisma](https://github.com/umidbekk/prettier-plugin-prisma)     |
+| [**python**](https://www.python.org/)                                         | [black](https://github.com/python/black)                                                                            |
+| [**r**](https://www.r-project.org/)                                           | [styler](https://github.com/r-lib/styler)                                                                           |
+| [**rust**](https://www.rust-lang.org/)                                        | [rustfmt](https://github.com/rust-lang/rustfmt)                                                                     |
+| [**svelte**](https://svelte.dev/)                                             | [prettier](https://prettier.io/) + [prettier-plugin-svelte](https://github.com/UnwrittenFun/prettier-plugin-svelte) |
+| [**terraform**](https://www.terraform.io/)                                    | [terraform fmt](https://www.terraform.io/docs/commands/fmt.html)                                                    |
+| [**toml**](https://github.com/toml-lang/toml)                                 | [toml-sort](https://github.com/pappasam/toml-sort)                                                                  |
+| [**typescript/tsx**](https://www.typescriptlang.org/)                         | [prettier](https://prettier.io/)                                                                                    |
+| [**yaml**](https://yaml.org/)                                                 | [prettier](https://prettier.io/)                                                                                    |
 
-Don't like the defaults? Writing custom commands is easy!
+Don't like the defaults? Writing your own is easy!
 
 Each Vim filetype maps to one command-line command. This plugin supports any code formatter command as long as it:
 
@@ -33,12 +35,7 @@ Each Vim filetype maps to one command-line command. This plugin supports any cod
 2. Writes to standard output.
 3. Is in your `$PATH`.
 
-**Vim Filetype Formatter uses code formatters; it does not install them.**
-
-Requires:
-
-- A recent version of Neovim or Vim 8.
-- Bash
+Requires Bash and a recent version of Vim or Neovim.
 
 ## Differentiating Features
 
@@ -151,7 +148,3 @@ It's not exactly pretty, but:
 ## Notes
 
 This plugin prioritizes simplicity and ease of use on a POSIX-compliant system. Support for Windows and other non-Unix derivatives is out of scope.
-
-## Written by
-
-Samuel Roeca _samuel.roeca@gmail.com_
