@@ -74,6 +74,7 @@ let s:default_formatters = {
       \ 'prisma': s:prettier,
       \ 'python': 'black -q -',
       \ 'rust': 'rustfmt --quiet',
+      \ 'scss': s:prettier,
       \ 'svelte': s:prettier,
       \ 'terraform': 'terraform fmt -',
       \ 'r': s:styler,
