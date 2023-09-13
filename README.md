@@ -62,21 +62,11 @@ let g:vim_filetype_formatter_commands = {
       \ }
 ```
 
-For further customization (e.g., where you need anything dynamic), you can pass a [`Funcref`](https://neovim.io/doc/user/eval.html#Funcref) to a zero-argument function. For example, you might need to pass the current filename as an argument to your command line program. Here is an example for Python:
+For further customization (e.g., where you need anything dynamic), you can pass either a [`Funcref`](https://neovim.io/doc/user/eval.html#Funcref) or a [`lambda expression`](https://neovim.io/doc/user/eval.html#expr-lambda). For example, you might want to pass the current filename as an argument to your command line program. Here is an example for Python using a lambda expression:
 
 ```vim
-function! s:formatter_python()
-  let filename = expand('%:p')
-  return printf(
-        \ 'ruff check -q --fix-only --stdin-filename="%s" - ' .
-        \ '| black -q --stdin-filename="%s" - ' .
-        \ '| isort -q --filename="%s" - ' .
-        \ '| docformatter -',
-        \ filename, filename, filename
-        \ )
-endfunction
 let g:vim_filetype_formatter_commands = {
-      \ 'python': funcref('s:formatter_python')
+      \ 'python': {-> printf('black -q --stdin-filename="%1$s" - | isort -q --filename="%1$s" - | docformatter -', expand('%:p'))},
       \ }
 ```
 
