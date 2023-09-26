@@ -26,6 +26,14 @@ function! s:_prettier()
 endfunction
 let s:prettier = funcref('s:_prettier')
 
+function! s:_prettier_svelte()
+  return printf(
+        \ 'npx --no-update-notifier --silent --no-install prettier --plugin prettier-plugin-svelte --stdin-filepath="%s"',
+        \ expand('%:p')
+        \ )
+endfunction
+let s:prettier_svelte = funcref('s:_prettier_svelte')
+
 function! s:_ocamlformat()
   return printf(
         \ 'ocamlformat --enable-outside-detected-project --name "%s" -',
@@ -75,7 +83,7 @@ let s:default_formatters = {
       \ 'python': 'black -q -',
       \ 'rust': 'rustfmt --quiet',
       \ 'scss': s:prettier,
-      \ 'svelte': s:prettier,
+      \ 'svelte': s:prettier_svelte,
       \ 'terraform': 'terraform fmt -',
       \ 'r': s:styler,
       \ 'toml': 'toml-sort',
