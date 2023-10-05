@@ -139,8 +139,8 @@ overridden by this configuration. >
 This plugin does not provide key mappings; please add your own! Recommended
 mappings: >
 
-  nnoremap <silent> <leader>f :FiletypeFormat<cr>
-  vnoremap <silent> <leader>f :FiletypeFormat<cr>
+  nnoremap <silent> <leader>f <Cmd>FiletypeFormat<CR>
+  xnoremap <silent> <leader>f :FiletypeFormat<CR>
 
 ==============================================================================
                                                    *filetype_formatter_credits*

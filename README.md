@@ -99,15 +99,15 @@ From within Vim, type:
 This plugin provides no default key mappings. I recommend setting a key mapping for normal mode and visual mode like this:
 
 ```vim
-nnoremap <silent> <leader>f :FiletypeFormat<cr>
-vnoremap <silent> <leader>f :FiletypeFormat<cr>
+nnoremap <silent> <leader>f <Cmd>FiletypeFormat<CR>
+xnoremap <silent> <leader>f :FiletypeFormat<CR>
 ```
 
 If you're using [coc.nvim](https://github.com/neoclide/coc.nvim), and you want to prevent the language server from freaking out after running `:FiletypeFormat`, you can use the following mappings instead. They're just like the above mappings, but they explicitly turn off/on coc, which seems to get around any "language server"-side hiccups.
 
 ```vim
-nnoremap <silent> <leader>f <Cmd>silent! CocDisable<cr><Cmd>FiletypeFormat<cr><Cmd>silent! CocEnable<cr>
-vnoremap <silent> <leader>f <Cmd>silent! CocDisable<cr>:FiletypeFormat<cr><Cmd>silent! CocEnable<cr>
+nnoremap <silent> <leader>f <Cmd>silent! CocDisable<CR><Cmd>FiletypeFormat<cr><Cmd>silent! CocEnable<CR>
+xnoremap <silent> <leader>f <Cmd>silent! CocDisable<CR>:FiletypeFormat<cr><Cmd>silent! CocEnable<CR>
 ```
 
 ## Default configurations
@@ -121,9 +121,9 @@ In the rare case where a required code formatter does not read from standard inp
 ```vim
 \ 'nginx':
 \   'dd status=none of=/tmp/nginx.conf >& /dev/null && '
-\   . 'nginxbeautifier --space 4 /tmp/nginx.conf >& /dev/null && '
-\   . 'cat /tmp/nginx.conf && '
-\   . 'rm /tmp/nginx.conf',
+\   .. 'nginxbeautifier --space 4 /tmp/nginx.conf >& /dev/null && '
+\   .. 'cat /tmp/nginx.conf && '
+\   .. 'rm /tmp/nginx.conf',
 ```
 
 1. `dd`: read `vim-filetype-formatter`'s standard output as standard input, writing to a temporary file named `/tmp/nginx.conf`
