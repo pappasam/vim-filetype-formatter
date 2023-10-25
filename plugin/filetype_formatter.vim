@@ -18,17 +18,33 @@ set cpo&vim
 
 " Configuration
 
-function! s:_prettier()
+function! s:_prettier(startline, endline)
+  let startpos = line2byte(a:startline) - 1
+  let endpos = line2byte(a:endline + 1) - 1
   return printf(
-        \ 'npx --no-update-notifier --silent --no-install prettier --stdin-filepath="%s"',
+        \ 'npx --no-update-notifier --silent --no-install prettier --range-start=%i --range-end=%i --stdin-filepath="%s"',
+        \ startpos,
+        \ endpos,
         \ expand('%:p')
         \ )
 endfunction
 let s:prettier = funcref('s:_prettier')
 
-function! s:_prettier_svelte()
+function! s:_prettier_no_explicit_range()
   return printf(
-        \ 'npx --no-update-notifier --silent --no-install prettier --plugin prettier-plugin-svelte --stdin-filepath="%s"',
+        \ 'npx --no-update-notifier --silent --no-install prettier --stdin-filepath="%s"',
+        \ expand('%:p')
+        \ )
+endfunction
+let s:prettier_no_explicit_range = funcref('s:_prettier_no_explicit_range')
+
+function! s:_prettier_svelte(startline, endline)
+  let startpos = line2byte(a:startline) - 1
+  let endpos = line2byte(a:endline + 1) - 1
+  return printf(
+        \ 'npx --no-update-notifier --silent --no-install prettier --plugin prettier-plugin-svelte --range-start=%i --range-end=%i --stdin-filepath="%s"',
+        \ startpos,
+        \ endpos,
         \ expand('%:p')
         \ )
 endfunction
@@ -74,9 +90,9 @@ let s:default_formatters = {
       \ 'json': s:prettier,
       \ 'jsonc': s:prettier,
       \ 'lua': s:stylua,
-      \ 'markdown': s:prettier,
-      \ 'markdown.mdx': s:prettier,
-      \ 'mdx': s:prettier,
+      \ 'markdown': s:prettier_no_explicit_range,
+      \ 'markdown.mdx': s:prettier_no_explicit_range,
+      \ 'mdx': s:prettier_no_explicit_range,
       \ 'nginx': 'nginxfmt -',
       \ 'ocaml': s:ocamlformat,
       \ 'prisma': s:prettier,
