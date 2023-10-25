@@ -70,6 +70,32 @@ let g:vim_filetype_formatter_commands = {
       \ }
 ```
 
+Here's another Python example involving [ruff](https://github.com/astral-sh/ruff).
+
+```vim
+function s:formatter_python()
+  return printf(
+        \ 'ruff check --unsafe-fixes -q --fix-only --stdin-filename="%1$s" - | ' ..
+        \ 'ruff format -q --stdin-filename="%1$s" -',
+        \ expand('%:p'))
+endfunction
+let g:vim_filetype_formatter_commands = {'python': function('s:formatter_python')}
+```
+
+Finally, here's an example of how we can support prettier's built-in range functionality:
+
+```vim
+function! s:prettier(startline, endline)
+  return printf(
+        \ 'npx --no-update-notifier --silent --no-install prettier --range-start=%i --range-end=%i --stdin-filepath="%s"',
+        \ line2byte(a:startline) - 1,
+        \ line2byte(a:endline + 1) - 1,
+        \ expand('%:p')
+        \ )
+endfunction
+let g:vim_filetype_formatter_commands = {'javascript': function('s:prettier')}
+```
+
 ## Installation
 
 If using [vim-plug](https://github.com/junegunn/vim-plug), place the following line in the Plugin section of your `init.vim` / `vimrc`:
