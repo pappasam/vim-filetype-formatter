@@ -102,6 +102,10 @@ function! s:format_code_range(
   let results_raw = system(a:system_call, stdin)
   let results = s:strip_newlines(results_raw)
   if !v:shell_error
+    if stdin ==# results
+      return
+    endif
+
     if a:first_line != a:last_line
       " Delete the relevant part of buffer if more than 1 line as input
       silent execute a:first_line .. ',' .. (a:last_line - 1) .. 'delete'
@@ -128,6 +132,10 @@ function! s:format_code_file(system_call)
   let results_raw = system(a:system_call, stdin)
   let results = s:strip_newlines(results_raw)
   if !v:shell_error
+    if stdin ==# results
+      return
+    endif
+
     " remove undo point caused via BufWritePre
     try | silent undojoin | catch | endtry
 
