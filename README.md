@@ -2,31 +2,74 @@
 
 A simple, cross-language Vim code formatter plugin supporting both range and full-file formatting. **It uses code formatters available in your $PATH; it does not install them.** The following languages are configured out of the box.
 
-| Language                                                                      | Formatter                                                                                                           |
-| ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| [**biblatex**](http://www.bibtex.org/)                                        | [bibtool](https://ctan.org/pkg/bibtool)                                                                             |
-| [**css**](https://developer.mozilla.org/en-US/docs/Web/CSS)                   | [prettier](https://prettier.io/)                                                                                    |
-| [**go**](https://golang.org/)                                                 | [gofmt](https://golang.org/cmd/gofmt/)                                                                              |
-| [**graphql**](https://developer.mozilla.org/en-US/docs/Web/HTML)              | [prettier](https://prettier.io/)                                                                                    |
-| [**html**](https://developer.mozilla.org/en-US/docs/Web/HTML)                 | [prettier](https://prettier.io/)                                                                                    |
-| [**javascript/jsx**](https://developer.mozilla.org/en-US/docs/Web/JavaScript) | [prettier](https://prettier.io/)                                                                                    |
-| [**json**](https://json.org/)                                                 | [prettier](https://prettier.io/)                                                                                    |
-| [**jsonc**](https://komkom.github.io/)                                        | [prettier](https://prettier.io/)                                                                                    |
-| [**lua**](https://www.lua.org/)                                               | [stylua](https://github.com/JohnnyMorganz/StyLua)                                                                   |
-| [**markdown**](https://en.wikipedia.org/wiki/Markdown)                        | [prettier](https://prettier.io/)                                                                                    |
-| [**mdx**](https://mdxjs.com/)                                                 | [prettier](https://prettier.io/)                                                                                    |
-| [**nginx**](https://www.nginx.com/resources/wiki/start/topics/examples/full/) | [nginxfmt](https://github.com/slomkowski/nginx-config-formatter)                                                    |
-| [**ocaml**](https://ocaml.org/)                                               | [ocamlformat](https://github.com/ocaml-ppx/ocamlformat)                                                             |
-| [**prisma**](https://www.prisma.io/)                                          | [prettier](https://prettier.io/) + [prettier-plugin-prisma](https://github.com/umidbekk/prettier-plugin-prisma)     |
-| [**python**](https://www.python.org/)                                         | [black](https://github.com/python/black)                                                                            |
-| [**r**](https://www.r-project.org/)                                           | [styler](https://github.com/r-lib/styler)                                                                           |
-| [**rust**](https://www.rust-lang.org/)                                        | [rustfmt](https://github.com/rust-lang/rustfmt)                                                                     |
-| [**scss**](https://sass-lang.com/)                                            | [prettier](https://prettier.io/)                                                                                    |
-| [**svelte**](https://svelte.dev/)                                             | [prettier](https://prettier.io/) + [prettier-plugin-svelte](https://github.com/UnwrittenFun/prettier-plugin-svelte) |
-| [**terraform**](https://www.terraform.io/)                                    | [terraform fmt](https://www.terraform.io/docs/commands/fmt.html)                                                    |
-| [**toml**](https://github.com/toml-lang/toml)                                 | [toml-sort](https://github.com/pappasam/toml-sort)                                                                  |
-| [**typescript/tsx**](https://www.typescriptlang.org/)                         | [prettier](https://prettier.io/)                                                                                    |
-| [**yaml**](https://yaml.org/)                                                 | [prettier](https://prettier.io/)                                                                                    |
+| Language         | Default Formatter                     | Other Formatters |
+| ---------------- | ------------------------------------- | ---------------- |
+| [biblatex]       | [bibtool]                             |                  |
+| [css]            | [prettier]                            |                  |
+| [go]             | [gofmt]                               |                  |
+| [graphql]        | [prettier]                            |                  |
+| [html]           | [prettier]                            |                  |
+| [javascript/jsx] | [prettier]                            |                  |
+| [json]           | [prettier]                            |                  |
+| [jsonc]          | [prettier]                            |                  |
+| [lua]            | [stylua]                              |                  |
+| [markdown]       | [prettier]                            |                  |
+| [mdx]            | [prettier]                            |                  |
+| [nginx]          | [nginxfmt]                            |                  |
+| [ocaml]          | [ocamlformat]                         |                  |
+| [prisma]         | [prettier] + [prettier-plugin-prisma] |                  |
+| [python]         | [black]                               | [ruff]           |
+| [r]              | [styler]                              |                  |
+| [rust]           | [rustfmt]                             |                  |
+| [scss]           | [prettier]                            |                  |
+| [svelte]         | [prettier] + [prettier-plugin-svelte] |                  |
+| [terraform]      | [terraform fmt]                       |                  |
+| [toml]           | [toml-sort]                           |                  |
+| [typescript/tsx] | [prettier]                            |                  |
+| [yaml]           | [prettier]                            |                  |
+
+<!-- formatters -->
+
+[bibtool]: https://ctan.org/pkg/bibtool
+[black]: https://github.com/python/black
+[gofmt]: https://golang.org/cmd/gofmt/
+[nginxfmt]: https://github.com/slomkowski/nginx-config-formatter
+[ocamlformat]: https://github.com/ocaml-ppx/ocamlformat
+[prettier-plugin-prisma]: https://github.com/umidbekk/prettier-plugin-prisma
+[prettier-plugin-svelte]: https://github.com/UnwrittenFun/prettier-plugin-svelte
+[prettier]: https://prettier.io/
+[ruff]: https://github.com/astral-sh/ruff
+[rustfmt]: https://github.com/rust-lang/rustfmt
+[styler]: https://github.com/r-lib/styler
+[stylua]: https://github.com/JohnnyMorganz/StyLua
+[terraform fmt]: https://www.terraform.io/docs/commands/fmt.html
+[toml-sort]: https://github.com/pappasam/toml-sort
+
+<!-- languages -->
+
+[biblatex]: http://www.bibtex.org/
+[css]: https://developer.mozilla.org/en-US/docs/Web/CSS
+[go]: https://golang.org/
+[graphql]: https://developer.mozilla.org/en-US/docs/Web/HTML
+[html]: https://developer.mozilla.org/en-US/docs/Web/HTML
+[javascript/jsx]: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+[json]: https://json.org/
+[jsonc]: https://komkom.github.io/
+[lua]: https://www.lua.org/
+[markdown]: https://en.wikipedia.org/wiki/Markdown
+[mdx]: https://mdxjs.com/
+[nginx]: https://www.nginx.com/resources/wiki/start/topics/examples/full/
+[ocaml]: https://ocaml.org/
+[prisma]: https://www.prisma.io/
+[python]: https://www.python.org/
+[r]: https://www.r-project.org/
+[rust]: https://www.rust-lang.org/
+[scss]: https://sass-lang.com/
+[svelte]: https://svelte.dev/
+[terraform]: https://www.terraform.io/
+[toml]: https://github.com/toml-lang/toml
+[typescript/tsx]: https://www.typescriptlang.org/
+[yaml]: https://yaml.org/
 
 Don't like the defaults? Writing your own is easy!
 
@@ -139,6 +182,13 @@ xnoremap <silent> <leader>f <Cmd>silent! CocDisable<CR>:FiletypeFormat<cr><Cmd>s
 ## Default configurations
 
 Default configurations may be overridden by creating our own `g:vim_filetype_formatter_commands` dictionary. If you would like to map one filetype to another, see `g:vim_filetype_formatter_ft_maps`. See [here](./doc/filetype_formatter.txt) for specifics on how to do this.
+
+If you would like to use a formatter listed above in "Other Formatters", you'll first need to `packadd vim-filetype-formatter` and then add it to `g:vim_filetype_formatter` commands. Here is an example of how to override Python's formatter with the built-in configuration for `ruff`:
+
+```vim
+packadd vim-filetype-formatter
+let g:vim_filetype_formatter_commands.python = g:vim_filetype_formatter_builtins.ruff
+```
 
 ## Non-standard code formatters
 

@@ -18,7 +18,7 @@ set cpo&vim
 
 " Configuration
 
-function! s:_prettier(startline, endline)
+function! s:prettier(startline, endline)
   let startpos = line2byte(a:startline) - 1
   let endpos = line2byte(a:endline + 1) - 1
   return printf(
@@ -28,17 +28,13 @@ function! s:_prettier(startline, endline)
         \ expand('%:p')
         \ )
 endfunction
-let s:prettier = funcref('s:_prettier')
-
-function! s:_prettier_no_explicit_range()
+function! s:prettier_no_explicit_range()
   return printf(
         \ 'npx --no-update-notifier --silent --no-install prettier --stdin-filepath="%s"',
         \ expand('%:p')
         \ )
 endfunction
-let s:prettier_no_explicit_range = funcref('s:_prettier_no_explicit_range')
-
-function! s:_prettier_svelte(startline, endline)
+function! s:prettier_svelte(startline, endline)
   let startpos = line2byte(a:startline) - 1
   let endpos = line2byte(a:endline + 1) - 1
   return printf(
@@ -48,25 +44,25 @@ function! s:_prettier_svelte(startline, endline)
         \ expand('%:p')
         \ )
 endfunction
-let s:prettier_svelte = funcref('s:_prettier_svelte')
-
-function! s:_ocamlformat()
+function! s:ocamlformat()
   return printf(
         \ 'ocamlformat --enable-outside-detected-project --name "%s" -',
         \ expand('%')
         \ )
 endfunction
-let s:ocamlformat = funcref('s:_ocamlformat')
-
-function! s:_stylua()
+function s:ruff()
+  return printf(
+        \ 'ruff check --unsafe-fixes -q --fix-only --stdin-filename="%1$s" - | ' ..
+        \ 'ruff format -q --stdin-filename="%1$s" -',
+        \ expand('%:p'))
+endfunction
+function! s:stylua()
   return printf(
         \ 'stylua --search-parent-directories --stdin-filepath "%s" -',
         \ expand('%')
         \ )
 endfunction
-let s:stylua = funcref('s:_stylua')
-
-function! s:_styler()
+function! s:styler()
   return 'Rscript --default-packages=styler ' ..
         \ '-e "options(styler.colored_print.vertical = FALSE)" ' ..
         \ '-e "options(styler.quiet = TRUE)" ' ..
@@ -75,39 +71,53 @@ function! s:_styler()
         \ 'readLines(file(\"stdin\"), warn = FALSE, encoding=\"UTF-8\")' ..
         \ ')"'
 endfunction
-let s:styler = funcref('s:_styler')
-
+let s:b = {
+      \ 'bibtool':                    'bibtool -q -s',
+      \ 'black':                      'black -q -',
+      \ 'gofmt':                      'gofmt',
+      \ 'nginxfmt':                   'nginxfmt -',
+      \ 'ocamlformat':                funcref('s:ocamlformat'),
+      \ 'prettier':                   funcref('s:prettier'),
+      \ 'prettier_no_explicit_range': funcref('s:prettier_no_explicit_range'),
+      \ 'prettier_svelte':            funcref('s:prettier_svelte'),
+      \ 'ruff':                       funcref('s:ruff'),
+      \ 'rustfmt':                    'rustfmt --quiet',
+      \ 'styler':                     funcref('s:styler'),
+      \ 'stylua':                     funcref('s:stylua'),
+      \ 'terraform_fmt':              'terraform fmt -',
+      \ 'toml_sort':                  'toml-sort',
+      \ }
 let s:default_formatters = {
-      \ 'bib': 'bibtool -q -s',
-      \ 'css': s:prettier,
-      \ 'go': 'gofmt',
-      \ 'graphql': s:prettier,
-      \ 'html': s:prettier,
-      \ 'javascript': s:prettier,
-      \ 'javascript.jsx': s:prettier,
-      \ 'javascriptreact': s:prettier,
-      \ 'jinja.html': s:prettier,
-      \ 'json': s:prettier,
-      \ 'jsonc': s:prettier,
-      \ 'lua': s:stylua,
-      \ 'markdown': s:prettier_no_explicit_range,
-      \ 'markdown.mdx': s:prettier_no_explicit_range,
-      \ 'mdx': s:prettier_no_explicit_range,
-      \ 'nginx': 'nginxfmt -',
-      \ 'ocaml': s:ocamlformat,
-      \ 'prisma': s:prettier,
-      \ 'python': 'black -q -',
-      \ 'rust': 'rustfmt --quiet',
-      \ 'scss': s:prettier,
-      \ 'svelte': s:prettier_svelte,
-      \ 'terraform': 'terraform fmt -',
-      \ 'r': s:styler,
-      \ 'toml': 'toml-sort',
-      \ 'typescript': s:prettier,
-      \ 'typescript.tsx': s:prettier,
-      \ 'typescriptreact': s:prettier,
-      \ 'yaml': s:prettier,
-      \ 'yaml.docker-compose': s:prettier,
+      \ 'bib':                 s:b.bibtool,
+      \ 'css':                 s:b.prettier,
+      \ 'go':                  s:b.gofmt,
+      \ 'graphql':             s:b.prettier,
+      \ 'html':                s:b.prettier,
+      \ 'javascript':          s:b.prettier,
+      \ 'javascript.jsx':      s:b.prettier,
+      \ 'javascriptreact':     s:b.prettier,
+      \ 'jinja.html':          s:b.prettier,
+      \ 'json':                s:b.prettier,
+      \ 'jsonc':               s:b.prettier,
+      \ 'lua':                 s:b.stylua,
+      \ 'markdown':            s:b.prettier_no_explicit_range,
+      \ 'markdown.mdx':        s:b.prettier_no_explicit_range,
+      \ 'mdx':                 s:b.prettier_no_explicit_range,
+      \ 'nginx':               s:b.nginxfmt,
+      \ 'ocaml':               s:b.ocamlformat,
+      \ 'prisma':              s:b.prettier,
+      \ 'python':              s:b.black,
+      \ 'r':                   s:b.styler,
+      \ 'rust':                s:b.rustfmt,
+      \ 'scss':                s:b.prettier,
+      \ 'svelte':              s:b.prettier_svelte,
+      \ 'terraform':           s:b.terraform_fmt,
+      \ 'toml':                s:b.toml_sort,
+      \ 'typescript':          s:b.prettier,
+      \ 'typescript.tsx':      s:b.prettier,
+      \ 'typescriptreact':     s:b.prettier,
+      \ 'yaml':                s:b.prettier,
+      \ 'yaml.docker-compose': s:b.prettier,
       \ }
 
 function! s:configure_constants()
@@ -116,11 +126,16 @@ function! s:configure_constants()
     let g:vim_filetype_formatter_verbose = v:false
   endif
 
+  " Define built-in filetypes.
+  if !exists('g:vim_filetype_formatter_builtins')
+    let g:vim_filetype_formatter_builtins = s:b
+  endif
+
   " Map weird filetypes to standard filetypes
   if !exists('g:vim_filetype_formatter_ft_maps')
     let g:vim_filetype_formatter_ft_maps = {}
   elseif type(g:vim_filetype_formatter_ft_maps) != v:t_dict
-    throw 'User-configured g:vim_filetype_formatter_ft_no_defaults must be List'
+    throw 'User-configured g:vim_filetype_formatter_ft_no_defaults must be Dict'
   endif
 
   " Set filetypes for which there is no default
