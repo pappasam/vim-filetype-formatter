@@ -81,21 +81,21 @@ function! s:styler()
         \ ')"'
 endfunction
 let s:b = {
-      \ 'bibtool':                    'bibtool -q -s',
-      \ 'black':                      'black -q -',
-      \ 'gofmt':                      'gofmt',
-      \ 'nginxfmt':                   'nginxfmt -',
+      \ 'bibtool':                            'bibtool -q -s',
+      \ 'black':                              'black -q -',
+      \ 'gofmt':                              'gofmt',
+      \ 'nginxfmt':                           'nginxfmt -',
       \ 'ocamlformat':                funcref('s:ocamlformat'),
       \ 'prettier':                   funcref('s:prettier'),
       \ 'prettier_svelte':            funcref('s:prettier_svelte'),
       \ 'prettier_prisma':            funcref('s:prettier_prisma'),
       \ 'prettier_no_explicit_range': funcref('s:prettier_no_explicit_range'),
       \ 'ruff':                       funcref('s:ruff'),
-      \ 'rustfmt':                    'rustfmt --quiet',
+      \ 'rustfmt':                            'rustfmt --quiet',
       \ 'styler':                     funcref('s:styler'),
       \ 'stylua':                     funcref('s:stylua'),
-      \ 'terraform_fmt':              'terraform fmt -',
-      \ 'toml_sort':                  'toml-sort',
+      \ 'terraform_fmt':                      'terraform fmt -',
+      \ 'toml_sort':                          'toml-sort',
       \ }
 let s:default_formatters = {
       \ 'bib':                 s:b.bibtool,
