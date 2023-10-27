@@ -2,31 +2,31 @@
 
 A simple, cross-language Vim code formatter plugin supporting both range and full-file formatting. **It uses code formatters available in your $PATH; it does not install them.** The following languages are configured out of the box.
 
-| Language         | Default Formatter                     | Other Formatters |
-| ---------------- | ------------------------------------- | ---------------- |
-| [biblatex]       | [bibtool]                             |                  |
-| [css]            | [prettier]                            |                  |
-| [go]             | [gofmt]                               |                  |
-| [graphql]        | [prettier]                            |                  |
-| [html]           | [prettier]                            |                  |
-| [javascript/jsx] | [prettier]                            |                  |
-| [json]           | [prettier]                            |                  |
-| [jsonc]          | [prettier]                            |                  |
-| [lua]            | [stylua]                              |                  |
-| [markdown]       | [prettier]                            |                  |
-| [mdx]            | [prettier]                            |                  |
-| [nginx]          | [nginxfmt]                            |                  |
-| [ocaml]          | [ocamlformat]                         |                  |
-| [prisma]         | [prettier] + [prettier-plugin-prisma] |                  |
-| [python]         | [black]                               | [ruff]           |
-| [r]              | [styler]                              |                  |
-| [rust]           | [rustfmt]                             |                  |
-| [scss]           | [prettier]                            |                  |
-| [svelte]         | [prettier] + [prettier-plugin-svelte] |                  |
-| [terraform]      | [terraform fmt]                       |                  |
-| [toml]           | [toml-sort]                           |                  |
-| [typescript/tsx] | [prettier]                            |                  |
-| [yaml]           | [prettier]                            |                  |
+| Language         | Default Formatter | Other Formatters |
+| ---------------- | ----------------- | ---------------- |
+| [biblatex]       | [bibtool]         |                  |
+| [css]            | [prettier]        |                  |
+| [go]             | [gofmt]           |                  |
+| [graphql]        | [prettier]        |                  |
+| [html]           | [prettier]        |                  |
+| [javascript/jsx] | [prettier]        |                  |
+| [json]           | [prettier]        |                  |
+| [jsonc]          | [prettier]        |                  |
+| [lua]            | [stylua]          |                  |
+| [markdown]       | [prettier]        |                  |
+| [mdx]            | [prettier]        |                  |
+| [nginx]          | [nginxfmt]        |                  |
+| [ocaml]          | [ocamlformat]     |                  |
+| [prisma]         | [prettier_prisma] |                  |
+| [python]         | [black]           | [ruff]           |
+| [r]              | [styler]          |                  |
+| [rust]           | [rustfmt]         |                  |
+| [scss]           | [prettier]        |                  |
+| [svelte]         | [prettier_svelte] |                  |
+| [terraform]      | [terraform_fmt]   |                  |
+| [toml]           | [toml_sort]       |                  |
+| [typescript/tsx] | [prettier]        |                  |
+| [yaml]           | [prettier]        |                  |
 
 <!-- formatters -->
 
@@ -35,15 +35,15 @@ A simple, cross-language Vim code formatter plugin supporting both range and ful
 [gofmt]: https://golang.org/cmd/gofmt/
 [nginxfmt]: https://github.com/slomkowski/nginx-config-formatter
 [ocamlformat]: https://github.com/ocaml-ppx/ocamlformat
-[prettier-plugin-prisma]: https://github.com/umidbekk/prettier-plugin-prisma
-[prettier-plugin-svelte]: https://github.com/UnwrittenFun/prettier-plugin-svelte
+[prettier_prisma]: https://github.com/umidbekk/prettier-plugin-prisma
+[prettier_svelte]: https://github.com/UnwrittenFun/prettier-plugin-svelte
 [prettier]: https://prettier.io/
 [ruff]: https://github.com/astral-sh/ruff
 [rustfmt]: https://github.com/rust-lang/rustfmt
 [styler]: https://github.com/r-lib/styler
 [stylua]: https://github.com/JohnnyMorganz/StyLua
-[terraform fmt]: https://www.terraform.io/docs/commands/fmt.html
-[toml-sort]: https://github.com/pappasam/toml-sort
+[terraform_fmt]: https://www.terraform.io/docs/commands/fmt.html
+[toml_sort]: https://github.com/pappasam/toml-sort
 
 <!-- languages -->
 

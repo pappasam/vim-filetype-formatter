@@ -28,12 +28,6 @@ function! s:prettier(startline, endline)
         \ expand('%:p')
         \ )
 endfunction
-function! s:prettier_no_explicit_range()
-  return printf(
-        \ 'npx --no-update-notifier --silent --no-install prettier --stdin-filepath="%s"',
-        \ expand('%:p')
-        \ )
-endfunction
 function! s:prettier_svelte(startline, endline)
   let startpos = line2byte(a:startline) - 1
   let endpos = line2byte(a:endline + 1) - 1
@@ -41,6 +35,22 @@ function! s:prettier_svelte(startline, endline)
         \ 'npx --no-update-notifier --silent --no-install prettier --plugin prettier-plugin-svelte --range-start=%i --range-end=%i --stdin-filepath="%s"',
         \ startpos,
         \ endpos,
+        \ expand('%:p')
+        \ )
+endfunction
+function! s:prettier_prisma(startline, endline)
+  let startpos = line2byte(a:startline) - 1
+  let endpos = line2byte(a:endline + 1) - 1
+  return printf(
+        \ 'npx --no-update-notifier --silent --no-install prettier --plugin prettier-plugin-prisma --range-start=%i --range-end=%i --stdin-filepath="%s"',
+        \ startpos,
+        \ endpos,
+        \ expand('%:p')
+        \ )
+endfunction
+function! s:prettier_no_explicit_range()
+  return printf(
+        \ 'npx --no-update-notifier --silent --no-install prettier --stdin-filepath="%s"',
         \ expand('%:p')
         \ )
 endfunction
@@ -56,9 +66,14 @@ function s:ruff()
         \ 'ruff format -q --stdin-filename="%1$s" -',
         \ expand('%:p'))
 endfunction
-function! s:stylua()
+function! s:stylua(startline, endline)
+  " Range formatting requires complete statement to be selected.
+  let startpos = line2byte(a:startline) - 1
+  let endpos = line2byte(a:endline + 1) - 1
   return printf(
-        \ 'stylua --search-parent-directories --stdin-filepath "%s" -',
+        \ 'stylua --search-parent-directories --range-start %i --range-end %i --stdin-filepath "%s" -',
+        \ startpos,
+        \ endpos,
         \ expand('%')
         \ )
 endfunction
@@ -78,8 +93,9 @@ let s:b = {
       \ 'nginxfmt':                   'nginxfmt -',
       \ 'ocamlformat':                funcref('s:ocamlformat'),
       \ 'prettier':                   funcref('s:prettier'),
-      \ 'prettier_no_explicit_range': funcref('s:prettier_no_explicit_range'),
       \ 'prettier_svelte':            funcref('s:prettier_svelte'),
+      \ 'prettier_prisma':            funcref('s:prettier_prisma'),
+      \ 'prettier_no_explicit_range': funcref('s:prettier_no_explicit_range'),
       \ 'ruff':                       funcref('s:ruff'),
       \ 'rustfmt':                    'rustfmt --quiet',
       \ 'styler':                     funcref('s:styler'),
@@ -105,7 +121,7 @@ let s:default_formatters = {
       \ 'mdx':                 s:b.prettier_no_explicit_range,
       \ 'nginx':               s:b.nginxfmt,
       \ 'ocaml':               s:b.ocamlformat,
-      \ 'prisma':              s:b.prettier,
+      \ 'prisma':              s:b.prettier_prisma,
       \ 'python':              s:b.black,
       \ 'r':                   s:b.styler,
       \ 'rust':                s:b.rustfmt,

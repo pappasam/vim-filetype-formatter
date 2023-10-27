@@ -273,6 +273,7 @@ function! filetype_formatter#debug()
               \ 'system_call': Current_formatter(0, 1),
               \ 'lines_specified': 1,
               \ }
+        let current_formatter_result = result.system_call
       catch /.*/
         let current_formatter_result = 'Formatter function must take exactly 0, or 2, arguments'
       endtry
