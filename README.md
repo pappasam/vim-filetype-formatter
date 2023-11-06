@@ -172,13 +172,6 @@ nnoremap <silent> <leader>f <Cmd>FiletypeFormat<CR>
 xnoremap <silent> <leader>f :FiletypeFormat<CR>
 ```
 
-If you're using [coc.nvim](https://github.com/neoclide/coc.nvim), and you want to prevent the language server from freaking out after running `:FiletypeFormat`, you can use the following mappings instead. They're just like the above mappings, but they explicitly turn off/on coc, which seems to get around any "language server"-side hiccups.
-
-```vim
-nnoremap <silent> <leader>f <Cmd>silent! CocDisable<CR><Cmd>FiletypeFormat<cr><Cmd>silent! CocEnable<CR>
-xnoremap <silent> <leader>f <Cmd>silent! CocDisable<CR>:FiletypeFormat<cr><Cmd>silent! CocEnable<CR>
-```
-
 ## Default configurations
 
 Default configurations may be overridden by creating our own `g:vim_filetype_formatter_commands` dictionary. If you would like to map one filetype to another, see `g:vim_filetype_formatter_ft_maps`. See [here](./doc/filetype_formatter.txt) for specifics on how to do this.
@@ -211,6 +204,17 @@ It's not exactly pretty, but:
 
 1. Reality isn't always pretty
 2. We can use the command because it reads from standard input and writes to standard output
+
+## FAQ
+
+### Is this compatible with coc.nvim
+
+If you're using [coc.nvim](https://github.com/neoclide/coc.nvim), and you want to prevent the language server from freaking out after running `:FiletypeFormat`, you can use the following mappings instead. They're just like the above mappings, but they explicitly turn off/on coc, which seems to get around any "language server"-side hiccups.
+
+```vim
+nnoremap <silent> <leader>f <Cmd>silent! CocDisable<CR><Cmd>FiletypeFormat<cr><Cmd>silent! CocEnable<CR>
+xnoremap <silent> <leader>f <Cmd>silent! CocDisable<CR>:FiletypeFormat<cr><Cmd>silent! CocEnable<CR>
+```
 
 ## Notes
 
