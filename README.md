@@ -4,6 +4,7 @@ A simple, cross-language Vim code formatter plugin supporting both range and ful
 
 | Language         | Default Formatter | Other Formatters |
 | ---------------- | ----------------- | ---------------- |
+| [bash/sh]        | [shfmt]           |                  |
 | [biblatex]       | [bibtool]         |                  |
 | [css]            | [prettier]        |                  |
 | [go]             | [gofmt]           |                  |
@@ -40,6 +41,7 @@ A simple, cross-language Vim code formatter plugin supporting both range and ful
 [prettier]: https://prettier.io/
 [ruff]: https://github.com/astral-sh/ruff
 [rustfmt]: https://github.com/rust-lang/rustfmt
+[shfmt]: https://github.com/mvdan/sh
 [styler]: https://github.com/r-lib/styler
 [stylua]: https://github.com/JohnnyMorganz/StyLua
 [terraform_fmt]: https://www.terraform.io/docs/commands/fmt.html
@@ -47,6 +49,7 @@ A simple, cross-language Vim code formatter plugin supporting both range and ful
 
 <!-- languages -->
 
+[bash/sh]: https://en.wikipedia.org/wiki/Bash_(Unix_shell)
 [biblatex]: http://www.bibtex.org/
 [css]: https://developer.mozilla.org/en-US/docs/Web/CSS
 [go]: https://golang.org/

@@ -60,6 +60,13 @@ function s:ruff()
         \ 'ruff format -q --stdin-filename="%1$s" -',
         \ expand('%:p'))
 endfunction
+function! s:shfmt()
+  return printf(
+        \ 'shfmt --indent %i --filename "%s"',
+        \ &expandtab == 1 ? &softtabstop : 0,
+        \ expand('%:p')
+        \ )
+endfunction
 function! s:stylua(startline, endline)
   " Range formatting requires complete statement to be selected.
   let startpos = line2byte(a:startline) - 1
@@ -92,12 +99,14 @@ let s:b = {
       \ 'prettier_no_explicit_range': funcref('s:prettier_no_explicit_range'),
       \ 'ruff':                       funcref('s:ruff'),
       \ 'rustfmt':                            'rustfmt --quiet',
+      \ 'shfmt':                      funcref('s:shfmt'),
       \ 'styler':                     funcref('s:styler'),
       \ 'stylua':                     funcref('s:stylua'),
       \ 'terraform_fmt':                      'terraform fmt -',
       \ 'toml_sort':                          'toml-sort',
       \ }
 let s:default_formatters = {
+      \ 'bash':                s:b.shfmt,
       \ 'bib':                 s:b.bibtool,
       \ 'css':                 s:b.prettier,
       \ 'go':                  s:b.gofmt,
@@ -120,6 +129,7 @@ let s:default_formatters = {
       \ 'r':                   s:b.styler,
       \ 'rust':                s:b.rustfmt,
       \ 'scss':                s:b.prettier,
+      \ 'sh':                  s:b.shfmt,
       \ 'svelte':              s:b.prettier_svelte,
       \ 'terraform':           s:b.terraform_fmt,
       \ 'toml':                s:b.toml_sort,
