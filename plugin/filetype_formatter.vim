@@ -186,14 +186,20 @@ function! s:cmd_exists(name)
   return _exists
 endfunction
 
+function! s:cmd_filetypeformat() range
+  let result = filetype_formatter#format_filetype(a:firstline, a:lastline)
+  if result ==# 'success'
+    silent! normal! zR
+  endif
+endfunction
+
 " Commands
 
 if !s:cmd_exists(':FiletypeFormat')
   command -range=% FiletypeFormat silent!
         \ let b:filetype_formatter_winview = winsaveview()
-        \ | <line1>,<line2>call filetype_formatter#format_filetype()
+        \ | <line1>,<line2>call s:cmd_filetypeformat()
         \ | silent call winrestview(b:filetype_formatter_winview)
-        \ | silent! normal! zO
 endif
 
 if !s:cmd_exists(':LogFiletypeFormat')

@@ -177,18 +177,19 @@ endfunction
 " format_filetype: format a particular filetype with the configured command
 " WrittenBy: Samuel Roeca
 " Parameters: firstline AND lastline: int : from range command
-function! filetype_formatter#format_filetype() range
+function! filetype_formatter#format_filetype(first_line, last_line)
   let _shell_original = &shell
   set shell=/bin/bash
   set lazyredraw
+  let result = 'success'
   try
     " Note: below must begin with capital letter
     let Config_system_call = s:parse_config(
           \ g:vim_filetype_formatter_commands,
           \ g:vim_filetype_formatter_ft_maps,
           \ )
-    let parser = s:parse_call(Config_system_call, a:firstline, a:lastline)
-    if a:firstline == 1 && a:lastline == line('$')
+    let parser = s:parse_call(Config_system_call, a:first_line, a:last_line)
+    if a:first_line == 1 && a:last_line == line('$')
       " The entire buffer is selected, hence we use the entire file
       call s:format_code_file(parser.system_call)
     elseif parser.lines_specified == 1
@@ -196,7 +197,7 @@ function! filetype_formatter#format_filetype() range
       " The specific lines to be updated are handled by the formatter itself
       call s:format_code_file(parser.system_call)
     else
-      call s:format_code_range(parser.system_call, a:firstline, a:lastline)
+      call s:format_code_range(parser.system_call, a:first_line, a:last_line)
     endif
     if g:vim_filetype_formatter_verbose
       echom 'filetype_formatter: Success! ' .. '"' .. parser.system_call .. '"'
@@ -215,6 +216,7 @@ function! filetype_formatter#format_filetype() range
             \ )
     endif
     let b:vim_filetype_formatter_log = v:exception
+    let result = 'error'
   finally
     let &shell = _shell_original
     set nolazyredraw
@@ -222,6 +224,7 @@ function! filetype_formatter#format_filetype() range
   if bufwinnr(s:filename_log) >= 0
     call filetype_formatter#log()
   endif
+  return result
 endfunction
 
 " echo_log: print the full console output from the most-recent formatter run
