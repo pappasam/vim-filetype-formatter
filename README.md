@@ -1,82 +1,8 @@
 # Vim Filetype Formatter
 
-A simple, cross-language Vim code formatter plugin supporting both range and full-file formatting. **It uses code formatters available in your $PATH; it does not install them.** The following languages are configured out of the box.
+A simple, cross-language Vim code formatter plugin supporting both range and full-file formatting. **It uses code formatters available in your $PATH; it does not install them.**
 
-| Language         | Default Formatter | Other Formatters |
-| ---------------- | ----------------- | ---------------- |
-| [bash/sh]        | [shfmt]           |                  |
-| [biblatex]       | [bibtool]         |                  |
-| [css]            | [prettier]        |                  |
-| [go]             | [gofmt]           |                  |
-| [graphql]        | [prettier]        |                  |
-| [html]           | [prettier]        |                  |
-| [javascript/jsx] | [prettier]        |                  |
-| [json]           | [prettier]        |                  |
-| [jsonc]          | [prettier]        |                  |
-| [lua]            | [stylua]          |                  |
-| [markdown]       | [prettier]        |                  |
-| [mdx]            | [prettier]        |                  |
-| [nginx]          | [nginxfmt]        |                  |
-| [ocaml]          | [ocamlformat]     |                  |
-| [prisma]         | [prettier_prisma] |                  |
-| [python]         | [black]           | [ruff]           |
-| [r]              | [styler]          |                  |
-| [rust]           | [rustfmt]         |                  |
-| [scss]           | [prettier]        |                  |
-| [svelte]         | [prettier_svelte] |                  |
-| [terraform]      | [terraform_fmt]   |                  |
-| [toml]           | [toml_sort]       |                  |
-| [typescript/tsx] | [prettier]        |                  |
-| [yaml]           | [prettier]        |                  |
-
-<!-- formatters -->
-
-[bibtool]: https://ctan.org/pkg/bibtool
-[black]: https://github.com/python/black
-[gofmt]: https://golang.org/cmd/gofmt/
-[nginxfmt]: https://github.com/slomkowski/nginx-config-formatter
-[ocamlformat]: https://github.com/ocaml-ppx/ocamlformat
-[prettier_prisma]: https://github.com/umidbekk/prettier-plugin-prisma
-[prettier_svelte]: https://github.com/UnwrittenFun/prettier-plugin-svelte
-[prettier]: https://prettier.io/
-[ruff]: https://github.com/astral-sh/ruff
-[rustfmt]: https://github.com/rust-lang/rustfmt
-[shfmt]: https://github.com/mvdan/sh
-[styler]: https://github.com/r-lib/styler
-[stylua]: https://github.com/JohnnyMorganz/StyLua
-[terraform_fmt]: https://www.terraform.io/docs/commands/fmt.html
-[toml_sort]: https://github.com/pappasam/toml-sort
-
-<!-- languages -->
-
-[bash/sh]: https://en.wikipedia.org/wiki/Bash_(Unix_shell)
-[biblatex]: http://www.bibtex.org/
-[css]: https://developer.mozilla.org/en-US/docs/Web/CSS
-[go]: https://golang.org/
-[graphql]: https://developer.mozilla.org/en-US/docs/Web/HTML
-[html]: https://developer.mozilla.org/en-US/docs/Web/HTML
-[javascript/jsx]: https://developer.mozilla.org/en-US/docs/Web/JavaScript
-[json]: https://json.org/
-[jsonc]: https://komkom.github.io/
-[lua]: https://www.lua.org/
-[markdown]: https://en.wikipedia.org/wiki/Markdown
-[mdx]: https://mdxjs.com/
-[nginx]: https://www.nginx.com/resources/wiki/start/topics/examples/full/
-[ocaml]: https://ocaml.org/
-[prisma]: https://www.prisma.io/
-[python]: https://www.python.org/
-[r]: https://www.r-project.org/
-[rust]: https://www.rust-lang.org/
-[scss]: https://sass-lang.com/
-[svelte]: https://svelte.dev/
-[terraform]: https://www.terraform.io/
-[toml]: https://github.com/toml-lang/toml
-[typescript/tsx]: https://www.typescriptlang.org/
-[yaml]: https://yaml.org/
-
-Don't like the defaults? Writing your own is easy!
-
-Each Vim filetype maps to one command-line command. This plugin supports any code formatter command as long as it:
+See our [pre-configured languages and formatters](#batteries-included). Don't like the defaults? Writing your own is easy! Each Vim filetype maps to one command-line command. This plugin supports any code formatter command as long as it:
 
 1. Reads from standard input.
 2. Writes to standard output.
@@ -208,6 +134,80 @@ It's not exactly pretty, but:
 1. Reality isn't always pretty
 2. We can use the command because it reads from standard input and writes to standard output
 
+## Batteries Included
+
+| Language         | Default Formatter | Other Formatters |
+| ---------------- | ----------------- | ---------------- |
+| [bash/sh]        | [shfmt]           |                  |
+| [biblatex]       | [bibtool]         |                  |
+| [css]            | [prettier]        |                  |
+| [go]             | [gofmt]           |                  |
+| [graphql]        | [prettier]        |                  |
+| [html]           | [prettier]        |                  |
+| [javascript/jsx] | [prettier]        |                  |
+| [json]           | [prettier]        |                  |
+| [jsonc]          | [prettier]        |                  |
+| [lua]            | [stylua]          |                  |
+| [markdown]       | [prettier]        |                  |
+| [mdx]            | [prettier]        |                  |
+| [nginx]          | [nginxfmt]        |                  |
+| [ocaml]          | [ocamlformat]     |                  |
+| [prisma]         | [prettier_prisma] |                  |
+| [python]         | [black]           | [ruff]           |
+| [r]              | [styler]          |                  |
+| [rust]           | [rustfmt]         |                  |
+| [scss]           | [prettier]        |                  |
+| [svelte]         | [prettier_svelte] |                  |
+| [terraform]      | [terraform_fmt]   |                  |
+| [toml]           | [toml_sort]       |                  |
+| [typescript/tsx] | [prettier]        |                  |
+| [yaml]           | [prettier]        |                  |
+
+<!-- formatters -->
+
+[bibtool]: https://ctan.org/pkg/bibtool
+[black]: https://github.com/python/black
+[gofmt]: https://golang.org/cmd/gofmt/
+[nginxfmt]: https://github.com/slomkowski/nginx-config-formatter
+[ocamlformat]: https://github.com/ocaml-ppx/ocamlformat
+[prettier_prisma]: https://github.com/umidbekk/prettier-plugin-prisma
+[prettier_svelte]: https://github.com/UnwrittenFun/prettier-plugin-svelte
+[prettier]: https://prettier.io/
+[ruff]: https://github.com/astral-sh/ruff
+[rustfmt]: https://github.com/rust-lang/rustfmt
+[shfmt]: https://github.com/mvdan/sh
+[styler]: https://github.com/r-lib/styler
+[stylua]: https://github.com/JohnnyMorganz/StyLua
+[terraform_fmt]: https://www.terraform.io/docs/commands/fmt.html
+[toml_sort]: https://github.com/pappasam/toml-sort
+
+<!-- languages -->
+
+[bash/sh]: https://en.wikipedia.org/wiki/Bash_(Unix_shell)
+[biblatex]: http://www.bibtex.org/
+[css]: https://developer.mozilla.org/en-US/docs/Web/CSS
+[go]: https://golang.org/
+[graphql]: https://developer.mozilla.org/en-US/docs/Web/HTML
+[html]: https://developer.mozilla.org/en-US/docs/Web/HTML
+[javascript/jsx]: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+[json]: https://json.org/
+[jsonc]: https://komkom.github.io/
+[lua]: https://www.lua.org/
+[markdown]: https://en.wikipedia.org/wiki/Markdown
+[mdx]: https://mdxjs.com/
+[nginx]: https://www.nginx.com/resources/wiki/start/topics/examples/full/
+[ocaml]: https://ocaml.org/
+[prisma]: https://www.prisma.io/
+[python]: https://www.python.org/
+[r]: https://www.r-project.org/
+[rust]: https://www.rust-lang.org/
+[scss]: https://sass-lang.com/
+[svelte]: https://svelte.dev/
+[terraform]: https://www.terraform.io/
+[toml]: https://github.com/toml-lang/toml
+[typescript/tsx]: https://www.typescriptlang.org/
+[yaml]: https://yaml.org/
+
 ## FAQ
 
 ### Is this compatible with coc.nvim
@@ -218,7 +218,3 @@ If you're using [coc.nvim](https://github.com/neoclide/coc.nvim), and you want t
 nnoremap <silent> <leader>f <Cmd>silent! CocDisable<CR><Cmd>FiletypeFormat<cr><Cmd>silent! CocEnable<CR>
 xnoremap <silent> <leader>f <Cmd>silent! CocDisable<CR>:FiletypeFormat<cr><Cmd>silent! CocEnable<CR>
 ```
-
-## Notes
-
-This plugin prioritizes simplicity and ease of use on a POSIX-compliant system. Support for Windows and other non-Unix derivatives is out of scope.
