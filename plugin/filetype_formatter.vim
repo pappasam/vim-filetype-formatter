@@ -91,6 +91,7 @@ let s:b = {
       \ 'bibtool':                            'bibtool -q -s',
       \ 'black':                              'black -q -',
       \ 'gofmt':                              'gofmt',
+      \ 'leptosfmt':                          'leptosfmt --rustfmt --stdin --quiet',
       \ 'nginxfmt':                           'nginxfmt -',
       \ 'ocamlformat':                funcref('s:ocamlformat'),
       \ 'prettier':                   funcref('s:prettier'),

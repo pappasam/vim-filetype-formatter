@@ -155,7 +155,7 @@ It's not exactly pretty, but:
 | [prisma]         | [prettier_prisma] |                  |
 | [python]         | [black]           | [ruff]           |
 | [r]              | [styler]          |                  |
-| [rust]           | [rustfmt]         |                  |
+| [rust]           | [rustfmt]         | [leptosfmt]      |
 | [scss]           | [prettier]        |                  |
 | [svelte]         | [prettier_svelte] |                  |
 | [terraform]      | [terraform_fmt]   |                  |
@@ -168,6 +168,7 @@ It's not exactly pretty, but:
 [bibtool]: https://ctan.org/pkg/bibtool
 [black]: https://github.com/python/black
 [gofmt]: https://golang.org/cmd/gofmt/
+[leptosfmt]: https://github.com/bram209/leptosfmt
 [nginxfmt]: https://github.com/slomkowski/nginx-config-formatter
 [ocamlformat]: https://github.com/ocaml-ppx/ocamlformat
 [prettier_prisma]: https://github.com/umidbekk/prettier-plugin-prisma
@@ -210,11 +211,15 @@ It's not exactly pretty, but:
 
 ## FAQ
 
-### Is this compatible with coc.nvim
+### How can I have per-project settings?
 
-If you're using [coc.nvim](https://github.com/neoclide/coc.nvim), and you want to prevent the language server from freaking out after running `:FiletypeFormat`, you can use the following mappings instead. They're just like the above mappings, but they explicitly turn off/on coc, which seems to get around any "language server"-side hiccups.
+If using a recent version of Neovim, see `:help 'exrc'`.
 
 ```vim
-nnoremap <silent> <leader>f <Cmd>silent! CocDisable<CR><Cmd>FiletypeFormat<cr><Cmd>silent! CocEnable<CR>
-xnoremap <silent> <leader>f <Cmd>silent! CocDisable<CR>:FiletypeFormat<cr><Cmd>silent! CocEnable<CR>
+" $XDG_CONFIG_HOME/init.vim
+set exrc
+" $PROJECT_PATH/.nvimrc
+packadd vim-filetype-formatter
+let g:vim_filetype_formatter_commands['python'] = g:vim_filetype_formatter_builtins['ruff']
+let g:vim_filetype_formatter_commands['rust'] = g:vim_filetype_formatter_builtins['leptosfmt']
 ```
