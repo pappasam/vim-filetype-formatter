@@ -135,22 +135,22 @@ function! s:format_code_file(system_call)
     if stdin ==# results
       return
     endif
-
-    " remove undo point caused via BufWritePre
-    try | silent undojoin | catch | endtry
-
     " Replace current file with temp file, then reload buffer. Finally, make
     " sure new file has same Unix permissions as old file
     let tempfile = tempname()
     call writefile(split(results, '\n'), tempfile)
     if has('mac')
-        silent let permission = trim(system('stat -f "%Mp%Lp"  ' .. expand('%')))
-        call system('chmod "' .. permission .. '"  ' .. tempfile)
+      silent let permission = trim(system('stat -f "%Mp%Lp"  ' .. expand('%')))
+      call system('chmod "' .. permission .. '"  ' .. tempfile)
     else
-        call system('chmod --reference=' .. expand('%') .. ' ' .. tempfile)
+      call system('chmod --reference=' .. expand('%') .. ' ' .. tempfile)
     endif
     call rename(tempfile, resolve(expand('%')))
+    " Keep foldsettings consistent
+    " NOTE: may act weirdly with complex folds and many formatting changes
+    silent mkview!
     silent edit!
+    silent! loadview
   else
     throw printf("command: %s\nmessage: %s", a:system_call, results)
   endif
@@ -159,16 +159,13 @@ endfunction
 " Read lines into preview window
 " Note: taken from <https://vi.stackexchange.com/a/19059>
 function! s:show_in_preview(name, fileType, lines)
-  let l:command = "silent! pedit! +setlocal\\ " ..
+  execute "silent! pedit! +setlocal\\ " ..
         \ "buftype=nofile\\ nobuflisted\\ " ..
         \ "noswapfile\\ nonumber\\ hidden\\ " ..
         \ "filetype=" .. a:fileType .. " " .. a:name
-
-  exe l:command
-
   if has('nvim')
-    let l:bufNr = bufnr(a:name)
-    call nvim_buf_set_lines(l:bufNr, 0, -1, 0, a:lines)
+    let buf_number = bufnr(a:name)
+    call nvim_buf_set_lines(buf_number, 0, -1, 0, a:lines)
   else
     call setbufline(a:name, 1, a:lines)
   endif

@@ -199,9 +199,6 @@ endfunction
 
 function! s:cmd_filetypeformat() range
   let result = filetype_formatter#format_filetype(a:firstline, a:lastline)
-  if result ==# 'success'
-    silent! normal! zR
-  endif
 endfunction
 
 " Commands
