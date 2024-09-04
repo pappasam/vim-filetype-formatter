@@ -22,7 +22,7 @@ function! s:prettier(startline, endline)
   let startpos = line2byte(a:startline) - 1
   let endpos = line2byte(a:endline + 1) - 1
   return printf(
-        \ 'npx --no-update-notifier --silent --no-install prettier --range-start=%i --range-end=%i --stdin-filepath="%s"',
+        \ 'prettier --range-start=%i --range-end=%i --stdin-filepath="%s"',
         \ startpos,
         \ endpos,
         \ expand('%:p')
@@ -31,20 +31,20 @@ endfunction
 function! s:prettier_svelte()
   " Range not currently supported: <https://github.com/sveltejs/prettier-plugin-svelte/issues/233>
   return printf(
-        \ 'npx --no-update-notifier --silent --no-install prettier --plugin prettier-plugin-svelte --stdin-filepath="%s"',
+        \ 'prettier --plugin prettier-plugin-svelte --stdin-filepath="%s"',
         \ expand('%:p')
         \ )
 endfunction
 function! s:prettier_prisma()
   " Range does not currently appear to be supported
   return printf(
-        \ 'npx --no-update-notifier --silent --no-install prettier --plugin prettier-plugin-prisma --stdin-filepath="%s"',
+        \ 'prettier --plugin prettier-plugin-prisma --stdin-filepath="%s"',
         \ expand('%:p')
         \ )
 endfunction
 function! s:prettier_no_explicit_range()
   return printf(
-        \ 'npx --no-update-notifier --silent --no-install prettier --stdin-filepath="%s"',
+        \ 'prettier --stdin-filepath="%s"',
         \ expand('%:p')
         \ )
 endfunction
