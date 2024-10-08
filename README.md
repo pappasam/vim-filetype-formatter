@@ -211,6 +211,17 @@ It's not exactly pretty, but:
 
 ## FAQ
 
+### How can I use an executable from my project's node_modules/ folder?
+
+For example, if you have a different version of prettier installed in your project than you installed globally, you'll probably want vim-filetype-formatter to use your project's version of prettier. To achieve this:
+
+1. Place the following line in `init.vim` / `.vimrc`:
+   ```vim
+   let $PATH = $PWD .. '/node_modules/.bin:' .. $PATH
+   ```
+2. Open Neovim at the root of your project.
+3. You should now be referencing executable files within your project's `node_modules/` folder.
+
 ### How can I have per-project settings?
 
 If using a recent version of Neovim, see `:help 'exrc'`.
