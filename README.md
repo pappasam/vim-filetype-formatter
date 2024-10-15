@@ -54,7 +54,7 @@ endfunction
 let g:vim_filetype_formatter_commands = {'python': function('s:formatter_python')}
 ```
 
-Finally, here's an example of how we can support prettier's built-in range functionality:
+Here's an example of how we can support prettier's built-in range functionality:
 
 ```vim
 function! s:prettier(startline, endline)
@@ -66,6 +66,22 @@ function! s:prettier(startline, endline)
         \ )
 endfunction
 let g:vim_filetype_formatter_commands = {'javascript': function('s:prettier')}
+```
+
+Finally, custom Vim commands may be used instead of shell commands by ensuring that your final string is prefixed with a `:`. For an example implementation, see here:
+
+```vim
+" Use vim's built-in commands.
+" 1. = (the vimscript_builtin)
+" 2. Replace all instances of multiple blank lines, shortening to a single
+function! s:vimscript_builtin(startline, endline)
+  return printf(
+        \ ':silent! execute "normal! %igg=%igg" | silent! %i,%iglobal/^\_$\n\_^$/de',
+        \ a:startline, a:endline,
+        \ a:startline, a:endline
+        \ )
+endfunction
+let g:vim_filetype_formatter_commands = {'vim': function('s:vimscript_builtin')}
 ```
 
 ## Installation
@@ -161,6 +177,8 @@ It's not exactly pretty, but:
 | [terraform]      | [terraform_fmt]   |                  |
 | [toml]           | [toml_sort]       |                  |
 | [typescript/tsx] | [prettier]        |                  |
+| [typescript/tsx] | [prettier]        |                  |
+| [vimscript]      | built-in          |                  |
 | [yaml]           | [prettier]        |                  |
 
 <!-- formatters -->
@@ -207,6 +225,7 @@ It's not exactly pretty, but:
 [terraform]: https://www.terraform.io/
 [toml]: https://github.com/toml-lang/toml
 [typescript/tsx]: https://www.typescriptlang.org/
+[vimscript]: https://vimhelp.org/usr_41.txt.html
 [yaml]: https://yaml.org/
 
 ## FAQ

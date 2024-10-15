@@ -14,6 +14,15 @@ function! s:strip_newlines(instring)
   return substitute(a:instring, '\v^\n*(.{-})\n*$', '\1', '')
 endfunction
 
+function! s:is_vimcmd(input)
+  try
+    " check if input starts with :
+    return a:input[0 : len(':') - 1] ==# ':'
+  catch /.*/
+    return 0
+  endtry
+endfunction
+
 function! s:parse_config(global_lookup, filetype_map)
   let ft = has_key(a:filetype_map, &filetype)
         \ ? a:filetype_map[&filetype]
@@ -36,7 +45,7 @@ endfunction
 "   syscall_config: String | Function[Integer, Integer] | Function[]
 "   first_line: int : the first line for formatting
 "   last_line: int : the last line for formatting
-" Returns: Dict[system_call: String, lines_specified: Integer]
+" Returns: Dict[system_call: String, has_lines_specified: Integer, is_vimcmd: Integer]
 "
 " Note: this function is a little ugly. It's really hard to test Vimscript
 " functions for number of accepted parameters. Functions accept more arguments
@@ -47,13 +56,16 @@ function! s:parse_call(Syscall_config, first_line, last_line)
   if t_config_system_call == v:t_string
     let result = {
           \ 'system_call': a:Syscall_config,
-          \ 'lines_specified': 0,
+          \ 'has_lines_specified': 0,
+          \ 'is_vimcmd': s:is_vimcmd(s:Syscall_config)
           \ }
   elseif t_config_system_call == v:t_func
     try
+      let system_call = a:Syscall_config()
       let result = {
-            \ 'system_call': a:Syscall_config(),
-            \ 'lines_specified': 0,
+            \ 'system_call': system_call,
+            \ 'has_lines_specified': 0,
+            \ 'is_vimcmd': s:is_vimcmd(system_call)
             \ }
     catch /.*/
       try
@@ -68,24 +80,28 @@ function! s:parse_call(Syscall_config, first_line, last_line)
       endif
 
       try
+        let system_call = a:Syscall_config(a:first_line, a:last_line)
         let result = {
-              \ 'system_call': a:Syscall_config(a:first_line, a:last_line),
-              \ 'lines_specified': 1,
+              \ 'system_call': system_call,
+              \ 'has_lines_specified': 1,
+              \ 'is_vimcmd': s:is_vimcmd(system_call)
               \ }
       catch /.*/
         throw 'Formatter function must take exactly 0, or 2, arguments'
       endtry
     endtry
+    if type(result['system_call']) != v:t_string
+      throw '"' .. &filetype ..
+            \ '" is configured as neither a function nor a string' ..
+            \ ' in g:vim_filetype_formatter_commands'
+    endif
   else
     throw 'Formatter value is neither a String nor a function'
   endif
-  if type(result['system_call']) != v:t_string
-    throw '"' .. &filetype ..
-          \ '" is configured as neither a function nor a string' ..
-          \ ' in g:vim_filetype_formatter_commands'
+  if result.is_vimcmd == 0
+    " Make sure pipelines (eg, 'x - | y - | z -') fail immediately
+    let result.system_call = 'set -Eeuo pipefail; ' .. result.system_call
   endif
-  " Make sure pipelines (eg, 'x - | y - | z -') fail immediately
-  let result.system_call = 'set -Eeuo pipefail; ' .. result.system_call
   return result
 endfunction
 
@@ -186,10 +202,12 @@ function! filetype_formatter#format_filetype(first_line, last_line)
           \ g:vim_filetype_formatter_ft_maps,
           \ )
     let parser = s:parse_call(Config_system_call, a:first_line, a:last_line)
-    if a:first_line == 1 && a:last_line == line('$')
+    if parser.is_vimcmd == 1
+      execute parser.system_call[1:]
+    elseif a:first_line == 1 && a:last_line == line('$')
       " The entire buffer is selected, hence we use the entire file
       call s:format_code_file(parser.system_call)
-    elseif parser.lines_specified == 1
+    elseif parser.has_lines_specified == 1
       " Lines were specifically specified through function arguments.
       " The specific lines to be updated are handled by the formatter itself
       call s:format_code_file(parser.system_call)
@@ -271,7 +289,7 @@ function! filetype_formatter#debug()
       try
         let result = {
               \ 'system_call': Current_formatter(0, 1),
-              \ 'lines_specified': 1,
+              \ 'has_lines_specified': 1,
               \ }
         let current_formatter_result = result.system_call
       catch /.*/

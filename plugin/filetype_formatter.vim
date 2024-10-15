@@ -18,6 +18,17 @@ set cpo&vim
 
 " Configuration
 
+" Use vim's built-in commands.
+" 1. = (the vimscript_builtin)
+" 2. Replace all instances of multiple blank lines, shortening to a single
+function! s:vimscript_builtin(startline, endline)
+  return printf(
+        \ ':silent! execute "normal! %igg=%igg" | silent! %i,%iglobal/^\_$\n\_^$/de',
+        \ a:startline, a:endline,
+        \ a:startline, a:endline
+        \ )
+endfunction
+
 function! s:prettier(startline, endline)
   let startpos = line2byte(a:startline) - 1
   let endpos = line2byte(a:endline + 1) - 1
@@ -90,6 +101,7 @@ endfunction
 let s:b = {
       \ 'bibtool':                            'bibtool -q -s',
       \ 'black':                              'black -q -',
+      \ 'vimscript_builtin':                   funcref('s:vimscript_builtin'),
       \ 'gofmt':                              'gofmt',
       \ 'leptosfmt':                          'leptosfmt --rustfmt --stdin --quiet',
       \ 'nginxfmt':                           'nginxfmt -',
@@ -137,6 +149,7 @@ let s:default_formatters = {
       \ 'typescript':          s:b.prettier,
       \ 'typescript.tsx':      s:b.prettier,
       \ 'typescriptreact':     s:b.prettier,
+      \ 'vim':                 s:b.vimscript_builtin,
       \ 'yaml':                s:b.prettier,
       \ 'yaml.docker-compose': s:b.prettier,
       \ }
