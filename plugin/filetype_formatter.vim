@@ -19,7 +19,7 @@ set cpo&vim
 " Configuration
 
 " Use vim's built-in commands.
-" 1. = (the vimscript_builtin)
+" 1. = (calls `equalprg`)
 " 2. Replace all instances of multiple blank lines, shortening to a single
 function! s:vimscript_builtin(startline, endline)
   return printf(
