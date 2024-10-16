@@ -89,13 +89,9 @@ Type: Dictionary[String, String]
 Default: {}
 
 Maps a filetype to a top-level filetype. Values on the left should be
-available as keys in vim_filetype_formatter_commands.
+available as keys in vim_filetype_formatter_commands. >
 
-This default is provided purely as a courtesy. If you choose to override, you
-will need to provide the above mappings again in your own vimrc if you would
-like to retain them. >
-
-  let g:vim_filetype_formatter_ft_maps = {'sql.postgres', 'sql'}
+  let g:vim_filetype_formatter_ft_maps = {'sql.postgres': 'sql'}
 
 *g:vim_filetype_formatter_ft_no_defaults*
 Type: List[String]
