@@ -1,8 +1,8 @@
 # Vim Filetype Formatter
 
-A simple, cross-language Vim code formatter plugin supporting both range and full-file formatting. **It uses code formatters available in your $PATH; it does not install them.**
+A simple, cross-language Vim code formatter plugin supporting both range and full-file formatting. **It uses code formatters; it does not install them.**
 
-See our [pre-configured languages and formatters](#batteries-included). Don't like the defaults? Writing your own is easy! Each Vim filetype maps to one command-line command. This plugin supports any code formatter command as long as it:
+See our [pre-configured languages and formatters](#batteries-included). Don't like the defaults? Writing your own is easy! Each Vim filetype maps to one command. This plugin supports compatible Vim commands, or any command line code formatter as long as it:
 
 1. Reads from standard input.
 2. Writes to standard output.
@@ -152,34 +152,35 @@ It's not exactly pretty, but:
 
 ## Batteries Included
 
-| Language         | Default Formatter | Other Formatters |
-| ---------------- | ----------------- | ---------------- |
-| [bash/sh]        | [shfmt]           |                  |
-| [biblatex]       | [bibtool]         |                  |
-| [css]            | [prettier]        |                  |
-| [go]             | [gofmt]           |                  |
-| [graphql]        | [prettier]        |                  |
-| [html]           | [prettier]        |                  |
-| [javascript/jsx] | [prettier]        |                  |
-| [json]           | [prettier]        |                  |
-| [jsonc]          | [prettier]        |                  |
-| [lua]            | [stylua]          |                  |
-| [make]           | built-in          |                  |
-| [markdown]       | [prettier]        |                  |
-| [mdx]            | [prettier]        |                  |
-| [nginx]          | [nginxfmt]        |                  |
-| [ocaml]          | [ocamlformat]     |                  |
-| [prisma]         | [prettier_prisma] |                  |
-| [python]         | [black]           | [ruff]           |
-| [r]              | [styler]          |                  |
-| [rust]           | [rustfmt]         | [leptosfmt]      |
-| [scss]           | [prettier]        |                  |
-| [svelte]         | [prettier_svelte] |                  |
-| [terraform]      | [terraform_fmt]   |                  |
-| [toml]           | [toml_sort]       |                  |
-| [typescript/tsx] | [prettier]        |                  |
-| [vimscript]      | built-in          |                  |
-| [yaml]           | [prettier]        |                  |
+| Language         | Default Formatter    | Other Formatters |
+| ---------------- | -------------------- | ---------------- |
+| [bash/sh]        | [shfmt]              |                  |
+| [biblatex]       | [bibtool]            |                  |
+| [css]            | [prettier]           |                  |
+| [dockerfile]     | [vim.lsp.buf.format] |                  |
+| [go]             | [gofmt]              |                  |
+| [graphql]        | [prettier]           |                  |
+| [html]           | [prettier]           |                  |
+| [javascript/jsx] | [prettier]           |                  |
+| [json]           | [prettier]           |                  |
+| [jsonc]          | [prettier]           |                  |
+| [lua]            | [stylua]             |                  |
+| [make]           | built-in             |                  |
+| [markdown]       | [prettier]           |                  |
+| [mdx]            | [prettier]           |                  |
+| [nginx]          | [nginxfmt]           |                  |
+| [ocaml]          | [ocamlformat]        |                  |
+| [prisma]         | [prettier_prisma]    |                  |
+| [python]         | [black]              | [ruff]           |
+| [r]              | [styler]             |                  |
+| [rust]           | [rustfmt]            | [leptosfmt]      |
+| [scss]           | [prettier]           |                  |
+| [svelte]         | [prettier_svelte]    |                  |
+| [terraform]      | [terraform_fmt]      |                  |
+| [toml]           | [toml_sort]          |                  |
+| [typescript/tsx] | [prettier]           |                  |
+| [vimscript]      | built-in             |                  |
+| [yaml]           | [prettier]           |                  |
 
 <!-- formatters -->
 
@@ -199,12 +200,14 @@ It's not exactly pretty, but:
 [stylua]: https://github.com/JohnnyMorganz/StyLua
 [terraform_fmt]: https://www.terraform.io/docs/commands/fmt.html
 [toml_sort]: https://github.com/pappasam/toml-sort
+[vim.lsp.buf.format]: https://neovim.io/doc/user/lsp.html#vim.lsp.buf.format
 
 <!-- languages -->
 
 [bash/sh]: https://en.wikipedia.org/wiki/Bash_(Unix_shell)
 [biblatex]: http://www.bibtex.org/
 [css]: https://developer.mozilla.org/en-US/docs/Web/CSS
+[dockerfile]: https://docs.docker.com/reference/dockerfile/
 [go]: https://golang.org/
 [graphql]: https://developer.mozilla.org/en-US/docs/Web/HTML
 [html]: https://developer.mozilla.org/en-US/docs/Web/HTML

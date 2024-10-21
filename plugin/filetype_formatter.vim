@@ -29,6 +29,14 @@ function! s:vimscript_builtin(startline, endline)
         \ )
 endfunction
 
+" Use Neovim's built-in language server
+function! s:vimscript_nvimlsp(startline, endline)
+  return printf(
+        \ ':silent lua vim.lsp.buf.format({range = {["start"] = {%i, 0}, ["end"] = {%i, 0}}})',
+        \ a:startline, a:endline,
+        \ )
+endfunction
+
 function! s:prettier(startline, endline)
   let startpos = line2byte(a:startline) - 1
   let endpos = line2byte(a:endline + 1) - 1
@@ -102,6 +110,7 @@ let s:b = {
       \ 'bibtool':                            'bibtool -q -s',
       \ 'black':                              'black -q -',
       \ 'vimscript_builtin':                   funcref('s:vimscript_builtin'),
+      \ 'vimscript_nvimlsp':                   funcref('s:vimscript_nvimlsp'),
       \ 'gofmt':                              'gofmt',
       \ 'leptosfmt':                          'leptosfmt --rustfmt --stdin --quiet',
       \ 'nginxfmt':                           'nginxfmt -',
@@ -122,6 +131,7 @@ let s:default_formatters = {
       \ 'bash':                s:b.shfmt,
       \ 'bib':                 s:b.bibtool,
       \ 'css':                 s:b.prettier,
+      \ 'dockerfile':          s:b.vimscript_nvimlsp,
       \ 'go':                  s:b.gofmt,
       \ 'graphql':             s:b.prettier,
       \ 'html':                s:b.prettier,
