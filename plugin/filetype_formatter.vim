@@ -132,6 +132,7 @@ let s:default_formatters = {
       \ 'json':                s:b.prettier,
       \ 'jsonc':               s:b.prettier,
       \ 'lua':                 s:b.stylua,
+      \ 'make':                s:b.vimscript_builtin,
       \ 'markdown':            s:b.prettier_no_explicit_range,
       \ 'markdown.mdx':        s:b.prettier_no_explicit_range,
       \ 'mdx':                 s:b.prettier_no_explicit_range,

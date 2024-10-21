@@ -164,6 +164,7 @@ It's not exactly pretty, but:
 | [json]           | [prettier]        |                  |
 | [jsonc]          | [prettier]        |                  |
 | [lua]            | [stylua]          |                  |
+| [make]           | built-in          |                  |
 | [markdown]       | [prettier]        |                  |
 | [mdx]            | [prettier]        |                  |
 | [nginx]          | [nginxfmt]        |                  |
@@ -176,7 +177,6 @@ It's not exactly pretty, but:
 | [svelte]         | [prettier_svelte] |                  |
 | [terraform]      | [terraform_fmt]   |                  |
 | [toml]           | [toml_sort]       |                  |
-| [typescript/tsx] | [prettier]        |                  |
 | [typescript/tsx] | [prettier]        |                  |
 | [vimscript]      | built-in          |                  |
 | [yaml]           | [prettier]        |                  |
@@ -212,6 +212,7 @@ It's not exactly pretty, but:
 [json]: https://json.org/
 [jsonc]: https://komkom.github.io/
 [lua]: https://www.lua.org/
+[make]: https://www.gnu.org/software/make/
 [markdown]: https://en.wikipedia.org/wiki/Markdown
 [mdx]: https://mdxjs.com/
 [nginx]: https://www.nginx.com/resources/wiki/start/topics/examples/full/
