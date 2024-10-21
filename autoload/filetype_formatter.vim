@@ -247,13 +247,11 @@ endfunction
 " WrittenBy: Samuel Roeca
 function! filetype_formatter#log()
   if !exists('b:vim_filetype_formatter_log')
-    call filetype_formatter#warning(
-          \ '":FiletypeFormat" not yet used on this buffer'
-          \ )
+    call filetype_formatter#warning('":FiletypeFormat" not yet used on this buffer')
     return
   endif
   let message = split(b:vim_filetype_formatter_log, '\n', v:true)
-  call s:show_in_preview(s:filename_log, 'text', message)
+  call s:show_in_preview(s:filename_log, 'text', message + ['timelog: ' .. strftime('%c')])
 endfunction
 
 " debug: print configuration variables and settings to console
