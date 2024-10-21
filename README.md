@@ -1,6 +1,8 @@
 # Vim Filetype Formatter
 
-A simple, cross-language Vim code formatter plugin supporting both range and full-file formatting. **It uses code formatters; it does not install them.**
+A simple, cross-language Vim code formatter plugin supporting both range and full-file formatting.
+
+**It uses code formatters; it does not install them.**
 
 See our [pre-configured languages and formatters](#batteries-included). Don't like the defaults? Writing your own is easy! Each Vim filetype maps to one command. This plugin supports compatible Vim commands, or any command line code formatter as long as it:
 
@@ -22,9 +24,13 @@ Requires Bash and a recent version of Vim or Neovim.
 - Simple, extendable codebase
 - Modular: does not pollute your Vim environment with custom key mappings / poor Vim plugin practices
 
+## Screencast
+
 The following screencast demonstrates `:FiletypeFormat`, `:LogFiletypeFormat`, and `:DebugFiletypeFormat`.
 
 ![Screencast](./img/vim-filetype-formatter-walkthrough.gif)
+
+## Configuration Overview
 
 Although [black](https://github.com/psf/black) works out of the box for Python, the above example overrides the default and combines black with [isort](https://github.com/PyCQA/isort) and [docformatter](https://github.com/myint/docformatter) using Unix pipes. This specific example can be achieved with the following configuration in your `vimrc` or `init.vim`:
 
