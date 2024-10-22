@@ -54,6 +54,12 @@ function! s:prettier_svelte()
         \ expand('%:p')
         \ )
 endfunction
+function! s:prettier_jinja()
+  return printf(
+        \ 'prettier --plugin prettier-plugin-jinja-template --parser=jinja-template --stdin-filepath="%s"',
+        \ expand('%:p')
+        \ )
+endfunction
 function! s:prettier_prisma()
   " Range does not currently appear to be supported
   return printf(
@@ -118,6 +124,7 @@ let s:b = {
       \ 'prettier':                   funcref('s:prettier'),
       \ 'prettier_svelte':            funcref('s:prettier_svelte'),
       \ 'prettier_prisma':            funcref('s:prettier_prisma'),
+      \ 'prettier_jinja':             funcref('s:prettier_jinja'),
       \ 'prettier_no_explicit_range': funcref('s:prettier_no_explicit_range'),
       \ 'ruff':                       funcref('s:ruff'),
       \ 'rustfmt':                            'rustfmt --quiet',
@@ -135,10 +142,11 @@ let s:default_formatters = {
       \ 'go':                  s:b.gofmt,
       \ 'graphql':             s:b.prettier,
       \ 'html':                s:b.prettier,
+      \ 'htmldjango':          s:b.prettier_jinja,
       \ 'javascript':          s:b.prettier,
       \ 'javascript.jsx':      s:b.prettier,
       \ 'javascriptreact':     s:b.prettier,
-      \ 'jinja.html':          s:b.prettier,
+      \ 'jinja.html':          s:b.prettier_jinja,
       \ 'json':                s:b.prettier,
       \ 'jsonc':               s:b.prettier,
       \ 'lua':                 s:b.stylua,
