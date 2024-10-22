@@ -28,7 +28,6 @@ function! s:vimscript_builtin(startline, endline)
         \ a:startline, a:endline
         \ )
 endfunction
-
 " Use Neovim's built-in language server
 function! s:vimscript_nvimlsp(startline, endline)
   return printf(
@@ -36,7 +35,6 @@ function! s:vimscript_nvimlsp(startline, endline)
         \ a:startline, a:endline,
         \ )
 endfunction
-
 function! s:prettier(startline, endline)
   let startpos = line2byte(a:startline) - 1
   let endpos = line2byte(a:endline + 1) - 1
