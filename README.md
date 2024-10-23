@@ -164,10 +164,14 @@ It's not exactly pretty, but:
 | [biblatex]       | [bibtool]            |                  |
 | [css]            | [prettier]           |                  |
 | [dockerfile]     | [vim.lsp.buf.format] |                  |
+| [dosini]         | built-in             |                  |
+| [gitconfig]      | built-in             |                  |
 | [go]             | [gofmt]              |                  |
 | [graphql]        | [prettier]           |                  |
 | [html]           | [prettier]           |                  |
+| [htmldjango]     | [prettier_jinja]     |                  |
 | [javascript/jsx] | [prettier]           |                  |
+| [jinja.html]     | [prettier_jinja]     |                  |
 | [json]           | [prettier]           |                  |
 | [jsonc]          | [prettier]           |                  |
 | [lua]            | [stylua]             |                  |
@@ -196,9 +200,10 @@ It's not exactly pretty, but:
 [leptosfmt]: https://github.com/bram209/leptosfmt
 [nginxfmt]: https://github.com/slomkowski/nginx-config-formatter
 [ocamlformat]: https://github.com/ocaml-ppx/ocamlformat
+[prettier]: https://prettier.io/
+[prettier_jinja]: https://github.com/davidodenwald/prettier-plugin-jinja-template
 [prettier_prisma]: https://github.com/umidbekk/prettier-plugin-prisma
 [prettier_svelte]: https://github.com/UnwrittenFun/prettier-plugin-svelte
-[prettier]: https://prettier.io/
 [ruff]: https://github.com/astral-sh/ruff
 [rustfmt]: https://github.com/rust-lang/rustfmt
 [shfmt]: https://github.com/mvdan/sh
@@ -214,10 +219,14 @@ It's not exactly pretty, but:
 [biblatex]: http://www.bibtex.org/
 [css]: https://developer.mozilla.org/en-US/docs/Web/CSS
 [dockerfile]: https://docs.docker.com/reference/dockerfile/
+[dosini]: https://vim.fandom.com/wiki/Dosini_files
+[gitconfig]: https://git-scm.com/docs/git-config/2.22.0
 [go]: https://golang.org/
 [graphql]: https://developer.mozilla.org/en-US/docs/Web/HTML
 [html]: https://developer.mozilla.org/en-US/docs/Web/HTML
+[htmldjango]: https://docs.djangoproject.com/en/5.1/topics/templates/
 [javascript/jsx]: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+[jinja.html]: https://jinja.palletsprojects.com/en/3.1.x/
 [json]: https://json.org/
 [jsonc]: https://komkom.github.io/
 [lua]: https://www.lua.org/

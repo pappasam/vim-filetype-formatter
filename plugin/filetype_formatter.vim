@@ -137,6 +137,8 @@ let s:default_formatters = {
       \ 'bib':                 s:b.bibtool,
       \ 'css':                 s:b.prettier,
       \ 'dockerfile':          s:b.vimscript_nvimlsp,
+      \ 'dosini':              s:b.vimscript_builtin,
+      \ 'gitconfig':           s:b.vimscript_builtin,
       \ 'go':                  s:b.gofmt,
       \ 'graphql':             s:b.prettier,
       \ 'html':                s:b.prettier,
