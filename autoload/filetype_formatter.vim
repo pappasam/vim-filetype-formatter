@@ -57,7 +57,7 @@ function! s:parse_call(Syscall_config, first_line, last_line)
     let result = {
           \ 'system_call': a:Syscall_config,
           \ 'has_lines_specified': 0,
-          \ 'is_vimcmd': s:is_vimcmd(s:Syscall_config)
+          \ 'is_vimcmd': s:is_vimcmd(a:Syscall_config)
           \ }
   elseif t_config_system_call == v:t_func
     try
