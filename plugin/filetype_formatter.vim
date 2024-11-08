@@ -171,6 +171,7 @@ let s:default_formatters = {
       \ 'vim':                 s:b.vimscript_builtin,
       \ 'yaml':                s:b.prettier,
       \ 'yaml.docker-compose': s:b.prettier,
+      \ 'zsh':                 s:b.vimscript_builtin,
       \ }
 
 function! s:configure_constants()

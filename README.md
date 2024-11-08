@@ -191,6 +191,7 @@ It's not exactly pretty, but:
 | [typescript/tsx] | [prettier]           |                  |
 | [vimscript]      | built-in             |                  |
 | [yaml]           | [prettier]           |                  |
+| [zsh]            | built-in             |                  |
 
 <!-- formatters -->
 
@@ -246,6 +247,7 @@ It's not exactly pretty, but:
 [typescript/tsx]: https://www.typescriptlang.org/
 [vimscript]: https://vimhelp.org/usr_41.txt.html
 [yaml]: https://yaml.org/
+[zsh]: https://en.wikipedia.org/wiki/Z_shell
 
 ## FAQ
 
