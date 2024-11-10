@@ -77,6 +77,12 @@ function! s:ocamlformat()
         \ expand('%')
         \ )
 endfunction
+function! s:taplo()
+  return printf(
+        \ 'taplo format --stdin-filepath "%s" --colors never -',
+        \ expand('%')
+        \ )
+endfunction
 function s:ruff()
   return printf(
         \ 'ruff check --unsafe-fixes -q --fix-only --stdin-filename="%1$s" - | ' ..
@@ -129,8 +135,8 @@ let s:b = {
       \ 'shfmt':                      funcref('s:shfmt'),
       \ 'styler':                     funcref('s:styler'),
       \ 'stylua':                     funcref('s:stylua'),
+      \ 'taplo':                      funcref('s:taplo'),
       \ 'terraform_fmt':                      'terraform fmt -',
-      \ 'toml_sort':                          'toml-sort',
       \ }
 let s:default_formatters = {
       \ 'bash':                s:b.shfmt,
@@ -164,7 +170,7 @@ let s:default_formatters = {
       \ 'sh':                  s:b.shfmt,
       \ 'svelte':              s:b.prettier_svelte,
       \ 'terraform':           s:b.terraform_fmt,
-      \ 'toml':                s:b.toml_sort,
+      \ 'toml':                s:b.taplo,
       \ 'typescript':          s:b.prettier,
       \ 'typescript.tsx':      s:b.prettier,
       \ 'typescriptreact':     s:b.prettier,

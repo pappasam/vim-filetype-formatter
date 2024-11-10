@@ -187,7 +187,7 @@ It's not exactly pretty, but:
 | [scss]           | [prettier]           |                  |
 | [svelte]         | [prettier_svelte]    |                  |
 | [terraform]      | [terraform_fmt]      |                  |
-| [toml]           | [toml_sort]          |                  |
+| [toml]           | [taplo]              |                  |
 | [typescript/tsx] | [prettier]           |                  |
 | [vimscript]      | built-in             |                  |
 | [yaml]           | [prettier]           |                  |
@@ -210,8 +210,8 @@ It's not exactly pretty, but:
 [shfmt]: https://github.com/mvdan/sh
 [styler]: https://github.com/r-lib/styler
 [stylua]: https://github.com/JohnnyMorganz/StyLua
+[taplo]: https://taplo.tamasfe.dev/cli/usage/formatting.html
 [terraform_fmt]: https://www.terraform.io/docs/commands/fmt.html
-[toml_sort]: https://github.com/pappasam/toml-sort
 [vim.lsp.buf.format]: https://neovim.io/doc/user/lsp.html#vim.lsp.buf.format
 
 <!-- languages -->
