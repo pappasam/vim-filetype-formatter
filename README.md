@@ -164,8 +164,8 @@ It's not exactly pretty, but:
 | [biblatex]       | [bibtool]            |                  |
 | [css]            | [prettier]           |                  |
 | [dockerfile]     | [vim.lsp.buf.format] |                  |
-| [dosini]         | built-in             |                  |
-| [gitconfig]      | built-in             |                  |
+| [dosini]         | [built-in]           |                  |
+| [gitconfig]      | [built-in]           |                  |
 | [go]             | [gofmt]              |                  |
 | [graphql]        | [prettier]           |                  |
 | [html]           | [prettier]           |                  |
@@ -175,7 +175,7 @@ It's not exactly pretty, but:
 | [json]           | [prettier]           |                  |
 | [jsonc]          | [prettier]           |                  |
 | [lua]            | [stylua]             |                  |
-| [make]           | built-in             |                  |
+| [make]           | [built-in]           |                  |
 | [markdown]       | [prettier]           |                  |
 | [mdx]            | [prettier]           |                  |
 | [nginx]          | [nginxfmt]           |                  |
@@ -189,14 +189,15 @@ It's not exactly pretty, but:
 | [terraform]      | [terraform_fmt]      |                  |
 | [toml]           | [taplo]              |                  |
 | [typescript/tsx] | [prettier]           |                  |
-| [vimscript]      | built-in             |                  |
+| [vimscript]      | [built-in]           |                  |
 | [yaml]           | [prettier]           |                  |
-| [zsh]            | built-in             |                  |
+| [zsh]            | [built-in]           |                  |
 
 <!-- formatters -->
 
 [bibtool]: https://ctan.org/pkg/bibtool
 [black]: https://github.com/python/black
+[built-in]: https://neovim.io/doc/user/options.html#'equalprg'
 [gofmt]: https://golang.org/cmd/gofmt/
 [leptosfmt]: https://github.com/bram209/leptosfmt
 [nginxfmt]: https://github.com/slomkowski/nginx-config-formatter
