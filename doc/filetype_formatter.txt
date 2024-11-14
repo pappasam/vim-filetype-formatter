@@ -111,7 +111,8 @@ overridden by this configuration. >
                                                   *filetype_formatter_commands*
 3. COMMANDS~
 
-*:FiletypeFormat*
+:FiletypeFormat                                               *:FiletypeFormat*
+
   Format the entire current buffer using a configured formatter. If the
   buffer's filetype has not been associated with this plugin, it will save an
   error message accessible through :ErrorFiletypeFormat.
@@ -121,19 +122,20 @@ overridden by this configuration. >
   ranges, behavior depends on whether a filetype's formatter is a "String", a
   "Function[] -> String", or a "Function[Integer, Integer] -> String".
 
-*:LogFiletypeFormat*
+:LogFiletypeFormat                                         *:LogFiletypeFormat*
+
   Show output from a buffer's most recent formatter function attempt in a Vim
   preview window.
 
-*:DebugFiletypeFormat*
+:DebugFiletypeFormat                                     *:DebugFiletypeFormat*
+
   Show configuration variables and settings in a Vim preview window.
 
 ==============================================================================
                                                   *filetype_formatter_mappings*
 4. MAPPINGS~
 
-This plugin does not provide key mappings; please add your own! Recommended
-mappings: >
+The user should map these mappings. Our recommendations: >vim
 
   nnoremap <silent> <leader>f <Cmd>FiletypeFormat<CR>
   xnoremap <silent> <leader>f :FiletypeFormat<CR>
