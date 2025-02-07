@@ -32,7 +32,7 @@ The following screencast demonstrates `:FiletypeFormat`, `:LogFiletypeFormat`, a
 
 ## Configuration Overview
 
-Although [black](https://github.com/psf/black) works out of the box for Python, the above example overrides the default and combines black with [isort](https://github.com/PyCQA/isort) and [docformatter](https://github.com/myint/docformatter) using Unix pipes. This specific example can be achieved with the following configuration in your `vimrc` or `init.vim`:
+If you want to combine black with [isort](https://github.com/PyCQA/isort) and [docformatter](https://github.com/myint/docformatter) using Unix pipes. This specific example can be achieved with the following configuration in your `vimrc` or `init.vim`:
 
 ```vim
 let g:vim_filetype_formatter_commands = {
@@ -127,11 +127,11 @@ xnoremap <silent> <leader>f :FiletypeFormat<CR>
 
 Default configurations may be overridden by creating our own `g:vim_filetype_formatter_commands` dictionary. If you would like to map one filetype to another, see `g:vim_filetype_formatter_ft_maps`. See [here](./doc/filetype_formatter.txt) for specifics on how to do this.
 
-If you would like to use a formatter listed above in "Other Formatters", you'll first need to `packadd vim-filetype-formatter` and then add it to `g:vim_filetype_formatter` commands. Here is an example of how to override Python's formatter with the built-in configuration for `ruff`:
+If you would like to use a formatter listed above in "Other Formatters", you'll first need to `packadd vim-filetype-formatter` and then add it to `g:vim_filetype_formatter` commands. Here is an example of how to override Python's formatter with the built-in configuration for `black`:
 
 ```vim
 packadd vim-filetype-formatter
-let g:vim_filetype_formatter_commands.python = g:vim_filetype_formatter_builtins.ruff
+let g:vim_filetype_formatter_commands.python = g:vim_filetype_formatter_builtins.black
 ```
 
 ## Non-standard code formatters
@@ -181,7 +181,7 @@ It's not exactly pretty, but:
 | [nginx]          | [nginxfmt]           |                  |
 | [ocaml]          | [ocamlformat]        |                  |
 | [prisma]         | [prettier_prisma]    |                  |
-| [python]         | [black]              | [ruff]           |
+| [python]         | [ruff]               | [black]          |
 | [r]              | [styler]             |                  |
 | [rust]           | [rustfmt]            | [leptosfmt]      |
 | [scss]           | [prettier]           |                  |
@@ -272,6 +272,6 @@ If using a recent version of Neovim, see `:help 'exrc'`.
 set exrc
 " $PROJECT_PATH/.nvimrc
 packadd vim-filetype-formatter
-let g:vim_filetype_formatter_commands['python'] = g:vim_filetype_formatter_builtins['ruff']
+let g:vim_filetype_formatter_commands['python'] = g:vim_filetype_formatter_builtins['black']
 let g:vim_filetype_formatter_commands['rust'] = g:vim_filetype_formatter_builtins['leptosfmt']
 ```

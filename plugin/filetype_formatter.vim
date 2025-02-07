@@ -163,7 +163,7 @@ let s:default_formatters = {
       \ 'nginx':               s:b.nginxfmt,
       \ 'ocaml':               s:b.ocamlformat,
       \ 'prisma':              s:b.prettier_prisma,
-      \ 'python':              s:b.black,
+      \ 'python':              s:b.ruff,
       \ 'r':                   s:b.styler,
       \ 'rust':                s:b.rustfmt,
       \ 'scss':                s:b.prettier,
