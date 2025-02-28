@@ -39,7 +39,7 @@ function! s:prettier(startline, endline)
   let startpos = line2byte(a:startline) - 1
   let endpos = line2byte(a:endline + 1) - 1
   return printf(
-        \ 'prettier --range-start=%i --range-end=%i --stdin-filepath="%s"',
+        \ 'npx prettier --range-start=%i --range-end=%i --stdin-filepath="%s"',
         \ startpos,
         \ endpos,
         \ expand('%:p')
@@ -48,26 +48,33 @@ endfunction
 function! s:prettier_svelte()
   " Range not currently supported: <https://github.com/sveltejs/prettier-plugin-svelte/issues/233>
   return printf(
-        \ 'prettier --plugin prettier-plugin-svelte --stdin-filepath="%s"',
+        \ 'npx prettier --plugin prettier-plugin-svelte --stdin-filepath="%s"',
         \ expand('%:p')
         \ )
 endfunction
 function! s:prettier_jinja()
   return printf(
-        \ 'prettier --plugin prettier-plugin-jinja-template --parser=jinja-template --stdin-filepath="%s"',
+        \ 'npx prettier --plugin prettier-plugin-jinja-template --parser=jinja-template --stdin-filepath="%s"',
         \ expand('%:p')
         \ )
 endfunction
 function! s:prettier_prisma()
   " Range does not currently appear to be supported
   return printf(
-        \ 'prettier --plugin prettier-plugin-prisma --stdin-filepath="%s"',
+        \ 'npx prettier --plugin prettier-plugin-prisma --stdin-filepath="%s"',
+        \ expand('%:p')
+        \ )
+endfunction
+function! s:prettier_xml()
+  " Range does not currently appear to be supported
+  return printf(
+        \ 'npx prettier --plugin @prettier/plugin-xml --stdin-filepath="%s"',
         \ expand('%:p')
         \ )
 endfunction
 function! s:prettier_no_explicit_range()
   return printf(
-        \ 'prettier --stdin-filepath="%s"',
+        \ 'npx prettier --stdin-filepath="%s"',
         \ expand('%:p')
         \ )
 endfunction
@@ -129,6 +136,7 @@ let s:b = {
       \ 'prettier_svelte':            funcref('s:prettier_svelte'),
       \ 'prettier_prisma':            funcref('s:prettier_prisma'),
       \ 'prettier_jinja':             funcref('s:prettier_jinja'),
+      \ 'prettier_xml':               funcref('s:prettier_xml'),
       \ 'prettier_no_explicit_range': funcref('s:prettier_no_explicit_range'),
       \ 'ruff':                       funcref('s:ruff'),
       \ 'rustfmt':                            'rustfmt --quiet',
@@ -175,6 +183,7 @@ let s:default_formatters = {
       \ 'typescript.tsx':      s:b.prettier,
       \ 'typescriptreact':     s:b.prettier,
       \ 'vim':                 s:b.vimscript_builtin,
+      \ 'xml':                 s:b.prettier_xml,
       \ 'yaml':                s:b.prettier,
       \ 'yaml.docker-compose': s:b.prettier,
       \ 'zsh':                 s:b.vimscript_builtin,

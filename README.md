@@ -190,6 +190,7 @@ It's not exactly pretty, but:
 | [toml]           | [taplo]              |                  |
 | [typescript/tsx] | [prettier]           |                  |
 | [vimscript]      | [built-in]           |                  |
+| [xml]            | [prettier_xml]       |                  |
 | [yaml]           | [prettier]           |                  |
 | [zsh]            | [built-in]           |                  |
 
@@ -206,6 +207,7 @@ It's not exactly pretty, but:
 [prettier_jinja]: https://github.com/davidodenwald/prettier-plugin-jinja-template
 [prettier_prisma]: https://github.com/umidbekk/prettier-plugin-prisma
 [prettier_svelte]: https://github.com/UnwrittenFun/prettier-plugin-svelte
+[prettier_xml]: https://github.com/prettier/plugin-xml
 [ruff]: https://github.com/astral-sh/ruff
 [rustfmt]: https://github.com/rust-lang/rustfmt
 [shfmt]: https://github.com/mvdan/sh
@@ -247,6 +249,7 @@ It's not exactly pretty, but:
 [toml]: https://github.com/toml-lang/toml
 [typescript/tsx]: https://www.typescriptlang.org/
 [vimscript]: https://vimhelp.org/usr_41.txt.html
+[xml]: https://www.w3.org/XML/
 [yaml]: https://yaml.org/
 [zsh]: https://en.wikipedia.org/wiki/Z_shell
 
