@@ -65,13 +65,6 @@ function! s:prettier_prisma()
         \ expand('%:p')
         \ )
 endfunction
-function! s:prettier_xml()
-  " Range does not currently appear to be supported
-  return printf(
-        \ 'npx prettier --plugin @prettier/plugin-xml --stdin-filepath="%s"',
-        \ expand('%:p')
-        \ )
-endfunction
 function! s:prettier_no_explicit_range()
   return printf(
         \ 'npx prettier --stdin-filepath="%s"',
@@ -136,7 +129,7 @@ let s:b = {
       \ 'prettier_svelte':            funcref('s:prettier_svelte'),
       \ 'prettier_prisma':            funcref('s:prettier_prisma'),
       \ 'prettier_jinja':             funcref('s:prettier_jinja'),
-      \ 'prettier_xml':               funcref('s:prettier_xml'),
+      \ 'xq':                                 'xq',
       \ 'prettier_no_explicit_range': funcref('s:prettier_no_explicit_range'),
       \ 'ruff':                       funcref('s:ruff'),
       \ 'rustfmt':                            'rustfmt --quiet',
@@ -183,7 +176,7 @@ let s:default_formatters = {
       \ 'typescript.tsx':      s:b.prettier,
       \ 'typescriptreact':     s:b.prettier,
       \ 'vim':                 s:b.vimscript_builtin,
-      \ 'xml':                 s:b.prettier_xml,
+      \ 'xml':                 s:b.xq,
       \ 'yaml':                s:b.prettier,
       \ 'yaml.docker-compose': s:b.prettier,
       \ 'zsh':                 s:b.vimscript_builtin,

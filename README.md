@@ -190,7 +190,7 @@ It's not exactly pretty, but:
 | [toml]           | [taplo]              |                  |
 | [typescript/tsx] | [prettier]           |                  |
 | [vimscript]      | [built-in]           |                  |
-| [xml]            | [prettier_xml]       |                  |
+| [xml]            | [xq]                 |                  |
 | [yaml]           | [prettier]           |                  |
 | [zsh]            | [built-in]           |                  |
 
@@ -249,7 +249,7 @@ It's not exactly pretty, but:
 [toml]: https://github.com/toml-lang/toml
 [typescript/tsx]: https://www.typescriptlang.org/
 [vimscript]: https://vimhelp.org/usr_41.txt.html
-[xml]: https://www.w3.org/XML/
+[xq]: https://github.com/sibprogrammer/xq
 [yaml]: https://yaml.org/
 [zsh]: https://en.wikipedia.org/wiki/Z_shell
 
