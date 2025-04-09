@@ -104,8 +104,6 @@ Then run the Ex command:
 :PlugInstall
 ```
 
-I personally use [vim-packager](https://github.com/kristijanhusak/vim-packager), so if you'd like to go down the "package" rabbit hole, I suggest giving that a try.
-
 ## Full Documentation
 
 From within Vim, type:
