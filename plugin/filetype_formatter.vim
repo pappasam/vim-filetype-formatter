@@ -171,6 +171,7 @@ let s:default_formatters = {
       \ 'sh':                  s:b.shfmt,
       \ 'svelte':              s:b.prettier_svelte,
       \ 'terraform':           s:b.terraform_fmt,
+      \ 'terraform-vars':      s:b.terraform_fmt,
       \ 'toml':                s:b.taplo,
       \ 'typescript':          s:b.prettier,
       \ 'typescript.tsx':      s:b.prettier,
