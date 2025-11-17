@@ -52,6 +52,12 @@ function! s:prettier_svelte()
         \ expand('%:p')
         \ )
 endfunction
+function! s:prettier_jsonc()
+  return printf(
+        \ 'npx prettier --trailing-comma=none --stdin-filepath="%s"',
+        \ expand('%:p')
+        \ )
+endfunction
 function! s:prettier_jinja()
   return printf(
         \ 'npx prettier --plugin prettier-plugin-jinja-template --parser=jinja-template --stdin-filepath="%s"',
@@ -129,6 +135,7 @@ let s:b = {
       \ 'prettier_svelte':            funcref('s:prettier_svelte'),
       \ 'prettier_prisma':            funcref('s:prettier_prisma'),
       \ 'prettier_jinja':             funcref('s:prettier_jinja'),
+      \ 'prettier_jsonc':             funcref('s:prettier_jsonc'),
       \ 'xq':                                 'xq',
       \ 'prettier_no_explicit_range': funcref('s:prettier_no_explicit_range'),
       \ 'ruff':                       funcref('s:ruff'),
@@ -155,7 +162,7 @@ let s:default_formatters = {
       \ 'javascriptreact':     s:b.prettier,
       \ 'jinja.html':          s:b.prettier_jinja,
       \ 'json':                s:b.prettier,
-      \ 'jsonc':               s:b.prettier,
+      \ 'jsonc':               s:b.prettier_jsonc,
       \ 'lua':                 s:b.stylua,
       \ 'make':                s:b.vimscript_builtin,
       \ 'markdown':            s:b.prettier_no_explicit_range,
