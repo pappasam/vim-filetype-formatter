@@ -160,18 +160,18 @@ It's not exactly pretty, but:
 | ---------------- | -------------------- | ---------------- |
 | [bash/sh]        | [shfmt]              |                  |
 | [biblatex]       | [bibtool]            |                  |
-| [css]            | [prettier]           |                  |
+| [css]            | [prettier]           | [biome]          |
 | [dockerfile]     | [vim.lsp.buf.format] |                  |
 | [dosini]         | [built-in]           |                  |
 | [gitconfig]      | [built-in]           |                  |
 | [go]             | [gofmt]              |                  |
-| [graphql]        | [prettier]           |                  |
-| [html]           | [prettier]           |                  |
+| [graphql]        | [prettier]           | [biome]          |
+| [html]           | [prettier]           | [biome]          |
 | [htmldjango]     | [prettier_jinja]     |                  |
-| [javascript/jsx] | [prettier]           |                  |
+| [javascript/jsx] | [prettier]           | [biome]          |
 | [jinja.html]     | [prettier_jinja]     |                  |
-| [json]           | [prettier]           |                  |
-| [jsonc]          | [prettier]           |                  |
+| [json]           | [prettier]           | [biome]          |
+| [jsonc]          | [prettier]           | [biome]          |
 | [lua]            | [stylua]             |                  |
 | [make]           | [built-in]           |                  |
 | [markdown]       | [prettier]           |                  |
@@ -186,7 +186,7 @@ It's not exactly pretty, but:
 | [svelte]         | [prettier_svelte]    |                  |
 | [terraform]      | [terraform_fmt]      |                  |
 | [toml]           | [taplo]              |                  |
-| [typescript/tsx] | [prettier]           |                  |
+| [typescript/tsx] | [prettier]           | [biome]          |
 | [vimscript]      | [built-in]           |                  |
 | [xml]            | [xq]                 |                  |
 | [yaml]           | [prettier]           |                  |
@@ -195,6 +195,7 @@ It's not exactly pretty, but:
 <!-- formatters -->
 
 [bibtool]: https://ctan.org/pkg/bibtool
+[biome]: https://biomejs.dev/
 [black]: https://github.com/python/black
 [built-in]: https://neovim.io/doc/user/options.html#'equalprg'
 [gofmt]: https://golang.org/cmd/gofmt/
@@ -276,3 +277,48 @@ packadd vim-filetype-formatter
 let g:vim_filetype_formatter_commands['python'] = g:vim_filetype_formatter_builtins['black']
 let g:vim_filetype_formatter_commands['rust'] = g:vim_filetype_formatter_builtins['leptosfmt']
 ```
+
+### The biome formatter isn't working
+
+See: <https://github.com/biomejs/biome/issues/6783>
+
+This assumes you're using biome. Here's an example where we've enabled biome for JSON and JSONC.
+
+```vim
+packadd vim-filetype-formatter
+let g:vim_filetype_formatter_commands.json = g:vim_filetype_formatter_builtins.biome
+let g:vim_filetype_formatter_commands.jsonc = g:vim_filetype_formatter_builtins.biome
+```
+
+Solution: create this `biome.json` at your home directory. This will serve as your default biome configuration file.
+
+```json
+{
+  "$schema": "https://biomejs.dev/schemas/2.0.5/schema.json",
+  "files": {
+    "includes": ["**"]
+  },
+  "formatter": {
+    "enabled": true,
+    "includes": ["**"]
+  }
+}
+```
+
+You can put other biome configurations into this file as well so that, by default, your editor will behave consistently. For example, if you prefer spaces over tabs:
+
+```json
+{
+  "$schema": "https://biomejs.dev/schemas/2.0.5/schema.json",
+  "files": {
+    "includes": ["**"]
+  },
+  "formatter": {
+    "enabled": true,
+    "includes": ["**"],
+    "indentStyle": "space"
+  }
+}
+```
+
+Don't worry: biome will defer to a project-specific file, so this is only important when you're not working on a project that has explicitly configured biome. See: <https://biomejs.dev/guides/configure-biome/#configuration-file-resolution>

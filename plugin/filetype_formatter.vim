@@ -18,6 +18,12 @@ set cpo&vim
 
 " Configuration
 
+function! s:biome()
+  return printf(
+        \ 'biome format --stdin-file-path="%s"',
+        \ expand('%:p')
+        \ )
+endfunction
 " Use vim's built-in commands.
 " 1. = (calls `equalprg`)
 " 2. Replace all instances of multiple blank lines, shortening to a single
@@ -124,6 +130,7 @@ function! s:styler()
 endfunction
 let s:b = {
       \ 'bibtool':                            'bibtool -q -s',
+      \ 'biome':                              funcref('s:biome'),
       \ 'black':                              'black -q -',
       \ 'vimscript_builtin':                   funcref('s:vimscript_builtin'),
       \ 'vimscript_nvimlsp':                   funcref('s:vimscript_nvimlsp'),
