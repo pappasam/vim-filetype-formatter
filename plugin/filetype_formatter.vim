@@ -152,6 +152,7 @@ let s:b = {
       \ 'stylua':                     funcref('s:stylua'),
       \ 'taplo':                      funcref('s:taplo'),
       \ 'terraform_fmt':                      'terraform fmt -',
+      \ 'zig_fmt':                            'zig fmt --stdin',
       \ }
 let s:default_formatters = {
       \ 'bash':                s:b.shfmt,
@@ -194,6 +195,7 @@ let s:default_formatters = {
       \ 'xml':                 s:b.xq,
       \ 'yaml':                s:b.prettier,
       \ 'yaml.docker-compose': s:b.prettier,
+      \ 'zig':                 s:b.zig_fmt,
       \ 'zsh':                 s:b.vimscript_builtin,
       \ }
 
