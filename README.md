@@ -190,6 +190,7 @@ It's not exactly pretty, but:
 | [vimscript]      | [built-in]           |                  |
 | [xml]            | [xq]                 |                  |
 | [yaml]           | [prettier]           |                  |
+| [zig]            | [zig fmt]            |                  |
 | [zsh]            | [built-in]           |                  |
 
 <!-- formatters -->
@@ -215,6 +216,7 @@ It's not exactly pretty, but:
 [taplo]: https://taplo.tamasfe.dev/cli/usage/formatting.html
 [terraform_fmt]: https://www.terraform.io/docs/commands/fmt.html
 [vim.lsp.buf.format]: https://neovim.io/doc/user/lsp.html#vim.lsp.buf.format
+[zig fmt]: https://codeberg.org/ziglang/zig/src/branch/master/src/fmt.zig
 
 <!-- languages -->
 
@@ -250,6 +252,7 @@ It's not exactly pretty, but:
 [vimscript]: https://vimhelp.org/usr_41.txt.html
 [xml]: https://www.w3.org/XML/
 [yaml]: https://yaml.org/
+[zig]: https://ziglang.org/
 [zsh]: https://en.wikipedia.org/wiki/Z_shell
 
 ## FAQ
