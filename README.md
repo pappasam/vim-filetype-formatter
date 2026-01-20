@@ -156,104 +156,42 @@ It's not exactly pretty, but:
 
 ## Batteries Included
 
-| Language         | Default Formatter    | Other Formatters |
-| ---------------- | -------------------- | ---------------- |
-| [bash/sh]        | [shfmt]              |                  |
-| [biblatex]       | [bibtool]            |                  |
-| [css]            | [prettier]           | [biome]          |
-| [dockerfile]     | [vim.lsp.buf.format] |                  |
-| [dosini]         | [built-in]           |                  |
-| [gitconfig]      | [built-in]           |                  |
-| [go]             | [gofmt]              |                  |
-| [graphql]        | [prettier]           | [biome]          |
-| [html]           | [prettier]           | [biome]          |
-| [htmldjango]     | [prettier_jinja]     |                  |
-| [javascript/jsx] | [prettier]           | [biome]          |
-| [jinja.html]     | [prettier_jinja]     |                  |
-| [json]           | [prettier]           | [biome]          |
-| [jsonc]          | [prettier]           | [biome]          |
-| [lua]            | [stylua]             |                  |
-| [make]           | [built-in]           |                  |
-| [markdown]       | [prettier]           |                  |
-| [mdx]            | [prettier]           |                  |
-| [nginx]          | [nginxfmt]           |                  |
-| [ocaml]          | [ocamlformat]        |                  |
-| [prisma]         | [prettier_prisma]    |                  |
-| [python]         | [ruff]               | [black]          |
-| [r]              | [styler]             |                  |
-| [rust]           | [rustfmt]            | [leptosfmt]      |
-| [scss]           | [prettier]           |                  |
-| [svelte]         | [prettier_svelte]    |                  |
-| [terraform]      | [terraform_fmt]      |                  |
-| [toml]           | [taplo]              |                  |
-| [typescript/tsx] | [prettier]           | [biome]          |
-| [vimscript]      | [built-in]           |                  |
-| [xml]            | [xq]                 |                  |
-| [yaml]           | [prettier]           |                  |
-| [zig]            | [zig fmt]            |                  |
-| [zsh]            | [built-in]           |                  |
-
-<!-- formatters -->
-
-[bibtool]: https://ctan.org/pkg/bibtool
-[biome]: https://biomejs.dev/
-[black]: https://github.com/python/black
-[built-in]: https://neovim.io/doc/user/options.html#'equalprg'
-[gofmt]: https://golang.org/cmd/gofmt/
-[leptosfmt]: https://github.com/bram209/leptosfmt
-[nginxfmt]: https://github.com/slomkowski/nginx-config-formatter
-[ocamlformat]: https://github.com/ocaml-ppx/ocamlformat
-[prettier]: https://prettier.io/
-[prettier_jinja]: https://github.com/davidodenwald/prettier-plugin-jinja-template
-[prettier_prisma]: https://github.com/umidbekk/prettier-plugin-prisma
-[prettier_svelte]: https://github.com/UnwrittenFun/prettier-plugin-svelte
-[xq]: https://github.com/sibprogrammer/xq
-[ruff]: https://github.com/astral-sh/ruff
-[rustfmt]: https://github.com/rust-lang/rustfmt
-[shfmt]: https://github.com/mvdan/sh
-[styler]: https://github.com/r-lib/styler
-[stylua]: https://github.com/JohnnyMorganz/StyLua
-[taplo]: https://taplo.tamasfe.dev/cli/usage/formatting.html
-[terraform_fmt]: https://www.terraform.io/docs/commands/fmt.html
-[vim.lsp.buf.format]: https://neovim.io/doc/user/lsp.html#vim.lsp.buf.format
-[zig fmt]: https://codeberg.org/ziglang/zig/src/branch/master/src/fmt.zig
-
-<!-- languages -->
-
-[bash/sh]: https://en.wikipedia.org/wiki/Bash_(Unix_shell)
-[biblatex]: http://www.bibtex.org/
-[css]: https://developer.mozilla.org/en-US/docs/Web/CSS
-[dockerfile]: https://docs.docker.com/reference/dockerfile/
-[dosini]: https://vim.fandom.com/wiki/Dosini_files
-[gitconfig]: https://git-scm.com/docs/git-config/2.22.0
-[go]: https://golang.org/
-[graphql]: https://developer.mozilla.org/en-US/docs/Web/HTML
-[html]: https://developer.mozilla.org/en-US/docs/Web/HTML
-[htmldjango]: https://docs.djangoproject.com/en/5.1/topics/templates/
-[javascript/jsx]: https://developer.mozilla.org/en-US/docs/Web/JavaScript
-[jinja.html]: https://jinja.palletsprojects.com/en/3.1.x/
-[json]: https://json.org/
-[jsonc]: https://komkom.github.io/
-[lua]: https://www.lua.org/
-[make]: https://www.gnu.org/software/make/
-[markdown]: https://en.wikipedia.org/wiki/Markdown
-[mdx]: https://mdxjs.com/
-[nginx]: https://www.nginx.com/resources/wiki/start/topics/examples/full/
-[ocaml]: https://ocaml.org/
-[prisma]: https://www.prisma.io/
-[python]: https://www.python.org/
-[r]: https://www.r-project.org/
-[rust]: https://www.rust-lang.org/
-[scss]: https://sass-lang.com/
-[svelte]: https://svelte.dev/
-[terraform]: https://www.terraform.io/
-[toml]: https://github.com/toml-lang/toml
-[typescript/tsx]: https://www.typescriptlang.org/
-[vimscript]: https://vimhelp.org/usr_41.txt.html
-[xml]: https://www.w3.org/XML/
-[yaml]: https://yaml.org/
-[zig]: https://ziglang.org/
-[zsh]: https://en.wikipedia.org/wiki/Z_shell
+| Language | Default Formatter | Other Formatters |
+| -- | -- | -- |
+| [bash/sh] | [shfmt] |  |
+| [biblatex] | [bibtool] |  |
+| [css] | [prettier] | [biome] |
+| [dockerfile] | [vim.lsp.buf.format] |  |
+| [dosini] | [built-in] |  |
+| [gitconfig] | [built-in] |  |
+| [go] | [gofmt] |  |
+| [graphql] | [prettier] | [biome] |
+| [html] | [prettier] | [biome] |
+| [htmldjango] | [prettier_jinja] |  |
+| [javascript/jsx] | [prettier] | [biome] |
+| [jinja.html] | [prettier_jinja] |  |
+| [json] | [prettier] | [biome] |
+| [jsonc] | [prettier] | [biome] |
+| [lua] | [stylua] |  |
+| [make] | [built-in] |  |
+| [markdown] | [mdformat] | [prettier] |
+| [mdx] | [prettier] |  |
+| [nginx] | [nginxfmt] |  |
+| [ocaml] | [ocamlformat] |  |
+| [prisma] | [prettier_prisma] |  |
+| [python] | [ruff] | [black] |
+| [r] | [styler] |  |
+| [rust] | [rustfmt] | [leptosfmt] |
+| [scss] | [prettier] |  |
+| [svelte] | [prettier_svelte] |  |
+| [terraform] | [terraform_fmt] |  |
+| [toml] | [taplo] |  |
+| [typescript/tsx] | [prettier] | [biome] |
+| [vimscript] | [built-in] |  |
+| [xml] | [xq] |  |
+| [yaml] | [prettier] |  |
+| [zig] | [zig fmt] |  |
+| [zsh] | [built-in] |  |
 
 ## FAQ
 
@@ -325,3 +263,61 @@ You can put other biome configurations into this file as well so that, by defaul
 ```
 
 Don't worry: biome will defer to a project-specific file, so this is only important when you're not working on a project that has explicitly configured biome. See: <https://biomejs.dev/guides/configure-biome/#configuration-file-resolution>
+
+[bash/sh]: https://en.wikipedia.org/wiki/Bash_(Unix_shell)
+[biblatex]: http://www.bibtex.org/
+[bibtool]: https://ctan.org/pkg/bibtool
+[biome]: https://biomejs.dev/
+[black]: https://github.com/python/black
+[built-in]: https://neovim.io/doc/user/options.html#'equalprg'
+[css]: https://developer.mozilla.org/en-US/docs/Web/CSS
+[dockerfile]: https://docs.docker.com/reference/dockerfile/
+[dosini]: https://vim.fandom.com/wiki/Dosini_files
+[gitconfig]: https://git-scm.com/docs/git-config/2.22.0
+[go]: https://golang.org/
+[gofmt]: https://golang.org/cmd/gofmt/
+[graphql]: https://developer.mozilla.org/en-US/docs/Web/HTML
+[html]: https://developer.mozilla.org/en-US/docs/Web/HTML
+[htmldjango]: https://docs.djangoproject.com/en/5.1/topics/templates/
+[javascript/jsx]: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+[jinja.html]: https://jinja.palletsprojects.com/en/3.1.x/
+[json]: https://json.org/
+[jsonc]: https://komkom.github.io/
+[leptosfmt]: https://github.com/bram209/leptosfmt
+[lua]: https://www.lua.org/
+[make]: https://www.gnu.org/software/make/
+[markdown]: https://en.wikipedia.org/wiki/Markdown
+[mdformat]: https://github.com/hukkin/mdformat
+[mdx]: https://mdxjs.com/
+[nginx]: https://www.nginx.com/resources/wiki/start/topics/examples/full/
+[nginxfmt]: https://github.com/slomkowski/nginx-config-formatter
+[ocaml]: https://ocaml.org/
+[ocamlformat]: https://github.com/ocaml-ppx/ocamlformat
+[prettier]: https://prettier.io/
+[prettier_jinja]: https://github.com/davidodenwald/prettier-plugin-jinja-template
+[prettier_prisma]: https://github.com/umidbekk/prettier-plugin-prisma
+[prettier_svelte]: https://github.com/UnwrittenFun/prettier-plugin-svelte
+[prisma]: https://www.prisma.io/
+[python]: https://www.python.org/
+[r]: https://www.r-project.org/
+[ruff]: https://github.com/astral-sh/ruff
+[rust]: https://www.rust-lang.org/
+[rustfmt]: https://github.com/rust-lang/rustfmt
+[scss]: https://sass-lang.com/
+[shfmt]: https://github.com/mvdan/sh
+[styler]: https://github.com/r-lib/styler
+[stylua]: https://github.com/JohnnyMorganz/StyLua
+[svelte]: https://svelte.dev/
+[taplo]: https://taplo.tamasfe.dev/cli/usage/formatting.html
+[terraform]: https://www.terraform.io/
+[terraform_fmt]: https://www.terraform.io/docs/commands/fmt.html
+[toml]: https://github.com/toml-lang/toml
+[typescript/tsx]: https://www.typescriptlang.org/
+[vim.lsp.buf.format]: https://neovim.io/doc/user/lsp.html#vim.lsp.buf.format
+[vimscript]: https://vimhelp.org/usr_41.txt.html
+[xml]: https://www.w3.org/XML/
+[xq]: https://github.com/sibprogrammer/xq
+[yaml]: https://yaml.org/
+[zig]: https://ziglang.org/
+[zig fmt]: https://codeberg.org/ziglang/zig/src/branch/master/src/fmt.zig
+[zsh]: https://en.wikipedia.org/wiki/Z_shell
