@@ -134,11 +134,10 @@ xnoremap <silent> <leader>f :FiletypeFormat<CR>
 
 Default configurations may be overridden by creating our own `g:vim_filetype_formatter_commands` dictionary. If you would like to map one filetype to another, see `g:vim_filetype_formatter_ft_maps`. See [here](./doc/filetype_formatter.txt) for specifics on how to do this.
 
-If you would like to use a formatter listed above in "Other Formatters", you'll first need to `packadd vim-filetype-formatter` and then add it to `g:vim_filetype_formatter` commands. Here is an example of how to override Python's formatter with the built-in configuration for `black`:
+Here is an example of how to override Python's formatter with the built-in configuration for `black`:
 
 ```vim
-packadd vim-filetype-formatter
-let g:vim_filetype_formatter_commands.python = 'black'
+let g:vim_filetype_formatter_commands = {'python': 'black'}
 ```
 
 ## Non-standard code formatters
@@ -223,55 +222,9 @@ If using a recent version of Neovim, see `:help 'exrc'`.
 " $XDG_CONFIG_HOME/init.vim
 set exrc
 " $PROJECT_PATH/.nvimrc
-packadd vim-filetype-formatter
 let g:vim_filetype_formatter_commands['python'] = 'black'
 let g:vim_filetype_formatter_commands['rust'] = 'leptosfmt'
 ```
-
-### The biome formatter isn't working
-
-See: <https://github.com/biomejs/biome/issues/6783>
-
-This assumes you're using biome. Here's an example where we've enabled biome for JSON and JSONC.
-
-```vim
-packadd vim-filetype-formatter
-let g:vim_filetype_formatter_commands.json = 'biome'
-let g:vim_filetype_formatter_commands.jsonc = 'biome'
-```
-
-Solution: create this `biome.json` at your home directory. This will serve as your default biome configuration file.
-
-```json
-{
-  "$schema": "https://biomejs.dev/schemas/2.0.5/schema.json",
-  "files": {
-    "includes": ["**"]
-  },
-  "formatter": {
-    "enabled": true,
-    "includes": ["**"]
-  }
-}
-```
-
-You can put other biome configurations into this file as well so that, by default, your editor will behave consistently. For example, if you prefer spaces over tabs:
-
-```json
-{
-  "$schema": "https://biomejs.dev/schemas/2.0.5/schema.json",
-  "files": {
-    "includes": ["**"]
-  },
-  "formatter": {
-    "enabled": true,
-    "includes": ["**"],
-    "indentStyle": "space"
-  }
-}
-```
-
-Don't worry: biome will defer to a project-specific file, so this is only important when you're not working on a project that has explicitly configured biome. See: <https://biomejs.dev/guides/configure-biome/#configuration-file-resolution>
 
 [bash/sh]: https://en.wikipedia.org/wiki/Bash_(Unix_shell)
 [biblatex]: http://www.bibtex.org/
