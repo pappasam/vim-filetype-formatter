@@ -36,11 +36,20 @@ If you want to combine black with [isort](https://github.com/PyCQA/isort) and [d
 
 ```vim
 let g:vim_filetype_formatter_commands = {
-      \ 'python': 'black -q - | isort -q - | docformatter -',
+      \ 'python': '!black -q - | isort -q - | docformatter -',
       \ }
 ```
 
-For further customization (e.g., where you need anything dynamic), you can pass either a [`Funcref`](https://neovim.io/doc/user/eval.html#Funcref) or a [`lambda expression`](https://neovim.io/doc/user/eval.html#expr-lambda). For example, you might want to pass the current filename as an argument to your command line program. Here is an example for Python using a lambda expression:
+### Formatter Value Types
+
+| Syntax | Meaning | Example |
+| -- | -- | -- |
+| `'name'` | Builtin formatter | `'black'`, `'prettier'` |
+| `'!cmd'` | Shell command | `'!black -q -'` |
+| `':cmd'` | Vim Ex command | `':normal! gg=G'` |
+| `Funcref` | Dynamic command | `{-> 'black -q -'}` |
+
+For further customization (e.g., where you need anything dynamic), you can pass either a [`Funcref`](https://neovim.io/doc/user/eval.html#Funcref) or a [`lambda expression`](https://neovim.io/doc/user/eval.html#expr-lambda). For example, you might want to pass the current filename as an argument to your command line program. Here is an example for Python using a lambda expression (note: lambdas returning shell commands don't need the `!` prefix):
 
 ```vim
 let g:vim_filetype_formatter_commands = {
@@ -129,7 +138,7 @@ If you would like to use a formatter listed above in "Other Formatters", you'll 
 
 ```vim
 packadd vim-filetype-formatter
-let g:vim_filetype_formatter_commands.python = g:vim_filetype_formatter_builtins.black
+let g:vim_filetype_formatter_commands.python = 'black'
 ```
 
 ## Non-standard code formatters
@@ -200,9 +209,9 @@ It's not exactly pretty, but:
 For example, if you have a different version of prettier installed in your project than you installed globally, you'll probably want vim-filetype-formatter to use your project's version of prettier. To achieve this:
 
 1. Place the following line in `init.vim` / `.vimrc`:
-   ```vim
-   let $PATH = $PWD .. '/node_modules/.bin:' .. $PATH
-   ```
+    ```vim
+    let $PATH = $PWD .. '/node_modules/.bin:' .. $PATH
+    ```
 2. Open Neovim at the root of your project.
 3. You should now be referencing executable files within your project's `node_modules/` folder.
 
@@ -215,8 +224,8 @@ If using a recent version of Neovim, see `:help 'exrc'`.
 set exrc
 " $PROJECT_PATH/.nvimrc
 packadd vim-filetype-formatter
-let g:vim_filetype_formatter_commands['python'] = g:vim_filetype_formatter_builtins['black']
-let g:vim_filetype_formatter_commands['rust'] = g:vim_filetype_formatter_builtins['leptosfmt']
+let g:vim_filetype_formatter_commands['python'] = 'black'
+let g:vim_filetype_formatter_commands['rust'] = 'leptosfmt'
 ```
 
 ### The biome formatter isn't working
@@ -227,8 +236,8 @@ This assumes you're using biome. Here's an example where we've enabled biome for
 
 ```vim
 packadd vim-filetype-formatter
-let g:vim_filetype_formatter_commands.json = g:vim_filetype_formatter_builtins.biome
-let g:vim_filetype_formatter_commands.jsonc = g:vim_filetype_formatter_builtins.biome
+let g:vim_filetype_formatter_commands.json = 'biome'
+let g:vim_filetype_formatter_commands.jsonc = 'biome'
 ```
 
 Solution: create this `biome.json` at your home directory. This will serve as your default biome configuration file.

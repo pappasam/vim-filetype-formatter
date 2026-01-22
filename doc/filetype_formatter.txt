@@ -45,6 +45,12 @@ Type: Dictionary[String, Union[String, F]]
         Function() -> String
 Default: defined in plugin/filetype_formatter.vim
 
+String values are interpreted based on their prefix:
+
+  'name'    Builtin formatter from g:vim_filetype_formatter_builtins
+  '!cmd'    Shell command (stdin/stdout)
+  ':cmd'    Vim Ex command
+
 Assume you have several theoretical filetypes: 'dog', 'cat', 'bat', and 'rat'.
 With these theoretical filetypes, you have some command line code formatting
 programs: 'dog-fmt', 'cat-fmt', 'bat-fmt', and 'rat-fmt'. To enable the
@@ -52,18 +58,26 @@ relevant code formatters to run on each filetype, you might configure this
 option as follows: >
 
   let g:vim_filetype_formatter_commands = {
-      \ 'dog': 'dog-fmt --stdout -',
-      \ 'cat': 'cat-fmt --standard-out --std-in',
+      \ 'dog': '!dog-fmt --stdout -',
+      \ 'cat': '!cat-fmt --standard-out --std-in',
       \ 'bat': {start, end -> printf('bat-fmt --lines=%d-%d', start, end)},
       \ 'rat': {-> printf('rat-fmt --stdin-file=%s', expand('%:p'))},
       \ }
 
-If your Dictionary value is a String, it is assumed to operate over an entire
-file / buffer.
+To use a builtin formatter, just use its name: >
+
+  let g:vim_filetype_formatter_commands = {
+      \ 'python': 'black',
+      \ 'json': 'prettier',
+      \ }
+
+If your Dictionary value is a String starting with '!', it is a shell command
+assumed to operate over an entire file / buffer.
 
 If your Dictionary value is a Function that takes 0 arguments, it may require
 some runtime functionality to format your string command, but it's assumed
-that the formatter is not aware of visually-selected ranges.
+that the formatter is not aware of visually-selected ranges. Functions return
+shell commands directly (no '!' prefix needed).
 
 If your Dictionary value is a Function that takes two arguments, these should
 be the starting line and the ending line from your range selection. In this

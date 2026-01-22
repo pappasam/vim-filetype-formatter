@@ -54,11 +54,30 @@ endfunction
 function! s:parse_call(Syscall_config, first_line, last_line)
   let t_config_system_call = type(a:Syscall_config)
   if t_config_system_call == v:t_string
-    let result = {
-          \ 'system_call': a:Syscall_config,
-          \ 'has_lines_specified': 0,
-          \ 'is_vimcmd': s:is_vimcmd(a:Syscall_config)
-          \ }
+    if s:is_vimcmd(a:Syscall_config)
+      " Vimcmd (starts with ':') - pass through
+      let result = {
+            \ 'system_call': a:Syscall_config,
+            \ 'has_lines_specified': 0,
+            \ 'is_vimcmd': 1
+            \ }
+    elseif a:Syscall_config[0:0] ==# '!'
+      " Shell command (starts with '!') - strip prefix
+      let system_call = a:Syscall_config[1:]
+      let result = {
+            \ 'system_call': system_call,
+            \ 'has_lines_specified': 0,
+            \ 'is_vimcmd': 0
+            \ }
+    else
+      " Builtin name - look it up
+      if !has_key(g:vim_filetype_formatter_builtins, a:Syscall_config)
+        throw 'Unknown builtin "' .. a:Syscall_config .. '". '
+              \ .. 'Use "!' .. a:Syscall_config .. '" to run as shell command.'
+      endif
+      let Builtin_value = g:vim_filetype_formatter_builtins[a:Syscall_config]
+      return s:parse_call(Builtin_value, a:first_line, a:last_line)
+    endif
   elseif t_config_system_call == v:t_func
     try
       let system_call = a:Syscall_config()
