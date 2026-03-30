@@ -168,18 +168,18 @@ It's not exactly pretty, but:
 | -- | -- | -- |
 | [bash/sh] | [shfmt] |  |
 | [biblatex] | [bibtool] |  |
-| [css] | [prettier] | [biome] |
+| [css] | [biome] | [prettier] |
 | [dockerfile] | [vim.lsp.buf.format] |  |
 | [dosini] | [built-in] |  |
 | [gitconfig] | [built-in] |  |
 | [go] | [gofmt] |  |
-| [graphql] | [prettier] | [biome] |
-| [html] | [prettier] | [biome] |
+| [graphql] | [biome] | [prettier] |
+| [html] | [biome] | [prettier] |
 | [htmldjango] | [prettier_jinja] |  |
-| [javascript/jsx] | [prettier] | [biome] |
+| [javascript/jsx] | [biome] | [prettier] |
 | [jinja.html] | [prettier_jinja] |  |
-| [json] | [prettier] | [biome] |
-| [jsonc] | [prettier] | [biome] |
+| [json] | [biome] | [prettier] |
+| [jsonc] | [biome] | [prettier] |
 | [lua] | [stylua] |  |
 | [make] | [built-in] |  |
 | [markdown] | [mdformat] | [prettier] |
@@ -194,7 +194,7 @@ It's not exactly pretty, but:
 | [svelte] | [prettier_svelte] |  |
 | [terraform] | [terraform_fmt] |  |
 | [toml] | [taplo] |  |
-| [typescript/tsx] | [prettier] | [biome] |
+| [typescript/tsx] | [biome] | [prettier] |
 | [vimscript] | [built-in] |  |
 | [xml] | [xq] |  |
 | [yaml] | [prettier] |  |
