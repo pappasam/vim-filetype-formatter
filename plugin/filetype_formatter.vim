@@ -101,6 +101,12 @@ function s:ruff()
         \ 'ruff format -q --stdin-filename="%1$s" -',
         \ expand('%:p'))
 endfunction
+function! s:rumdl()
+  return printf(
+        \ 'rumdl fmt --stdin --stdin-filename %s --silent',
+        \ shellescape(expand('%:p'))
+        \ )
+endfunction
 function! s:shfmt()
   return printf(
         \ 'shfmt --indent %i --filename "%s"',
@@ -147,6 +153,7 @@ let s:b = {
       \ 'xq':                                 '!xq',
       \ 'prettier_no_explicit_range': funcref('s:prettier_no_explicit_range'),
       \ 'ruff':                       funcref('s:ruff'),
+      \ 'rumdl':                      funcref('s:rumdl'),
       \ 'rustfmt':                            '!rustfmt --quiet',
       \ 'shfmt':                      funcref('s:shfmt'),
       \ 'styler':                     funcref('s:styler'),
@@ -174,7 +181,7 @@ let s:default_formatters = {
       \ 'jsonc':               s:b.biome,
       \ 'lua':                 s:b.stylua,
       \ 'make':                s:b.vimscript_builtin,
-      \ 'markdown':            s:b.mdformat,
+      \ 'markdown':            s:b.rumdl,
       \ 'markdown.mdx':        s:b.prettier_no_explicit_range,
       \ 'mdx':                 s:b.prettier_no_explicit_range,
       \ 'nginx':               s:b.nginxfmt,

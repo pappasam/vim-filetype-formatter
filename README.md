@@ -182,7 +182,7 @@ It's not exactly pretty, but:
 | [jsonc] | [biome] | [prettier] |
 | [lua] | [stylua] |  |
 | [make] | [built-in] |  |
-| [markdown] | [mdformat] | [prettier] |
+| [markdown] | [rumdl] | [mdformat], [prettier] |
 | [mdx] | [prettier] |  |
 | [nginx] | [nginxfmt] |  |
 | [ocaml] | [ocamlformat] |  |
@@ -263,6 +263,7 @@ let g:vim_filetype_formatter_commands['rust'] = 'leptosfmt'
 [python]: https://www.python.org/
 [r]: https://www.r-project.org/
 [ruff]: https://github.com/astral-sh/ruff
+[rumdl]: https://github.com/rvben/rumdl
 [rust]: https://www.rust-lang.org/
 [rustfmt]: https://github.com/rust-lang/rustfmt
 [scss]: https://sass-lang.com/
